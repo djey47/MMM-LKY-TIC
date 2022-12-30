@@ -1,0 +1,21 @@
+{
+  "historical": {
+    "ADCO": "counterAddress",
+    "ADPS": "subscribedPowerOverflowWarning",
+    "BASE": "baseIndex",
+    "EJPHN": "ejpNormalHoursIndex",
+    "EJPHPM": "ejpMobilePeakHoursIndex",
+    "HCHC": "hcLowHoursIndex",
+    "HCHP": "hcHighHoursIndex",
+    "HHPHC": "lowHighHoursSchedule",
+    "IINST": "instantIntensity",
+    "IMAX": "maxCalledIntensity",
+    "ISOUSC": "subscribedIntensity",
+    "MOTDETAT": "counterStateWord",
+    "OPTARIF": "chosenFareOption",
+    "PAPP": "apparentPower",
+    "PEJP": "ejpNotice",
+    "PTEC": "currentFarePeriod"
+  },
+  "standard": {}
+}
