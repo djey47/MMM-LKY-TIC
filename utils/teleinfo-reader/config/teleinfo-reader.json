@@ -1,0 +1,6 @@
+{
+    "developer": {
+        "serialPortMockEnabled": true
+    },
+    "serialDevice": "/dev/ttyAMA0"
+}

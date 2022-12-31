@@ -1,8 +1,20 @@
+import { SerialPort } from 'serialport';
 import { SerialPortStream } from '@serialport/stream';
 import { MockBinding } from '@serialport/binding-mock';
 import { DelimiterParser } from '@serialport/parser-delimiter';
 import { TeleInfo } from './domain/teleinfo';
 import * as groupIndex from './config/group-index.json';
+import * as Config from './helpers/config';
+
+function initHardwarePort(config: Config.Configuration) {
+  const port = new SerialPort({ path: config.serialDevice, baudRate: 9600 }, function (err) {
+    if (err) {
+      return console.log('Init hardware port failed: ', err.message)
+    }
+  })
+
+  return port;
+}
 
 function initMockPort() {
   // Create a port and enable the echo and recording.
@@ -65,16 +77,19 @@ function parseDatagram(data: Buffer): TeleInfo {
   }, { unresolvedGroups: {} });
 }
 
-const port = initMockPort();
+async function main() {
+  const config = await Config.read();
 
-const teleinfo: TeleInfo = {
-  unresolvedGroups: {},
-};
+  console.log('Loaded configuration:', config);
+  const port = config.developer.serialPortMockEnabled ? initMockPort() : initHardwarePort(config);
 
-configureStream(port, teleinfo);
+  const teleinfo: TeleInfo = {
+    unresolvedGroups: {},
+  };
+  
+  configureStream(port, teleinfo);
 
+  console.log('Ready!');
+}
 
-
-
-
-
+main();
