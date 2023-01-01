@@ -14,7 +14,10 @@ export interface TeleInfo {
   instantIntensity?: string;
   lowHighHoursSchedule?: string;
   maxCalledIntensity?: string;
+  meta: {
+    lastUpdateTimestamp?: number;
+    unresolvedGroups: {};
+  }
   subscribedIntensity?: string;
   subscribedPowerOverflowWarning?: string;
-  unresolvedGroups: {};
 };

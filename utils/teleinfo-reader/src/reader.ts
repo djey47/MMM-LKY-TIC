@@ -51,11 +51,12 @@ function parseDatagram(data: Buffer): TeleInfo {
     const teleinfoKeyName = groupIndex.historical[name];
     if (teleinfoKeyName) {
       acc[teleinfoKeyName] = value;
+      acc.meta.lastUpdateTimestamp = new Date().getTime();
     } else {
-      acc.unresolvedGroups[name] = value;
+      acc.meta.unresolvedGroups[name] = value;
     }
     return acc;
-  }, { unresolvedGroups: {} });
+  }, { meta: { unresolvedGroups: {} }});
 }
 
 function exitNotice() {
