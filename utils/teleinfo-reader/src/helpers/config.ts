@@ -3,7 +3,9 @@ import {readFile} from 'fs/promises';
 import * as Path from 'path';
 
 export interface Configuration {
+  baudRate: number;
   developer: {
+    mockRefreshRate: number;
     serialPortMockEnabled: boolean;
   },
   serialDevice: string;

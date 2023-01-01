@@ -1,6 +1,8 @@
 {
+    "baudRate": 9200,
     "developer": {
-        "serialPortMockEnabled": true
+        "serialPortMockEnabled": true,
+        "mockRefreshRate": 2500
     },
     "serialDevice": "/dev/ttyAMA0"
 }
