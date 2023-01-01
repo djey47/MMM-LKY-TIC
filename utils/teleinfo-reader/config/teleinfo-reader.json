@@ -1,5 +1,5 @@
 {
-    "baudRate": 9200,
+    "baudRate": 1200,
     "developer": {
         "serialPortMockEnabled": true,
         "mockRefreshRate": 2500
