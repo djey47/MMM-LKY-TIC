@@ -1,0 +1,14 @@
+/** @define main-sample */
+
+/**
+ * MagicMirror
+ * Style rules for Main component
+ */
+
+.main-sample {
+  font-weight: bold;
+
+  &__description {
+    font-style: italic;
+  }
+}

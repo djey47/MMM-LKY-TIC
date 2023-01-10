@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+# MM2 module development
+.vscode/
+coverage/
+node_modules/
+MMM-*.js
+MMM-*.js.LICENSE.txt
+node_helper.js
+stats.json
+styles.css
