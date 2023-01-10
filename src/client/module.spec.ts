@@ -180,7 +180,7 @@ describe('MM2 Module client', () => {
 
       // then
       expect(actual).toEqual({});
-      expect(mockRenderWrapper).toHaveBeenCalledWith('MMMReactCanvastsWrapper');
+      expect(mockRenderWrapper).toHaveBeenCalledWith('MMMLKYTICWrapper');
     });
   });
 
@@ -226,7 +226,7 @@ describe('MM2 Module client', () => {
       // then
       expect(implementation.viewEngineStarted).toBe(true);
       expect(mockRenderMainComponent).toHaveBeenCalledWith(
-        'MMMReactCanvastsWrapper'
+        'MMMLKYTICWrapper'
       );
       expect(mockCatchNotification).toHaveBeenCalledWith('DOM_OBJECTS_CREATED');
     });
