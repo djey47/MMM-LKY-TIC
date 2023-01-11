@@ -1,6 +1,6 @@
 import { NOTIF_INIT, NOTIF_SET_CONFIG } from '../support/notifications';
 import { MM2Helper } from './types/mm2';
-import { startProcessing } from './processing/custom-processor';
+import { startProcessing } from './processing/tele-info/teleinfo-processor';
 
 /**
  * Magic Mirror 2

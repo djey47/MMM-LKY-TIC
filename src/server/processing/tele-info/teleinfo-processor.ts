@@ -1,5 +1,5 @@
-import { Log } from '../utils/mm2_facades';
-import { MM2Helper } from '../types/mm2';
+import { Log } from '../../utils/mm2_facades';
+import { MM2Helper } from '../../types/mm2';
 
 export function startProcessing(helperContext: MM2Helper) {
   if (helperContext.config?.debug) {

@@ -1,8 +1,8 @@
 import { MockBinding } from '@serialport/binding-mock';
 import { SerialPortStream } from '@serialport/stream';
-import * as Config from './config';
+import { TeleinfoConfiguration } from '../domain/teleinfo-config';
 
-export function initMockPort(config: Config.Configuration) {
+export function initMockPort(config: TeleinfoConfiguration) {
   const { baudRate, developer: { mockRefreshRate } } = config;
 
   // Create a port and enable the echo and recording.

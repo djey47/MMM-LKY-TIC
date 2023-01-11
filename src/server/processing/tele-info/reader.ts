@@ -1,15 +1,21 @@
-import { SerialPort } from 'serialport';
-import { SerialPortStream } from '@serialport/stream';
 import { DelimiterParser } from '@serialport/parser-delimiter';
+import { SerialPortStream } from '@serialport/stream';
+import { SerialPort } from 'serialport';
+import { TeleinfoConfiguration } from './domain/teleinfo-config';
 import { TeleInfo } from './domain/teleinfo';
-import * as groupIndex from './config/group-index.json';
-import * as Config from './helpers/config';
 import * as SerialMock from './helpers/serial-mock';
+import * as groupIndex from './settings/group-index.json';
+
 
 const CHAR_STX = '\x02';
 const CHAR_ETX = '\x03';
 
-function initHardwarePort(config: Config.Configuration) {
+export function start(config: TeleinfoConfiguration) {
+  const port = config.developer.serialPortMockEnabled ? SerialMock.initMockPort(config) : initHardwarePort(config);
+  configureStream(port);  
+}
+
+function initHardwarePort(config: TeleinfoConfiguration) {
   const { baudRate, serialDevice } = config;
   const port = new SerialPort({ path: serialDevice, baudRate }, function (err) {
     if (err) {
@@ -29,7 +35,6 @@ function configureStream(port: SerialPortStream) {
     const newTeleInfo = parseDatagram(data);
 
     console.log('new Teleinfo:', newTeleInfo);
-    exitNotice();
   });
 }
 
@@ -59,19 +64,4 @@ function parseDatagram(data: Buffer): TeleInfo {
   }, { meta: { unresolvedGroups: {} }});
 }
 
-function exitNotice() {
-  console.log('CTRL-C to exit');
-}
 
-async function main() {
-  const config = await Config.read();
-  console.log('Loaded configuration:', config);
-
-  const port = config.developer.serialPortMockEnabled ? SerialMock.initMockPort(config) : initHardwarePort(config);
-  configureStream(port);
-
-  console.log('Ready!');
-  exitNotice();
-}
-
-main();
