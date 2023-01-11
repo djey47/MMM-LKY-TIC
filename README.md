@@ -7,12 +7,20 @@ MagicMirror2 module to display info about home power supply.
 
 Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as bootstrapper.
 
-## Utilities
+## Configuration
 
-### teleinfo-reader
-Small CLI program to diagnose reading of teleinfo data on serial input: `npm run tool:teleinfo-reader`
+### Main
+```json
+{
+  "debug": false,
+  "teleinfo": { ... }
+}
+```
 
-Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file:
+- `debug`: enables (true) or disables (true) additional log messages for development or troubleshooting
+- `teleinfo`: see below.
+
+### Teleinfo section
 
 ```json
 {
@@ -31,3 +39,11 @@ Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.j
   - `mockRefreshRate`: interval in ms for the emulator to receive mock teleinfo
 - `serialDevice`: device name to capture teleinfo data from.  
 
+## Utilities
+
+### teleinfo-reader
+Small CLI program to diagnose reading of teleinfo data on serial input: `npm run tool:teleinfo-reader`
+
+Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
+
+## MISC

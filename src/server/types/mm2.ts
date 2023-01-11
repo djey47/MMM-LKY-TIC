@@ -1,3 +1,5 @@
+import { TeleinfoConfiguration } from "../processing/teleinfo/domain/teleinfo-config";
+
 /**
  * The node helper is able to do some backend task to support your module.
  * For every module type, only one node helper instance will be created.
@@ -9,6 +11,7 @@ export interface MM2Helper {
    */
   config?: {
     debug?: boolean;
+    teleinfo?: TeleinfoConfiguration;
   };
   /**
    * If you want to send a notification to all your modules, use this method.

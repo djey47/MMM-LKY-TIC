@@ -13,7 +13,8 @@ export function initMockPort(config: TeleinfoConfiguration) {
   portMock.on('open', () => {
     setInterval(() => {
       const data = generateDatagram(360 + iterationCount);
-      portMock.port.emitData(data);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      portMock.port!.emitData(data);
       iterationCount += 1;
     }, mockRefreshRate);
   });

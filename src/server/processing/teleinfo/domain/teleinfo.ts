@@ -1,5 +1,6 @@
 // TODO use different types 
 export interface TeleInfo {
+  [key: string]: string | number | object | undefined;
   apparentPower?: string;
   baseIndex?: string;
   counterAddress?: string;
@@ -16,7 +17,9 @@ export interface TeleInfo {
   maxCalledIntensity?: string;
   meta: {
     lastUpdateTimestamp?: number;
-    unresolvedGroups: object;
+    unresolvedGroups: {
+      [key: string]: string;
+    };
   }
   subscribedIntensity?: string;
   subscribedPowerOverflowWarning?: string;

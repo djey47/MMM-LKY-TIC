@@ -6,10 +6,13 @@ import { TeleInfo } from './domain/teleinfo';
 import * as SerialMock from './helpers/serial-mock';
 import * as groupIndex from './settings/group-index.json';
 
-
 const CHAR_STX = '\x02';
 const CHAR_ETX = '\x03';
 
+/**
+ * Teleinfo reader entry point.
+ * @param config teleinfo configuration. See module README.
+ */
 export function start(config: TeleinfoConfiguration) {
   const port = config.developer.serialPortMockEnabled ? SerialMock.initMockPort(config) : initHardwarePort(config);
   configureStream(port);  
@@ -50,7 +53,8 @@ function parseDatagram(data: Buffer): TeleInfo {
       return acc;
     }
     
-    const teleinfoKeyName = groupIndex.historical[name];
+    const { historical } = groupIndex;
+    const teleinfoKeyName = historical[name as keyof typeof historical];
     if (teleinfoKeyName) {
       acc[teleinfoKeyName] = value;
       acc.meta.lastUpdateTimestamp = new Date().getTime();

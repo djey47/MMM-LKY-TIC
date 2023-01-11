@@ -6,7 +6,7 @@ jest.mock('./utils/mm2_facades', () => ({
 }));
 
 const mockStartProcessing = jest.fn();
-jest.mock('./processing/custom-processor', () => ({
+jest.mock('./processing/teleinfo/teleinfo-processor', () => ({
   startProcessing: mockStartProcessing,
 }));
 
