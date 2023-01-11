@@ -17,5 +17,5 @@ export function startProcessing(helperContext: MM2Helper) {
     return;
   }
 
-  start(teleinfoConfig);
+  start(teleinfoConfig, helperContext);
 }
