@@ -10,7 +10,9 @@ module.exports = {
     path: outputPath,
     libraryTarget: 'umd',
   },
-  externals: [ 'node_helper', 'logger' ], // MM2 provided
+  // - node-helper and logger are MM2 - provided
+  // - @serialport/bindings-cpp is a native module and should not be bundled for electron
+  externals: [ 'node_helper', 'logger', '@serialport/bindings-cpp' ], 
   module: {
     rules: [...commonRules],
   },
