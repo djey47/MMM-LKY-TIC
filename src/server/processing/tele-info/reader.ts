@@ -27,10 +27,8 @@ function initHardwarePort(config: TeleinfoConfiguration) {
 }
 
 function configureStream(port: SerialPortStream) {
-  // @ts-ignore
   const datagramStream = port.pipe(new DelimiterParser({ delimiter: CHAR_ETX }));
 
-  // @ts-ignore
   datagramStream.on('data', function (data: Buffer) {
     const newTeleInfo = parseDatagram(data);
 
@@ -39,7 +37,6 @@ function configureStream(port: SerialPortStream) {
 }
 
 function parseDatagram(data: Buffer): TeleInfo {
-  // @ts-ignore
   console.log('Data (RAW, TEXT):', data, data.toString());
 
   const groups = data.toString().split('\n');

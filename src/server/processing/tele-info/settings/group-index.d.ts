@@ -1,5 +1,8 @@
 interface GroupIndex {
- historical: {
+  /**
+   * Historical mode, compatible with Linky and old generation electrical counters
+   */
+  historical: {
     ADCO: string;
     ADPS: string;
     BASE: string;
@@ -16,6 +19,9 @@ interface GroupIndex {
     PAPP: string;
     PEJP: string;
     PTEC: string
- };
- standard: {};
+  };
+  /**
+  * Standard mode, only compatible with Linky counters, is not supported yet
+  */
+  standard: object;
 }

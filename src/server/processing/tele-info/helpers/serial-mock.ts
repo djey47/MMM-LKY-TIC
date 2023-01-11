@@ -10,9 +10,7 @@ export function initMockPort(config: TeleinfoConfiguration) {
   const portMock = new SerialPortStream({ binding: MockBinding, path: '/dev/ROBOT', baudRate })
 
   let iterationCount = 1;
-  // @ts-ignore
   portMock.on('open', () => {
-    // @ts-ignore
     setInterval(() => {
       const data = generateDatagram(360 + iterationCount);
       portMock.port.emitData(data);

@@ -16,7 +16,7 @@ export interface TeleInfo {
   maxCalledIntensity?: string;
   meta: {
     lastUpdateTimestamp?: number;
-    unresolvedGroups: {};
+    unresolvedGroups: object;
   }
   subscribedIntensity?: string;
   subscribedPowerOverflowWarning?: string;
