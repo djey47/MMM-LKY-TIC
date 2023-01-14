@@ -1,0 +1,14 @@
+/** @define teleinfo */
+
+.MMMLKYTICWrapper {
+  .teleinfo {
+    &__power {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__powerValue, &__instantValue {
+      color: white;
+    }
+  }
+}

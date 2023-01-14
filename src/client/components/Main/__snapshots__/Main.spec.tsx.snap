@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render correctly with default props 1`] = `
+<div
+  className="main dimmed light small"
+>
+  <div>
+    Teleinfo component
+  </div>
+</div>
+`;

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Teleinfo component should render correctly with notif data 1`] = `
+<div
+  className="teleinfo"
+>
+  <p
+    className="teleinfo__power"
+  >
+    <span
+      className="teleinfo__powerLabel"
+    >
+      Instant power:
+    </span>
+    <span
+      className="teleinfo__powerValue"
+    >
+      000250
+    </span>
+    <span
+      className="teleinfo__powerUnit"
+    >
+      VA
+    </span>
+  </p>
+  <p
+    className="teleinfo__instant"
+  >
+    <span
+      className="teleinfo__instantLabel"
+    >
+      Instant intensity:
+    </span>
+    <span
+      className="teleinfo__instantValue"
+    >
+      01
+    </span>
+    <span
+      className="teleinfo__instantUnit"
+    >
+      A
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Teleinfo component should render correctly without notif data 1`] = `
+<div
+  className="teleinfo"
+/>
+`;

@@ -3,24 +3,41 @@
 const mockWithNotifications = jest.fn((c, s) => c);
 
 import renderer from 'react-test-renderer';
-import Subscribed from './Subscribed';
+import Teleinfo, { WithNotificationDataProps } from './Teleinfo';
 
 jest.mock('../../hoc/with-notifications', () => ({
   withNotifications: mockWithNotifications,
 }));
 
-describe('Subscribed component', () => {
+describe('Teleinfo component', () => {
   it('should render correctly without notif data', () => {
-    const tree = renderer.create(<Subscribed prop1="val1" />).toJSON();
+    // given-when
+    const tree = renderer.create(<Teleinfo />).toJSON();
+
+    // then
     expect(tree).toMatchSnapshot();
     expect(mockWithNotifications).toHaveBeenCalled();
-    expect(mockWithNotifications.mock.calls[0][1]).toEqual(['*']);
+    expect(mockWithNotifications.mock.calls[0][1]).toEqual(['TELEINFO']);
   });
 
   it('should render correctly with notif data', () => {
+    // given
+    const props: WithNotificationDataProps = {
+      data_TELEINFO: {
+        meta: {
+          unresolvedGroups: {},
+        },
+        apparentPower: '000250',
+        instantIntensity: '01',
+      }
+    };
+
+    // when
     const tree = renderer
-      .create(<Subscribed prop1="val1" data_NOTIF={{ key: 'value' }} />)
+      .create(<Teleinfo {...props} />)
       .toJSON();
+
+    // then
     expect(tree).toMatchSnapshot();
   });
 });

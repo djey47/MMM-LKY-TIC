@@ -147,7 +147,7 @@ describe('MM2 Module client', () => {
       );
 
       // when-then
-      expect(implementation.getHeader()).toBe('MM2 Module Header');
+      expect(implementation.getHeader()).toBe('LINKY(tm) teleinfo');
     });
   });
 

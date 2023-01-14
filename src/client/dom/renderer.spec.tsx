@@ -10,11 +10,11 @@ jest.mock('react-dom/client', () => ({
   }),
 }));
 
-jest.mock('../components/Main/MainSample', () => () => (
-  <div>MainSample component</div>
+jest.mock('../components/Main/Main', () => () => (
+  <div>Main component</div>
 ));
 
-import MainSample from '../components/Main/MainSample';
+import Main from '../components/Main/Main';
 import { renderMainComponent, renderWrapper } from './renderer';
 
 describe('MM2 module React renderer', () => {
@@ -71,7 +71,7 @@ describe('MM2 module React renderer', () => {
       // then
       // @ts-ignore
       expect(global.Log.error).not.toHaveBeenCalled();
-      expect(mockRender).toHaveBeenCalledWith(<MainSample />);
+      expect(mockRender).toHaveBeenCalledWith(<Main />);
     });
   });
 });

@@ -54,7 +54,7 @@ Module.register(MODULE_NAME, {
   },
 
   getHeader: function (): string {
-    return 'MM2 Module Header';
+    return 'LINKY(tm) teleinfo';
   },
 
   /**

@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import MainSample from '../components/Main/MainSample';
+import Main from '../components/Main/Main';
 
 /**
  * MagicMirror
@@ -29,5 +29,5 @@ export const renderMainComponent = (wrapperId: string): void => {
   }
 
   const root = createRoot(wrapperElement);
-  root.render(<MainSample />);
+  root.render(<Main />);
 };
