@@ -1,7 +1,7 @@
 import * as AppRootDir from 'app-root-dir';
 import {readFile} from 'fs/promises';
 import * as Path from 'path';
-import { TeleinfoConfiguration } from '../../../../src/server/processing/tele-info/domain/teleinfo-config';
+import { TeleinfoConfiguration } from '../../../../src/server/processing/teleinfo/domain/teleinfo-config';
 
 /**
  * @returns Promise to configuration read from json file

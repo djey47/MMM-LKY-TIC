@@ -1,5 +1,5 @@
 import * as Config from './helpers/config';
-import { start } from '../../../src/server/processing/tele-info/reader';
+import { start } from '../../../src/server/processing/teleinfo/reader';
 
 function exitNotice() {
   console.log('CTRL-C to exit');
