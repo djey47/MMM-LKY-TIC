@@ -1,13 +1,14 @@
 /** @define teleinfo */
 
-.MMMLKYTICWrapper {
+.mmm-lky-tic-wrapper {
   .teleinfo {
     &__power {
       display: flex;
       flex-direction: row;
     }
 
-    &__powerValue, &__instantValue {
+    &__powerValue,
+    &__instantValue {
       color: white;
     }
   }

@@ -57,7 +57,6 @@
     "prettier": "2.8.2",
     "react-test-renderer": "18.2.0",
     "sass-loader": "13.2.0",
-    "serialport": "10.5.0",
     "stylelint": "14.16.1",
     "stylelint-config-standard-scss": "6.1.0",
     "ts-jest": "29.0.3",
@@ -69,7 +68,9 @@
   },
   "dependencies": {
     "classnames": "2.3.2",
+    "kebab-case": "1.0.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "serialport": "10.5.0"
   }
 }

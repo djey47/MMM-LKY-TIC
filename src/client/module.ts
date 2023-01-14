@@ -3,6 +3,7 @@
  * Module bootstrap
  */
 
+import kebabCase from 'kebab-case';
 import * as Notifications from '../support/notifications';
 import { renderWrapper, renderMainComponent } from './dom/renderer';
 import { NotificationCatcher } from './hoc/with-notifications';
@@ -17,7 +18,7 @@ const MODULE_NAME = 'MMM-LKY-TIC';
  * @return DIV Wrapper identifier
  */
 const getWrapperId = (): string => {
-  return `${MODULE_NAME}Wrapper`.replace(/-/g, '');
+  return kebabCase(`${MODULE_NAME.toLowerCase()}Wrapper`);
 };
 
 /**
