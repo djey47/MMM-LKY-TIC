@@ -1,8 +1,11 @@
 {
   "baudRate": 1200,
+  "dataBits": 7,
   "developer": {
     "serialPortMockEnabled": true,
     "mockRefreshRate": 2500
   },
-  "serialDevice": "/dev/ttyAMA0"
+  "powerFactor": 0.8,
+  "serialDevice": "/dev/ttyAMA0",
+  "stopBits": 1
 }

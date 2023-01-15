@@ -30,6 +30,7 @@ Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as boo
     "serialPortMockEnabled": false,
     "mockRefreshRate": 2500
   },
+  "powerFactor": .8,
   "serialDevice": "/dev/ttyAMA0",
   "stopBits": 7
 }
@@ -40,6 +41,7 @@ Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as boo
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
   - `mockRefreshRate`: interval in ms for the emulator to receive mock teleinfo
+- `powerFactor`: allows to estimate instant power in watts (value will depend on your electrical facilities, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
 - `serialDevice`: device name to capture teleinfo data from.  
 
 ## Utilities

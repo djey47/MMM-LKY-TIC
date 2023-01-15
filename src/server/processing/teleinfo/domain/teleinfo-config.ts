@@ -5,6 +5,7 @@ export interface TeleinfoConfiguration {
     mockRefreshRate: number;
     serialPortMockEnabled: boolean;
   },
+  powerFactor: number;
   serialDevice: string;
   stopBits: 1 | 2;
 }

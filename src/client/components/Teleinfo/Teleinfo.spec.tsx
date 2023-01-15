@@ -28,6 +28,7 @@ describe('Teleinfo component', () => {
           unresolvedGroups: {},
         },
         apparentPower: 250,
+        estimatedPower: 225,
         instantIntensity: 1,
       }
     };

@@ -49,6 +49,7 @@ export interface TeleInfo {
   ejpNormalHoursIndex?: number;
   ejpMobilePeakHoursIndex?: number;
   ejpNotice?: string;
+  estimatedPower?: number;
   hcHigHoursIndex?: number;
   hcLowHoursIndex?: number;
   instantIntensity?: number;

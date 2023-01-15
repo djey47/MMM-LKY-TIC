@@ -1,3 +1,7 @@
+/**
+ * Reads Teleinfo data from serial port as per configuration
+ */
+
 import { DelimiterParser } from '@serialport/parser-delimiter';
 import { SerialPortStream } from '@serialport/stream';
 import { SerialPort } from 'serialport';
@@ -7,6 +11,7 @@ import { TeleInfo } from '../../../shared/domain/teleinfo';
 import * as SerialMock from './helpers/serial-mock';
 import * as groupIndex from './settings/group-index.json';
 import { MM2Helper } from '../../types/mm2';
+import { computeAdditionalTeleinfoData } from './data-enhancer';
 
 const CHAR_STX = '\x02';
 const CHAR_ETX = '\x03';
@@ -18,7 +23,7 @@ const CHAR_ETX = '\x03';
  */
 export function start(config: TeleinfoConfiguration, mm2Helper?: MM2Helper) {
   const port = config.developer.serialPortMockEnabled ? SerialMock.initMockPort(config) : initHardwarePort(config);
-  configureStream(port, mm2Helper);  
+  configureStream(port, config, mm2Helper);  
 }
 
 function initHardwarePort(config: TeleinfoConfiguration) {
@@ -32,11 +37,11 @@ function initHardwarePort(config: TeleinfoConfiguration) {
   return port;
 }
 
-function configureStream(port: SerialPortStream, mm2Helper?: MM2Helper) {
+function configureStream(port: SerialPortStream, config: TeleinfoConfiguration, mm2Helper?: MM2Helper) {
   const datagramStream = port.pipe(new DelimiterParser({ delimiter: CHAR_ETX }));
 
   datagramStream.on('data', function (data: Buffer) {
-    const newTeleInfo = parseDatagram(data);
+    const newTeleInfo = parseDatagram(data, config);
 
     console.log('new Teleinfo:', newTeleInfo);
 
@@ -46,12 +51,12 @@ function configureStream(port: SerialPortStream, mm2Helper?: MM2Helper) {
   });
 }
 
-function parseDatagram(data: Buffer): TeleInfo {
+function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
   console.log('Data (RAW, TEXT):', data, data.toString());
 
   const groups = data.toString().split('\n');
 
-  return  groups.reduce((acc: TeleInfo, groupContents) => {
+  const teleinfoData = groups.reduce((acc: TeleInfo, groupContents) => {
     const [name, rawValue] = groupContents.split(' ');
     console.log('+Group: ', {name, value: rawValue});
 
@@ -70,6 +75,8 @@ function parseDatagram(data: Buffer): TeleInfo {
     }
     return acc;
   }, { meta: { unresolvedGroups: {} }});
+
+  return computeAdditionalTeleinfoData(teleinfoData, config);
 }
 
 

@@ -1,3 +1,7 @@
+/**
+ * Converts Teleinfo data to the most appropriate data type
+ */
+
 import { TeleInfoHistoricalOutputKeys } from '../../../shared/domain/teleinfo';
 
 export function convertTeleinfoRawData(dataKey: string, rawValue?: string): string | number | undefined {

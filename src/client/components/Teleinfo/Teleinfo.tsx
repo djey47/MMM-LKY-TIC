@@ -25,7 +25,10 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
           <p className="teleinfo__power">
             <span className="teleinfo__powerLabel">Instant power:</span>
             <span className="teleinfo__powerValue">{data_TELEINFO.apparentPower}</span>
-            <span className="teleinfo__powerUnit">VA</span> 
+            <span className="teleinfo__powerUnit">VA</span>
+            - 
+            <span className="teleinfo__powerValue">{data_TELEINFO.estimatedPower}</span>
+            <span className="teleinfo__powerUnit">W(est.)</span> 
           </p>
           <p className="teleinfo__instant">
             <span className="teleinfo__instantLabel">Instant intensity:</span>

@@ -22,6 +22,17 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     >
       VA
     </span>
+    -
+    <span
+      className="teleinfo__powerValue"
+    >
+      225
+    </span>
+    <span
+      className="teleinfo__powerUnit"
+    >
+      W(est.)
+    </span>
   </p>
   <p
     className="teleinfo__instant"
