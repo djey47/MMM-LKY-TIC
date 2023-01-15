@@ -1,8 +1,9 @@
 import { DelimiterParser } from '@serialport/parser-delimiter';
 import { SerialPortStream } from '@serialport/stream';
 import { SerialPort } from 'serialport';
+import { convertTeleinfoRawData } from './data-converter';
 import { TeleinfoConfiguration } from './domain/teleinfo-config';
-import { TeleInfo } from './domain/teleinfo';
+import { TeleInfo } from '../../../shared/domain/teleinfo';
 import * as SerialMock from './helpers/serial-mock';
 import * as groupIndex from './settings/group-index.json';
 import { MM2Helper } from '../../types/mm2';
@@ -51,8 +52,8 @@ function parseDatagram(data: Buffer): TeleInfo {
   const groups = data.toString().split('\n');
 
   return  groups.reduce((acc: TeleInfo, groupContents) => {
-    const [name, value] = groupContents.split(' ');
-    console.log('+Group: ', {name, value});
+    const [name, rawValue] = groupContents.split(' ');
+    console.log('+Group: ', {name, value: rawValue});
 
     if (name === CHAR_STX) {
       // As we parse datagrams following ETX (end) control char, ignore start token
@@ -62,10 +63,10 @@ function parseDatagram(data: Buffer): TeleInfo {
     const { historical } = groupIndex;
     const teleinfoKeyName = historical[name as keyof typeof historical];
     if (teleinfoKeyName) {
-      acc[teleinfoKeyName] = value;
+      acc[teleinfoKeyName] = convertTeleinfoRawData(teleinfoKeyName, rawValue);
       acc.meta.lastUpdateTimestamp = new Date().getTime();
     } else {
-      acc.meta.unresolvedGroups[name] = value;
+      acc.meta.unresolvedGroups[name] = rawValue;
     }
     return acc;
   }, { meta: { unresolvedGroups: {} }});
