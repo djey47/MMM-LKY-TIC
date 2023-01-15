@@ -21,8 +21,8 @@ export function start(config: TeleinfoConfiguration, mm2Helper?: MM2Helper) {
 }
 
 function initHardwarePort(config: TeleinfoConfiguration) {
-  const { baudRate, serialDevice } = config;
-  const port = new SerialPort({ path: serialDevice, baudRate }, function (err) {
+  const { baudRate, serialDevice, dataBits, stopBits } = config;
+  const port = new SerialPort({ path: serialDevice, baudRate, dataBits, stopBits }, function (err) {
     if (err) {
       return console.log('Init hardware port failed: ', err.message)
     }
