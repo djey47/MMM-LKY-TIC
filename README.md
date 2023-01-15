@@ -25,15 +25,18 @@ Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as boo
 ```json
 {
   "baudRate": 1200,
+  "dataBits": 7,
   "developer": {
     "serialPortMockEnabled": false,
     "mockRefreshRate": 2500
   },
-  "serialDevice": "/dev/ttyAMA0"
+  "serialDevice": "/dev/ttyAMA0",
+  "stopBits": 7
 }
 ```
 
 - `baudRate`: transfer speed for serial link
+- `dataBits` and `stopBits`: data encoding in bits number from the serial link
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
   - `mockRefreshRate`: interval in ms for the emulator to receive mock teleinfo
