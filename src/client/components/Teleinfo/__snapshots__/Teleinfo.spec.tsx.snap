@@ -15,7 +15,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     <span
       className="teleinfo__powerValue"
     >
-      000250
+      250
     </span>
     <span
       className="teleinfo__powerUnit"
@@ -34,7 +34,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     <span
       className="teleinfo__instantValue"
     >
-      01
+      1
     </span>
     <span
       className="teleinfo__instantUnit"

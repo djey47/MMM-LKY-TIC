@@ -27,8 +27,8 @@ describe('Teleinfo component', () => {
         meta: {
           unresolvedGroups: {},
         },
-        apparentPower: '000250',
-        instantIntensity: '01',
+        apparentPower: 250,
+        instantIntensity: 1,
       }
     };
 
