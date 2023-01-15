@@ -2,6 +2,13 @@
 
 .mmm-lky-tic-wrapper {
   .teleinfo {
+    display: flex;
+    flex-direction: column;
+
+    &__noData {
+      font-style: italic;
+    }
+
     &__power {
       display: flex;
       flex-direction: row;

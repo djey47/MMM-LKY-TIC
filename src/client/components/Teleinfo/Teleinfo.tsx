@@ -15,6 +15,11 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   console.log({ data_TELEINFO });
   return (
     <div className="teleinfo">
+      {!data_TELEINFO && (
+        <p className="teleinfo_noData">
+          No data received yet.
+        </p>
+      )}
       {!!data_TELEINFO && (
         <>
           <p className="teleinfo__power">

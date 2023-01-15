@@ -48,5 +48,11 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
 exports[`Teleinfo component should render correctly without notif data 1`] = `
 <div
   className="teleinfo"
-/>
+>
+  <p
+    className="teleinfo_noData"
+  >
+    No data received yet.
+  </p>
+</div>
 `;
