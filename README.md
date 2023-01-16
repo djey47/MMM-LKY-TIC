@@ -3,9 +3,36 @@
 [ ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit)
 [![Codeship Status for djey47/MMM-LKY-TIC](https://app.codeship.com/projects/27c90cc5-d5e1-4956-af95-ea1154fffda4/status?branch=master)](https://app.codeship.com/projects/462252)
 
-MagicMirror2 module to display info about home power supply.
+MagicMirror2 module to display info about home power supply (previous generation and Linky(tm) devices providing data via 'teleinfo' serial output). 
 
-Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as bootstrapper.
+*For now only historical data mode, single-phased settlement, is handled.*
+
+## Features
+
+### Uses latest MMM-React-Canvas-ts bootstrapper:
+See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
+
+### Displays instant data
+- apparent power in VA, and estimate in Watt (depending on your own power factor)
+- current intensity in Ampere
+
+### Displays daily statistics
+*soon*
+
+e.g: min/max/avg power and intensity
+
+### Displays daily electrical furniture costs
+*soon*
+
+## Install
+
+0. Make sure node v18.12.1 or newer is installed
+1. Clone repository
+2. Run `npm install` inside repository folder
+3. Run npm `run build:module` (development) or `npm run build:module-prod` (optimized)
+4. Check that `MMM-LKY-TIC.js`, `styles.css` and `node_helper.js` files have been created into current folder
+5. Back to MagicMirror folder, create symbolic link from /modules/ subdirectory, to module repository directory: e.g `ln -s ~/dev/MMM-LKY-TIC/`
+6. Add the module to MagicMirror config and customize it according to your needs (see below).
 
 ## Configuration
 
@@ -17,7 +44,7 @@ Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as boo
 }
 ```
 
-- `debug`: enables (true) or disables (true) additional log messages for development or troubleshooting
+- `debug`: enables (true) or disables (false) additional log messages for development or troubleshooting
 - `teleinfo`: see below.
 
 ### Teleinfo section
@@ -40,9 +67,13 @@ Uses [MMM-React-Canvas-ts](https://github.com/djey47/MMM-React-Canvas-ts) as boo
 - `dataBits` and `stopBits`: data encoding in bits number from the serial link
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
-  - `mockRefreshRate`: interval in ms for the emulator to receive mock teleinfo
-- `powerFactor`: allows to estimate instant power in watts (value will depend on your electrical facilities, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
+  - `mockRefreshRate`: interval in ms for the emulator to produce mock teleinfo
+- `powerFactor`: allows estimating instant power in watts (value will depend on your electrical settlement, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
 - `serialDevice`: device name to capture teleinfo data from.  
+
+## Development
+
+See [template documentation](https://github.com/djey47/MMM-React-Canvas-ts#developing-your-own-module) for more details.
 
 ## Utilities
 
@@ -52,3 +83,10 @@ Small CLI program to diagnose reading of teleinfo data on serial input: `npm run
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
 
 ## MISC
+
+## Credits
+
+Huge thanks to Charles, creator of the PITInfo module for Raspberry PI - great piece of hardware!
+
+- [His blog](https://hallard.me/author/hallard/)
+- [Support forum](https://community.ch2i.eu/)
