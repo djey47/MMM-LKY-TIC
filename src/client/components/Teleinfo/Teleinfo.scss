@@ -14,15 +14,27 @@
     display: flex;
     flex-direction: column;
 
-    &__power,
-    &__intensity {
-      display: flex;
-      flex-direction: row;
+    &::after {
+      content: '';
+      display: block;
+      border-bottom: 1px dashed var(--color-text-dimmed);
     }
 
-    &__power-value,
-    &__intensity-vaklue {
+    .teleinfo__power,
+    .teleinfo__intensity {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: .5em;
+    }
+
+    .teleinfo__power-value,
+    .teleinfo__intensity-value {
       color: white;
+    }
+
+    .teleinfo__power-label,
+    .teleinfo__intensity-label {
+      margin-right: .5em;
     }
   }
 }
