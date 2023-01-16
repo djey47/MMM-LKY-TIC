@@ -5,17 +5,23 @@
     display: flex;
     flex-direction: column;
 
-    &__noData {
+    &__no-data {
       font-style: italic;
     }
+  }
 
-    &__power {
+  .teleinfo__instant-section {
+    display: flex;
+    flex-direction: column;
+
+    &__power,
+    &__intensity {
       display: flex;
       flex-direction: row;
     }
 
-    &__powerValue,
-    &__instantValue {
+    &__power-value,
+    &__intensity-vaklue {
       color: white;
     }
   }

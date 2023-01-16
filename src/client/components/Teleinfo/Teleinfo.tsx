@@ -16,25 +16,27 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   return (
     <div className="teleinfo">
       {!data_TELEINFO && (
-        <p className="teleinfo_noData">
+        <p className="teleinfo__no-data">
           No data received yet.
         </p>
       )}
       {!!data_TELEINFO && (
         <>
-          <p className="teleinfo__power">
-            <span className="teleinfo__powerLabel">Instant power:</span>
-            <span className="teleinfo__powerValue">{data_TELEINFO.apparentPower}</span>
-            <span className="teleinfo__powerUnit">VA</span>
-            - 
-            <span className="teleinfo__powerValue">{data_TELEINFO.estimatedPower}</span>
-            <span className="teleinfo__powerUnit">W(est.)</span> 
-          </p>
-          <p className="teleinfo__instant">
-            <span className="teleinfo__instantLabel">Instant intensity:</span>
-            <span className="teleinfo__instantValue">{data_TELEINFO.instantIntensity}</span>
-            <span className="teleinfo__instantUnit">A</span> 
-          </p>
+          <section className="teleinfo__instant-section">
+            <p className="teleinfo__power">
+              <span className="teleinfo__power-label">Instant power:</span>
+              <span className="teleinfo__power-value">{data_TELEINFO.apparentPower}</span>
+              <span className="teleinfo__power-unit">VA</span>
+              - 
+              <span className="teleinfo__power-value">{data_TELEINFO.estimatedPower}</span>
+              <span className="teleinfo__power-unit">W(est.)</span> 
+            </p>
+            <p className="teleinfo__intensity">
+              <span className="teleinfo__intensity-label">Instant intensity:</span>
+              <span className="teleinfo__intensity-value">{data_TELEINFO.instantIntensity}</span>
+              <span className="teleinfo__intensity-unit">A</span> 
+            </p>
+          </section>
         </>
       )}
     </div>

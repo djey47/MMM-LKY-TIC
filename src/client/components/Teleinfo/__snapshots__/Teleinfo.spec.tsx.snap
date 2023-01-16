@@ -4,55 +4,59 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
 <div
   className="teleinfo"
 >
-  <p
-    className="teleinfo__power"
+  <section
+    className="teleinfo__instant-section"
   >
-    <span
-      className="teleinfo__powerLabel"
+    <p
+      className="teleinfo__power"
     >
-      Instant power:
-    </span>
-    <span
-      className="teleinfo__powerValue"
+      <span
+        className="teleinfo__power-label"
+      >
+        Instant power:
+      </span>
+      <span
+        className="teleinfo__power-value"
+      >
+        250
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
+      </span>
+      -
+      <span
+        className="teleinfo__power-value"
+      >
+        225
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        W(est.)
+      </span>
+    </p>
+    <p
+      className="teleinfo__intensity"
     >
-      250
-    </span>
-    <span
-      className="teleinfo__powerUnit"
-    >
-      VA
-    </span>
-    -
-    <span
-      className="teleinfo__powerValue"
-    >
-      225
-    </span>
-    <span
-      className="teleinfo__powerUnit"
-    >
-      W(est.)
-    </span>
-  </p>
-  <p
-    className="teleinfo__instant"
-  >
-    <span
-      className="teleinfo__instantLabel"
-    >
-      Instant intensity:
-    </span>
-    <span
-      className="teleinfo__instantValue"
-    >
-      1
-    </span>
-    <span
-      className="teleinfo__instantUnit"
-    >
-      A
-    </span>
-  </p>
+      <span
+        className="teleinfo__intensity-label"
+      >
+        Instant intensity:
+      </span>
+      <span
+        className="teleinfo__intensity-value"
+      >
+        1
+      </span>
+      <span
+        className="teleinfo__intensity-unit"
+      >
+        A
+      </span>
+    </p>
+  </section>
 </div>
 `;
 
@@ -61,7 +65,7 @@ exports[`Teleinfo component should render correctly without notif data 1`] = `
   className="teleinfo"
 >
   <p
-    className="teleinfo_noData"
+    className="teleinfo__no-data"
   >
     No data received yet.
   </p>
