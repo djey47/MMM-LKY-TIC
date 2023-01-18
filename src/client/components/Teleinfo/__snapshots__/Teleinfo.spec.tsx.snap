@@ -57,6 +57,30 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       </span>
     </p>
   </section>
+  <section
+    className="teleinfo__costs-section"
+  >
+    <p
+      className="teleinfo__costs"
+    >
+      <span
+        className="teleinfo__costs-label"
+      >
+        Costs:
+      </span>
+      <span
+        className="teleinfo__costs-value"
+      >
+        55
+      </span>
+      <span
+        className="teleinfo__costs-unit"
+      >
+        €
+        (est.)
+      </span>
+    </p>
+  </section>
 </div>
 `;
 

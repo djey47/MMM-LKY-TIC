@@ -21,7 +21,7 @@ export const renderWrapper = (wrapperId: string): HTMLDivElement => {
  * REACT gateway helper
  * @return Mounted component
  */
-export const renderMainComponent = (wrapperId: string): void => {
+export const renderMainComponent = (wrapperId: string, config?: ModuleConfiguration): void => {
   const wrapperElement = document.getElementById(wrapperId);
   if (!wrapperElement) {
     Log.error(`** Could not find root div with id: ${wrapperId}! Aborting.`);
@@ -29,5 +29,5 @@ export const renderMainComponent = (wrapperId: string): void => {
   }
 
   const root = createRoot(wrapperElement);
-  root.render(<Main />);
+  root.render(<Main config={config} />);
 };

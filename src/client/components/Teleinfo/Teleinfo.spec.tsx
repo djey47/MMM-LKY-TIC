@@ -10,9 +10,13 @@ jest.mock('../../hoc/with-notifications', () => ({
 }));
 
 describe('Teleinfo component', () => {
+  const defaultProps = {
+    currencySymbol: '€',
+  };
+
   it('should render correctly without notif data', () => {
     // given-when
-    const tree = renderer.create(<Teleinfo />).toJSON();
+    const tree = renderer.create(<Teleinfo {...defaultProps} />).toJSON();
 
     // then
     expect(tree).toMatchSnapshot();
@@ -23,12 +27,14 @@ describe('Teleinfo component', () => {
   it('should render correctly with notif data', () => {
     // given
     const props: WithNotificationDataProps = {
+      ...defaultProps,
       data_TELEINFO: {
         meta: {
           unresolvedGroups: {},
         },
         apparentPower: 250,
         estimatedPower: 225,
+        estimatedPrice: 55,
         instantIntensity: 1,
       }
     };

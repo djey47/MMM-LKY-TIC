@@ -10,4 +10,9 @@ describe('Main component', () => {
     const tree = renderer.create(<Main />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('should render correctly with optional props', () => {
+    const tree = renderer.create(<Main config={{ currencySymbol: 'S' }}  />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

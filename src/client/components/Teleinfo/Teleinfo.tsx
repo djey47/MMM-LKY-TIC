@@ -5,13 +5,14 @@ import { TeleInfo } from '../../../shared/domain/teleinfo';
 import './Teleinfo.scss';
 
 export interface WithNotificationDataProps {
+  currencySymbol: string;
   data_TELEINFO?: TeleInfo;
 }
 
 const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   props: WithNotificationDataProps
 ) => {
-  const { data_TELEINFO } = props;
+  const { currencySymbol, data_TELEINFO } = props;
   console.log({ data_TELEINFO });
   return (
     <div className="teleinfo">
@@ -35,6 +36,13 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
               <span className="teleinfo__intensity-label">Instant intensity:</span>
               <span className="teleinfo__intensity-value">{data_TELEINFO.instantIntensity}</span>
               <span className="teleinfo__intensity-unit">A</span> 
+            </p>
+          </section>
+          <section className="teleinfo__costs-section">
+            <p className="teleinfo__costs">
+              <span className="teleinfo__costs-label">Costs:</span>
+              <span className="teleinfo__costs-value">{data_TELEINFO.estimatedPrice}</span>
+              <span className="teleinfo__costs-unit">{currencySymbol}(est.)</span> 
             </p>
           </section>
         </>

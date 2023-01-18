@@ -23,7 +23,16 @@ interface MM2ModuleHelper {
    * @param moduleProperties an object with the module properties
    */
   register(moduleName: string, moduleProperties: MM2ModuleProperties): void;
-}
+};
+
+/**
+ * @see ModuleConfiguration interface in ../../shared/domain/module-config.ts
+ */
+interface ModuleConfiguration {
+  debug?: boolean;
+  currencySymbol?: string;
+  teleinfo?: object;
+};
 
 /**
  * @see https://docs.magicmirror.builders/development/core-module-file.html#available-module-instance-properties
@@ -33,14 +42,12 @@ interface MM2ModuleProperties {
    * The configuration of the module instance as set in the user's config.js file.
    * This config will also contain the module's defaults if these properties are not over-written by the user config.
    */
-  config?: {
-    debug?: boolean;
-  };
+  config?: ModuleConfiguration;
   /**
    * Any properties defined in the defaults object, will be merged with the module config as defined in the user's config.js file.
    * This is the best place to set your modules' configuration defaults.
    */
-  defaults: object;
+  defaults: ModuleConfiguration;
   /**
    * If you want to create a path to a file in your module folder, use the file() method.
    * It returns the path to the filename given as the attribute.

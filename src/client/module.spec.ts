@@ -45,7 +45,7 @@ describe('MM2 Module client', () => {
       mockModuleRegister.mock.lastCall
     );
     expect(name).toBe('MMM-LKY-TIC');
-    expect(implementation.defaults).toEqual({ debug: false });
+    expect(implementation.defaults).toEqual({ currencySymbol: '€', debug: false });
     expect(typeof implementation.getDom).toBe('function');
     expect(typeof implementation.getHeader).toBe('function');
     expect(typeof implementation.getStyles).toBe('function');
@@ -226,7 +226,7 @@ describe('MM2 Module client', () => {
       // then
       expect(implementation.viewEngineStarted).toBe(true);
       expect(mockRenderMainComponent).toHaveBeenCalledWith(
-        'mmm-lky-tic-wrapper'
+        'mmm-lky-tic-wrapper', { debug: false }
       );
       expect(mockCatchNotification).toHaveBeenCalledWith('DOM_OBJECTS_CREATED');
     });

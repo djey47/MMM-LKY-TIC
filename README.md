@@ -39,15 +39,19 @@ e.g: min/max/avg power and intensity
 ### Main
 ```json
 {
+  "currencySymbol": "€",
   "debug": false,
   "teleinfo": { ... }
 }
 ```
 
+- `currencySymbol`: defines the symbol to be used for money (e.g cost)
 - `debug`: enables (true) or disables (false) additional log messages for development or troubleshooting
 - `teleinfo`: see below.
 
 ### Teleinfo section
+
+*Provided `fareDetails` and `powerFactor` values depicted below may not be realistic and need to be adjusted to your particular case.*
 
 ```json
 {
@@ -56,6 +60,13 @@ e.g: min/max/avg power and intensity
   "developer": {
     "serialPortMockEnabled": false,
     "mockRefreshRate": 2500
+  },
+  "fareDetails": {
+    "basePricePerKwh": 0.7,
+    "ejpNormalPricePerKwh": 0.5,
+    "ejpPeakPricePerKwh": 1,
+    "hcLHPricePerKwh": 0.6,
+    "hcHHPricePerKwh": 0.8,
   },
   "powerFactor": .8,
   "serialDevice": "/dev/ttyAMA0",
@@ -68,6 +79,10 @@ e.g: min/max/avg power and intensity
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
   - `mockRefreshRate`: interval in ms for the emulator to produce mock teleinfo
+- `fareDetails`: price per supplied Kwh, depending on chosen fare option
+  - `basePricePerKwh`: for the subscribed BASE option
+  - `ejpNormalPricePerKwh` and `ejpPeakPricePerKwh`: for the subscribed EJP option
+  - `hcLHPricePerKwh` and `hcHHPricePerKwh`: for the subscribed HC option
 - `powerFactor`: allows estimating instant power in watts (value will depend on your electrical settlement, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
 - `serialDevice`: device name to capture teleinfo data from.  
 

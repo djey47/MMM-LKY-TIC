@@ -38,7 +38,6 @@ describe('MM2 module React renderer', () => {
   });
 
   describe('renderMainComponent function', () => {
-    // TODO add nominal render case when migrating to React18 syntax
     beforeEach(() => {
       mockRender.mockReset();
       // @ts-ignore
@@ -60,18 +59,18 @@ describe('MM2 module React renderer', () => {
       expect(mockRender).not.toHaveBeenCalled();
     });
 
-    it('should render with wrapper DOM element', () => {
+    it('should render with wrapper DOM element and configuration', () => {
       // given
       const wrapper = renderWrapper('wrapper-id');
       document.body.appendChild(wrapper);
 
       // when
-      renderMainComponent('wrapper-id');
+      renderMainComponent('wrapper-id', {});
 
       // then
       // @ts-ignore
       expect(global.Log.error).not.toHaveBeenCalled();
-      expect(mockRender).toHaveBeenCalledWith(<Main />);
+      expect(mockRender).toHaveBeenCalledWith(<Main config={{}} />);
     });
   });
 });
