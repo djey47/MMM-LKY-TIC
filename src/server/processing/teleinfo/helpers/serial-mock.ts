@@ -1,6 +1,6 @@
 import { MockBinding } from '@serialport/binding-mock';
 import { SerialPortStream } from '@serialport/stream';
-import { TeleinfoConfiguration } from '../domain/teleinfo-config';
+import { TeleinfoConfiguration } from '../../../../shared/domain/teleinfo-config';
 
 export function initMockPort(config: TeleinfoConfiguration) {
   const { baudRate, developer: { mockRefreshRate } } = config;
@@ -12,7 +12,7 @@ export function initMockPort(config: TeleinfoConfiguration) {
   let iterationCount = 1;
   portMock.on('open', () => {
     setInterval(() => {
-      const data = generateDatagram(360 + iterationCount);
+      const data = generateDatagram(360 + iterationCount, 20000 + iterationCount * 2, 10000 + iterationCount * 3);
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       portMock.port!.emitData(data);
       iterationCount += 1;
@@ -22,6 +22,6 @@ export function initMockPort(config: TeleinfoConfiguration) {
   return portMock;
 }
 
-function generateDatagram(pApp: number) {
-  return `\x02\nADCO 032161613293 <\nOPTARIF HC.. <\nISOUSC 45 ?\nHCHC 002940247 "\nHCHP 001481709 1\nPTEC HP..  \nIINST 001 X\nIMAX 090 H\nPAPP 00${pApp} *\nHHPHC A ,\nMOTDETAT 000000 B\x03`
+function generateDatagram(pApp: number, hcLHIndex: number, hcHHIndex: number) {
+  return `\x02\nADCO 032161613293 <\nOPTARIF HC.. <\nISOUSC 45 ?\nHCHC 00${hcLHIndex} "\nHCHP 00${hcHHIndex} 1\nPTEC HP..  \nIINST 001 X\nIMAX 090 H\nPAPP 00${pApp} *\nHHPHC A ,\nMOTDETAT 000000 B\x03`
 }

@@ -6,7 +6,7 @@ import { DelimiterParser } from '@serialport/parser-delimiter';
 import { SerialPortStream } from '@serialport/stream';
 import { SerialPort } from 'serialport';
 import { convertTeleinfoRawData } from './data-converter';
-import { TeleinfoConfiguration } from './domain/teleinfo-config';
+import { TeleinfoConfiguration } from '../../../shared/domain/teleinfo-config';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 import * as SerialMock from './helpers/serial-mock';
 import * as groupIndex from './settings/group-index.json';
@@ -78,5 +78,3 @@ function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
 
   return computeAdditionalTeleinfoData(teleinfoData, config);
 }
-
-

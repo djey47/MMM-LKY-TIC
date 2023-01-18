@@ -5,6 +5,11 @@
     "serialPortMockEnabled": true,
     "mockRefreshRate": 2500
   },
+  "fareDetails": {
+    "basePricePerKwh": 0.5,
+    "hcHHPricePerKwh": 0.6,
+    "hcLHPricePerKwh": 0.4     
+  },
   "powerFactor": 0.8,
   "serialDevice": "/dev/ttyAMA0",
   "stopBits": 1

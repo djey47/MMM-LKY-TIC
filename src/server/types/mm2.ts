@@ -1,4 +1,4 @@
-import { TeleinfoConfiguration } from "../processing/teleinfo/domain/teleinfo-config";
+import { ModuleConfiguration } from '../../shared/domain/module-config';
 
 /**
  * The node helper is able to do some backend task to support your module.
@@ -9,10 +9,7 @@ export interface MM2Helper {
    * React Canvas additional property.
    * Allows to store and retrieve module configuration by helper side.
    */
-  config?: {
-    debug?: boolean;
-    teleinfo?: TeleinfoConfiguration;
-  };
+  config?: ModuleConfiguration;
   /**
    * If you want to send a notification to all your modules, use this method.
    * Only the module of your helper type will receive the socket notification.

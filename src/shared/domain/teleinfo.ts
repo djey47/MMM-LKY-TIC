@@ -1,5 +1,3 @@
-// TODO use different types 
-
 export enum TeleInfoHistoricalInputCodes {
   ADCO = 'ADCO',
   ADPS = 'ADPS',
@@ -29,8 +27,8 @@ export enum TeleInfoHistoricalOutputKeys {
   ejpNormalHoursIndex = 'ejpNormalHoursIndex',
   ejpMobilePeakHoursIndex = 'ejpMobilePeakHoursIndex',
   ejpNotice = 'ejpNotice',
-  hcHigHoursIndex = 'hcHighoursIndex',
-  hcLowHoursIndex = 'lowHighHoursSchedule',
+  hcHighHoursIndex = 'hcHighHoursIndex',
+  hcLowHoursIndex = 'hcLowHoursIndex',
   instantIntensity = 'instantIntensity',
   lowHighHoursSchedule = 'lowHighHoursSchedule',
   maxCalledIntensity = 'maxCalledIntensity',
@@ -38,7 +36,25 @@ export enum TeleInfoHistoricalOutputKeys {
   subscribedPowerOverflowWarning = 'subscribedPowerOverflowWarning'
 }
 
-export interface TeleInfo {
+export enum FareOptions {
+  /**
+   * Unique fare
+   */
+  BASE = 'BASE',
+  /** 
+   * Normal period fare / Mobile peak period fare  
+   */
+  EJP = 'EJP',
+  /**
+   * Low fare hours / High fare hours
+   */
+  HC = 'HC',
+}
+
+/**
+ * Collected data
+ */
+interface OriginTeleInfo {
   [key: string]: string | number | object | undefined;
   apparentPower?: number;
   baseIndex?: number;
@@ -49,18 +65,30 @@ export interface TeleInfo {
   ejpNormalHoursIndex?: number;
   ejpMobilePeakHoursIndex?: number;
   ejpNotice?: string;
-  estimatedPower?: number;
-  hcHigHoursIndex?: number;
+  hcHighHoursIndex?: number;
   hcLowHoursIndex?: number;
   instantIntensity?: number;
   lowHighHoursSchedule?: string;
   maxCalledIntensity?: number;
+  subscribedIntensity?: number;
+  subscribedPowerOverflowWarning?: string;
+}
+
+/**
+ * Computed data
+ */
+interface ExtendedTeleInfo {
+  estimatedPower?: number;
+  estimatedPrice?: number;
   meta: {
     lastUpdateTimestamp?: number;
     unresolvedGroups: {
       [key: string]: string;
     };
-  }
-  subscribedIntensity?: number;
-  subscribedPowerOverflowWarning?: string;
-};
+  } 
+}
+
+/**
+ * Whole Teleinfo data (collected and computed)
+ */
+export interface TeleInfo extends OriginTeleInfo, ExtendedTeleInfo {}

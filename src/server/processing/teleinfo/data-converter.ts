@@ -14,13 +14,14 @@ export function convertTeleinfoRawData(dataKey: string, rawValue?: string): stri
     case TeleInfoHistoricalOutputKeys.baseIndex.toString():
     case TeleInfoHistoricalOutputKeys.ejpMobilePeakHoursIndex.toString():
     case TeleInfoHistoricalOutputKeys.ejpNormalHoursIndex.toString():
-    case TeleInfoHistoricalOutputKeys.hcHigHoursIndex.toString():
+    case TeleInfoHistoricalOutputKeys.hcHighHoursIndex.toString():
     case TeleInfoHistoricalOutputKeys.hcLowHoursIndex.toString():
     case TeleInfoHistoricalOutputKeys.instantIntensity.toString():
     case TeleInfoHistoricalOutputKeys.maxCalledIntensity.toString():
     case TeleInfoHistoricalOutputKeys.subscribedIntensity.toString():
       return Number(rawValue);
     case TeleInfoHistoricalOutputKeys.chosenFareOption.toString():
+      return rawValue.replace(/\./g, '');
     case TeleInfoHistoricalOutputKeys.counterAddress.toString():
     case TeleInfoHistoricalOutputKeys.counterStateWord.toString():
     case TeleInfoHistoricalOutputKeys.currentFarePeriod.toString():
