@@ -66,11 +66,11 @@ e.g: min/max/avg power and intensity
     "ejpNormalPricePerKwh": 0.5,
     "ejpPeakPricePerKwh": 1,
     "hcLHPricePerKwh": 0.6,
-    "hcHHPricePerKwh": 0.8,
+    "hcHHPricePerKwh": 0.8
   },
   "powerFactor": .8,
   "serialDevice": "/dev/ttyAMA0",
-  "stopBits": 7
+  "stopBits": 1
 }
 ```
 
