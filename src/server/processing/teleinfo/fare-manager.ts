@@ -62,7 +62,7 @@ export function computeEstimatedPrice(data: TeleInfo, fareDetails: FareDetails) 
       return amount;
     }
 
-    const indexDelta = currentIndex - initialIndex ;
+    const indexDelta = (currentIndex - initialIndex) / 1000;
     // console.log({ indexDelta });
     return amount + indexDelta * pricePerKwh;
   }, 0);
