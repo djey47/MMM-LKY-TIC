@@ -46,5 +46,5 @@ describe('Teleinfo component', () => {
 
     // then
     expect(tree).toMatchSnapshot();
-  });
+  });  
 });

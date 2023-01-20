@@ -4,7 +4,7 @@
 
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 import { TeleinfoConfiguration } from '../../../shared/domain/teleinfo-config';
-import { computeEstimatedPrice } from './fare-manager';
+import { computeEstimatedPrices } from './fare-manager';
 
 export function computeAdditionalTeleinfoData(data: TeleInfo, config: TeleinfoConfiguration): TeleInfo {
   const { apparentPower } = data;
@@ -13,7 +13,7 @@ export function computeAdditionalTeleinfoData(data: TeleInfo, config: TeleinfoCo
   return {
     ...data,
     estimatedPower: computeEstimatedPower(powerFactor, apparentPower),
-    estimatedPrice: computeEstimatedPrice(data, fareDetails),
+    estimatedPrices: { ...computeEstimatedPrices(data, fareDetails)},
   };
 }
 

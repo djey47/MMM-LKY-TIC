@@ -79,7 +79,10 @@ interface OriginTeleInfo {
  */
 interface ExtendedTeleInfo {
   estimatedPower?: number;
-  estimatedPrice?: number;
+  estimatedPrices?: {
+    currentDay?: number;
+    total?: number;
+  };
   meta: {
     lastUpdateTimestamp?: number;
     unresolvedGroups: {

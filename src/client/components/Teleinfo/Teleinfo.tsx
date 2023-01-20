@@ -40,8 +40,10 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
           </section>
           <section className="teleinfo__costs-section">
             <p className="teleinfo__costs">
-              <span className="teleinfo__costs-label">Costs:</span>
-              <span className="teleinfo__costs-value">{data_TELEINFO.estimatedPrice}</span>
+              <span className="teleinfo__costs-label">Costs (today/total):</span>
+              <span className="teleinfo__costs-value">
+                {data_TELEINFO.estimatedPrices?.currentDay || '...'}/{data_TELEINFO.estimatedPrices?.total || '...'}
+              </span>
               <span className="teleinfo__costs-unit">{currencySymbol}(est.)</span> 
             </p>
           </section>

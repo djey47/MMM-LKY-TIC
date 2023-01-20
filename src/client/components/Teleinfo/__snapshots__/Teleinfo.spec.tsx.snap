@@ -66,12 +66,14 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__costs-label"
       >
-        Costs:
+        Costs (today/total):
       </span>
       <span
         className="teleinfo__costs-value"
       >
-        55
+        ...
+        /
+        ...
       </span>
       <span
         className="teleinfo__costs-unit"
