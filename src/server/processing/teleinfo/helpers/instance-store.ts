@@ -37,7 +37,7 @@ export class InstanceStore {
     this.store = this.getFromPersist();
 
     this.persist();
-    setInterval(this.persist, InstanceStore.PERSIST_INTERVAL);
+    setInterval(this.persist.bind(this), InstanceStore.PERSIST_INTERVAL);
   }
 
   public reset() {
@@ -61,6 +61,7 @@ export class InstanceStore {
     const contentsAsJSON = JSON.stringify(this.store, null, 2);
     await writeFile(InstanceStore.PERSIST_PATH, contentsAsJSON, 'utf-8');
     this.store.meta.lastPersistTs = new Date().getTime();
+    console.log('**** instance-store::persist');
   }
 
   private getFromPersist(): Store {
