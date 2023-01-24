@@ -56,6 +56,90 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         A
       </span>
     </p>
+    <p
+      className="teleinfo__supplied"
+    >
+      <span
+        className="teleinfo__supplied-label"
+      >
+        Supplied (today/total):
+      </span>
+      <span
+        className="teleinfo__supplied-value"
+      >
+        3
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        30
+      </span>
+      <span
+        className="teleinfo__supplied-unit"
+      >
+        wh
+      </span>
+    </p>
+    <p
+      className="teleinfo__supplied-detail"
+    >
+      <ul
+        className="teleinfo__supplied-detail-items"
+      >
+        <li
+          className="teleinfo__supplied-detail-item"
+        >
+          <span
+            className="teleinfo__supplied-label"
+          >
+            base
+            :
+          </span>
+          <span
+            className="teleinfo__supplied-value"
+          >
+            1
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            10
+          </span>
+          <span
+            className="teleinfo__supplied-unit"
+          >
+            wh
+          </span>
+        </li>
+        <li
+          className="teleinfo__supplied-detail-item"
+        >
+          <span
+            className="teleinfo__supplied-label"
+          >
+            :
+          </span>
+          <span
+            className="teleinfo__supplied-value"
+          >
+            2
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            20
+          </span>
+          <span
+            className="teleinfo__supplied-unit"
+          >
+            wh
+          </span>
+        </li>
+      </ul>
+    </p>
   </section>
   <section
     className="teleinfo__costs-section"
@@ -72,7 +156,11 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         className="teleinfo__costs-value"
       >
         ...
-        /
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
         ...
       </span>
       <span

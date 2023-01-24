@@ -33,9 +33,14 @@ describe('Teleinfo component', () => {
           unresolvedGroups: {},
         },
         apparentPower: 250,
+        chosenFareOption: 'BASE',
         estimatedPower: 225,
         estimatedPrice: 55,
         instantIntensity: 1,
+        suppliedPower: {
+          currentDay: [1, 2],
+          total: [10, 20],
+        },
       }
     };
 

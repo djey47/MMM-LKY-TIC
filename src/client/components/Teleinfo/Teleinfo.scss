@@ -4,6 +4,7 @@
   .teleinfo {
     display: flex;
     flex-direction: column;
+    font-size: 0.9em;
 
     &__no-data {
       font-style: italic;
@@ -11,21 +12,35 @@
 
     &__power,
     &__intensity,
-    &__costs {
+    &__costs,
+    &__supplied,
+    &__supplied-detail {
       display: flex;
       flex-direction: row;
+    }
+
+    &__power,
+    &__intensity,
+    &__costs,
+    &__supplied-detail {
       margin-bottom: 0.5em;
     }
 
     &__power-value,
     &__intensity-value,
-    &__costs-value {
+    &__costs-value,
+    &__supplied-value {
       color: white;
+    }
+
+    &__supplied-detail {
+      margin-left: auto;
     }
 
     &__power-label,
     &__intensity-label,
-    &__costs-label {
+    &__costs-label,
+    &__supplied-label {
       margin-right: 0.5em;
     }
 
