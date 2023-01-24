@@ -61,7 +61,8 @@ export class InstanceStore {
     const contentsAsJSON = JSON.stringify(this.store, null, 2);
     await writeFile(InstanceStore.PERSIST_PATH, contentsAsJSON, 'utf-8');
     this.store.meta.lastPersistTs = new Date().getTime();
-    console.log('**** instance-store::persist');
+
+    // console.log('**** instance-store::persist done');
   }
 
   private getFromPersist(): Store {
