@@ -83,6 +83,11 @@ interface ExtendedTeleInfo {
     currentDay?: number;
     total?: number;
   };
+  suppliedPower?: {
+    [key: string]: number[] | undefined;
+    currentDay?: number[];
+    total?: number[];
+  };
   meta: {
     lastUpdateTimestamp?: number;
     unresolvedGroups: {

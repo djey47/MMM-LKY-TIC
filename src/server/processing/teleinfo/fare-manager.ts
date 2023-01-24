@@ -1,12 +1,13 @@
-import { format as formatDate } from 'date-fns';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 import { FareDetails } from '../../../shared/domain/teleinfo-config';
 import { InstanceStore } from './helpers/instance-store';
-
-const INITIAL_INDEXES_IS_KEY = 'INITIAL_INDEXES';
-const TOTAL_COSTS_IS_KEY = 'TOTAL_COSTS_';
-const PER_DAY_COSTS_IS_KEY_PREFIX = 'DAY_COSTS_';
-const PER_DAY_INDEXES_IS_KEY_PREFIX = 'DAY_INDEXES_';
+import {
+  INITIAL_INDEXES_IS_KEY,
+  PER_DAY_COSTS_IS_KEY_PREFIX,
+  PER_DAY_INDEXES_IS_KEY_PREFIX,
+  TOTAL_COSTS_IS_KEY
+} from './helpers/store-constants';
+import { generateCurrentDayISKey, readIndexes } from './index-reader';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -14,14 +15,6 @@ const PRICE_KEYS_PER_FARE_OPTION: {
   BASE: ['basePricePerKwh'],
   EJP: ['ejpNormalPricePerKwh', 'ejpPeakPricePerKwh'],
   HC: ['hcLHPricePerKwh', 'hcHHPricePerKwh'],
-}
-
-const INDEX_KEYS_PER_FARE_OPTION: {
-  [key: string]: string[];
-} = {
-  BASE: ['baseIndex'],
-  EJP: ['ejpNormalHoursIndex', 'ejpMobilePeakHoursIndex'],
-  HC: ['hcLowHoursIndex', 'hcHighHoursIndex'],
 }
 
 export function computeEstimatedPrices(data: TeleInfo, fareDetails: FareDetails) {
@@ -51,8 +44,7 @@ export function computeEstimatedPrices(data: TeleInfo, fareDetails: FareDetails)
   // console.log({ indexes, currentPriceKeys, initialIndexes });
 
   // Retrieve or store indexes for the current day
-  const dateSuffix = formatDate(new Date(), 'yyyyMMdd');
-  const currentDayIndexesISKey = `${PER_DAY_INDEXES_IS_KEY_PREFIX}${dateSuffix}`;
+  const currentDayIndexesISKey = generateCurrentDayISKey(PER_DAY_INDEXES_IS_KEY_PREFIX);
   let initialDayIndexes = storeInstance.get(currentDayIndexesISKey) as (number | undefined)[];
   if (!initialDayIndexes) {
     initialDayIndexes = [...indexes];
@@ -66,24 +58,16 @@ export function computeEstimatedPrices(data: TeleInfo, fareDetails: FareDetails)
   const totalDayPrice = computePrice(initialDayIndexes, indexes, currentPriceKeys, fareDetails);
 
   storeInstance.put(TOTAL_COSTS_IS_KEY, totalPrice);
-  storeInstance.put(`${PER_DAY_COSTS_IS_KEY_PREFIX}${dateSuffix}`, totalDayPrice);
 
-  console.log({ totalPrice, totalDayPrice, dateSuffix });
+  const currentDayCostsISKey = generateCurrentDayISKey(PER_DAY_COSTS_IS_KEY_PREFIX);
+  storeInstance.put(currentDayCostsISKey, totalDayPrice);
+
+  // console.log({ totalPrice, totalDayPrice });
 
   return {
     total: totalPrice === undefined ? undefined : Math.round(totalPrice),
     currentDay: totalDayPrice === undefined ? undefined : Math.round(totalDayPrice),
   };
-}
-
-function readIndexes(data: TeleInfo) {
-  if(!data.chosenFareOption) {
-    return undefined;
-  }
-
-  // Attempt to retrieve indexes for instance store first
-  const currentIndexKeys = INDEX_KEYS_PER_FARE_OPTION[data.chosenFareOption];
-  return currentIndexKeys.map((k) => data[k]) as (number | undefined)[];
 }
 
 function computePrice(
