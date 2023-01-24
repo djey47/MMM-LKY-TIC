@@ -1,6 +1,7 @@
 import { NOTIF_INIT, NOTIF_SET_CONFIG } from '../support/notifications';
 import { MM2Helper } from './types/mm2';
 import { startProcessing } from './processing/teleinfo/teleinfo-processor';
+import { InstanceStore } from './processing/teleinfo/helpers/instance-store';
 
 /**
  * Magic Mirror 2
@@ -23,6 +24,11 @@ const mm2Helper: MM2Helper = {
       startProcessing(this);
     }
   },
+
+  stop: function (): void {
+    // Saving data store before exiting
+    InstanceStore.getInstance().persist();
+  }
 };
 
 module.exports = mm2Helper;
