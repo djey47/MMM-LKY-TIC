@@ -69,9 +69,11 @@ function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
     const teleinfoKeyName = historical[name as keyof typeof historical];
     if (teleinfoKeyName) {
       acc[teleinfoKeyName] = convertTeleinfoRawData(teleinfoKeyName, rawValue);
-      acc.meta.lastUpdateTimestamp = new Date().getTime();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      acc.meta!.lastUpdateTimestamp = new Date().getTime();
     } else {
-      acc.meta.unresolvedGroups[name] = rawValue;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      acc.meta!.unresolvedGroups[name] = rawValue;
     }
     return acc;
   }, { meta: { unresolvedGroups: {} }});
