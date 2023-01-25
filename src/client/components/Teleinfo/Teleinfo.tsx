@@ -24,11 +24,19 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
 
   function computeWholeSuppliedPower(categoryKey: string) {
     const {data_TELEINFO} = props;
-    if (!data_TELEINFO || !data_TELEINFO.suppliedPower) {
+    if (!data_TELEINFO) {
       return undefined;
     }
 
-    const suppliedPowers = data_TELEINFO.suppliedPower[categoryKey] as number[];
+    const {suppliedPower} = data_TELEINFO;
+    if (!suppliedPower) {
+      return undefined;
+    }
+
+    const suppliedPowers = suppliedPower[categoryKey] as number[];
+    if (!suppliedPowers) {
+      return undefined;
+    }
     return suppliedPowers.reduce((sum, current) => {
       return sum + current;
     }, 0);

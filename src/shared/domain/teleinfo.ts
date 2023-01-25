@@ -88,7 +88,7 @@ interface ExtendedTeleInfo {
     currentDay?: number[];
     total?: number[];
   };
-  meta: {
+  meta?: {
     lastUpdateTimestamp?: number;
     unresolvedGroups: {
       [key: string]: string;

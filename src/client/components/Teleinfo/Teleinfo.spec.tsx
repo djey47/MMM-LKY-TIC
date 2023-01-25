@@ -10,9 +10,26 @@ jest.mock('../../hoc/with-notifications', () => ({
 }));
 
 describe('Teleinfo component', () => {
-  const defaultProps = {
+  const defaultProps: WithNotificationDataProps = {
     currencySymbol: '€',
   };
+  const propsWithFullNotifData: WithNotificationDataProps = {
+    ...defaultProps,
+    data_TELEINFO: {
+      meta: {
+        unresolvedGroups: {},
+      },
+      apparentPower: 250,
+      chosenFareOption: 'BASE',
+      estimatedPower: 225,
+      estimatedPrice: 55,
+      instantIntensity: 1,
+      suppliedPower: {
+        currentDay: [1, 2],
+        total: [10, 20],
+      },
+  }
+  }
 
   it('should render correctly without notif data', () => {
     // given-when
@@ -25,23 +42,23 @@ describe('Teleinfo component', () => {
   });
 
   it('should render correctly with notif data', () => {
+    // given-when
+    const tree = renderer
+      .create(<Teleinfo {...propsWithFullNotifData} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });  
+
+  it('should render correctly with notif data but without supplied power information', () => {
     // given
     const props: WithNotificationDataProps = {
-      ...defaultProps,
+      ...propsWithFullNotifData,
       data_TELEINFO: {
-        meta: {
-          unresolvedGroups: {},
-        },
-        apparentPower: 250,
-        chosenFareOption: 'BASE',
-        estimatedPower: 225,
-        estimatedPrice: 55,
-        instantIntensity: 1,
-        suppliedPower: {
-          currentDay: [1, 2],
-          total: [10, 20],
-        },
-      }
+        ...propsWithFullNotifData.data_TELEINFO,
+        suppliedPower: {},
+      },
     };
 
     // when
