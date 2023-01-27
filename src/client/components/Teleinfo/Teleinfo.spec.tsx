@@ -17,6 +17,7 @@ describe('Teleinfo component', () => {
     ...defaultProps,
     data_TELEINFO: {
       meta: {
+        lastUpdateTimestamp: 1674818126026,
         unresolvedGroups: {},
       },
       apparentPower: 250,

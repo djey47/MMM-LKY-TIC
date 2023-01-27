@@ -178,6 +178,38 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       />
     </p>
   </section>
+  <section
+    className="teleinfo__dates-section"
+  >
+    <p
+      className="teleinfo__dates-last"
+    >
+      <span
+        className="teleinfo__dates-last-label"
+      >
+        Last data on:
+      </span>
+      <span
+        className="teleinfo__dates-last-value"
+      >
+        12:15:26   2023/01/27
+      </span>
+    </p>
+    <p
+      className="teleinfo__dates-start"
+    >
+      <span
+        className="teleinfo__dates-start-label"
+      >
+        Started on:
+      </span>
+      <span
+        className="teleinfo__dates-start-value"
+      >
+        ...
+      </span>
+    </p>
+  </section>
 </div>
 `;
 
@@ -305,6 +337,38 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <ul
         className="teleinfo__costs-detail-items"
       />
+    </p>
+  </section>
+  <section
+    className="teleinfo__dates-section"
+  >
+    <p
+      className="teleinfo__dates-last"
+    >
+      <span
+        className="teleinfo__dates-last-label"
+      >
+        Last data on:
+      </span>
+      <span
+        className="teleinfo__dates-last-value"
+      >
+        12:15:26   2023/01/27
+      </span>
+    </p>
+    <p
+      className="teleinfo__dates-start"
+    >
+      <span
+        className="teleinfo__dates-start-label"
+      >
+        Started on:
+      </span>
+      <span
+        className="teleinfo__dates-start-value"
+      >
+        ...
+      </span>
     </p>
   </section>
 </div>

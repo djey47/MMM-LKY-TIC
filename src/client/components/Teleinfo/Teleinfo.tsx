@@ -1,3 +1,4 @@
+import formatDate from 'date-fns/format';
 import { FunctionComponent } from 'react';
 import { withNotifications } from '../../hoc/with-notifications';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
@@ -16,6 +17,8 @@ const PERIOD_LABELS_PER_FARE_OPTION: {
   EJP: ['EJP:normal', 'EJP:peak'],
   HC: ['HC:low', 'HC:high'],
 }
+
+const DATE_TIME_FORMAT = 'HH:mm:ss   yyyy/MM/dd';
 
 const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   props: WithNotificationDataProps
@@ -88,11 +91,20 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     );
   }
 
+  function presentDate(number?: number) {
+    if (!number) {
+      return '...';
+    }
+    return formatDate(number, DATE_TIME_FORMAT);
+  }
+
   // TODO debug log with integrated logger
   console.log({ data_TELEINFO });
 
   const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
+
+  const lastReceivedDataDate = presentDate(data_TELEINFO?.meta?.lastUpdateTimestamp);
 
   return (
     <div className="teleinfo">
@@ -146,6 +158,20 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
             </p>
             <p className="teleinfo__costs-detail">
               {renderCostsDetails()}
+            </p>
+          </section>
+          <section className="teleinfo__dates-section">
+            <p className="teleinfo__dates-last">
+              <span className="teleinfo__dates-last-label">Last data on:</span>
+              <span className="teleinfo__dates-last-value">
+                {lastReceivedDataDate}
+              </span>
+            </p>
+            <p className="teleinfo__dates-start">
+              <span className="teleinfo__dates-start-label">Started on:</span>
+              <span className="teleinfo__dates-start-value">
+                ...
+              </span>
             </p>
           </section>
         </>

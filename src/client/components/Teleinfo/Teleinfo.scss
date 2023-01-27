@@ -19,22 +19,30 @@
       flex-direction: row;
     }
 
-    // &__power,
     &__intensity,
     &__costs,
-    &__supplied-detail {
+    &__supplied-detail,
+    &__dates-start {
       margin-bottom: 0.5em;
     }
 
+    &__dates-start,
+    &__dates-last {
+      font-style: italic;
+      font-size: 0.8em;
+    }
+ 
     &__power-value,
     &__intensity-value,
     &__costs-value,
-    &__supplied-value {
+    &__supplied-value,
+    &__dates-last-value {
       color: white;
     }
 
     &__intensity,
-    &__supplied-detail {
+    &__supplied-detail,
+    &__dates {
       margin-left: auto;
     }
 
@@ -46,6 +54,7 @@
     }
 
     &__instant-section,
+    &__dates-section,
     &__costs-section {
       display: flex;
       flex-direction: column;
@@ -57,7 +66,8 @@
       }
     }
 
-    &__costs-section {
+    &__costs-section,
+    &__dates-section {
       padding-top: 0.5em;
     }
   }
