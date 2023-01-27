@@ -19,7 +19,7 @@
       flex-direction: row;
     }
 
-    &__power,
+    // &__power,
     &__intensity,
     &__costs,
     &__supplied-detail {
@@ -33,6 +33,7 @@
       color: white;
     }
 
+    &__intensity,
     &__supplied-detail {
       margin-left: auto;
     }

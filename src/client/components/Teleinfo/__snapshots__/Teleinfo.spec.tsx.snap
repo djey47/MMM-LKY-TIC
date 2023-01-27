@@ -43,7 +43,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__intensity-label"
       >
-        Instant intensity:
+        Intensity:
       </span>
       <span
         className="teleinfo__intensity-value"
@@ -170,6 +170,13 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         (est.)
       </span>
     </p>
+    <p
+      className="teleinfo__costs-detail"
+    >
+      <ul
+        className="teleinfo__costs-detail-items"
+      />
+    </p>
   </section>
 </div>
 `;
@@ -217,7 +224,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__intensity-label"
       >
-        Instant intensity:
+        Intensity:
       </span>
       <span
         className="teleinfo__intensity-value"
@@ -291,6 +298,13 @@ exports[`Teleinfo component should render correctly with notif data but without 
         €
         (est.)
       </span>
+    </p>
+    <p
+      className="teleinfo__costs-detail"
+    >
+      <ul
+        className="teleinfo__costs-detail-items"
+      />
     </p>
   </section>
 </div>

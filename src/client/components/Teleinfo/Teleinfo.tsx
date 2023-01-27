@@ -53,7 +53,6 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
 
   function renderSuppliedDetails() {
     const {data_TELEINFO} = props;
-
     if (!data_TELEINFO) {
       return undefined;
     }
@@ -76,6 +75,17 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
             </li>);
         })}
       </ul>);
+  }
+
+  function renderCostsDetails() {
+    const {data_TELEINFO} = props;
+    if (!data_TELEINFO) {
+      return undefined;
+    }
+
+    return (
+      <ul className="teleinfo__costs-detail-items"></ul>
+    );
   }
 
   // TODO debug log with integrated logger
@@ -103,7 +113,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
               <span className="teleinfo__power-unit">W(est.)</span> 
             </p>
             <p className="teleinfo__intensity">
-              <span className="teleinfo__intensity-label">Instant intensity:</span>
+              <span className="teleinfo__intensity-label">Intensity:</span>
               <span className="teleinfo__intensity-value">{data_TELEINFO.instantIntensity}</span>
               <span className="teleinfo__intensity-unit">A</span> 
             </p>
@@ -133,6 +143,9 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
                 {data_TELEINFO.estimatedPrices?.total || '...'}
               </span>
               <span className="teleinfo__costs-unit">{currencySymbol}(est.)</span> 
+            </p>
+            <p className="teleinfo__costs-detail">
+              {renderCostsDetails()}
             </p>
           </section>
         </>
