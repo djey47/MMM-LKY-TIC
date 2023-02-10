@@ -14,7 +14,7 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
-- console logs: use integrated logger and debug flag when needed
+
 
 # DONE
 - Data store: store initial indexes per day
