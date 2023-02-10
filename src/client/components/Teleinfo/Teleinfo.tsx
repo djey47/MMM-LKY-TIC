@@ -1,5 +1,6 @@
 import formatDate from 'date-fns/format';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
+import ConfigurationContext from '../../contexts/ConfigurationContext';
 import { withNotifications } from '../../hoc/with-notifications';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 
@@ -24,6 +25,7 @@ const TIME_FORMAT = 'HH:mm:ss';
 const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   props: WithNotificationDataProps
 ) => {
+  const configuration = useContext(ConfigurationContext);
   const { currencySymbol, data_TELEINFO } = props;
 
   function computeWholeSuppliedPower(categoryKey: string) {
@@ -99,8 +101,9 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(timestamp, DATE_FORMAT)}`;
   }
 
-  // TODO debug log with integrated logger
-  console.log({ data_TELEINFO });
+  if (configuration?.debug) {
+    Log.log(JSON.stringify({ data_TELEINFO }, null, 2));
+  }
 
   const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');

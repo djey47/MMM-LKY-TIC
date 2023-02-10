@@ -16,6 +16,9 @@ const mm2Helper: MM2Helper = {
     if (notification === NOTIF_SET_CONFIG && !this.started) {
       this.config = payload;
       this.started = true;
+
+      InstanceStore.setConfiguration(this.config);
+
       // Calling inherited method
       if (this.sendSocketNotification) {
         this.sendSocketNotification(NOTIF_INIT);

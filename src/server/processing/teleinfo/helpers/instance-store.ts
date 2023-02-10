@@ -2,6 +2,7 @@ import AppRootDir from 'app-root-dir';
 import { existsSync, readFileSync } from 'fs';
 import { writeFile } from 'fs/promises';
 import Path from 'path';
+import { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import { Log } from '../../../utils/mm2_facades';
 
 interface Store {
@@ -23,6 +24,7 @@ export class InstanceStore {
   private static readonly PERSIST_PATH = Path.join(AppRootDir.get(), 'config', 'MMM-LKY-TIC.datastore.json');
   private static readonly PERSIST_INTERVAL = 3600000;
   private static instance: InstanceStore;
+  private static moduleConfig?: ModuleConfiguration;
 
   private store: Store;
 
@@ -31,6 +33,10 @@ export class InstanceStore {
       InstanceStore.instance = new InstanceStore();
     }
     return InstanceStore.instance;
+  }
+
+  public static setConfiguration(config: ModuleConfiguration) {
+    InstanceStore.moduleConfig = config;
   }
 
   private constructor() {
@@ -51,7 +57,9 @@ export class InstanceStore {
   }
 
   public get(key: string) {
-    // console.log('**** instance-store::get', { key, store: JSON.stringify(this.store, null, 2)});
+    if (InstanceStore.moduleConfig?.debug) {
+      Log.log(`**** instance-store::get: ${JSON.stringify({ key, store: this.store }, null, 2)}`);
+    }
 
     this.store.meta.lastReadTs = new Date().getTime();
     return this.store.data[key];
@@ -62,7 +70,9 @@ export class InstanceStore {
     await writeFile(InstanceStore.PERSIST_PATH, contentsAsJSON, 'utf-8');
     this.store.meta.lastPersistTs = new Date().getTime();
 
-    // console.log('**** instance-store::persist done');
+    if (InstanceStore.moduleConfig?.debug) {
+      Log.log('**** instance-store::persist: done');
+    }
   }
 
   private getFromPersist(): Store {

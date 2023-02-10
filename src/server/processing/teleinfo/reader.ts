@@ -12,6 +12,7 @@ import * as SerialMock from './helpers/serial-mock';
 import * as groupIndex from './settings/group-index.json';
 import { MM2Helper } from '../../types/mm2';
 import { computeAdditionalTeleinfoData } from './data-enhancer';
+import { Log } from '../../utils/mm2_facades';
 
 const CHAR_STX = '\x02';
 const CHAR_ETX = '\x03';
@@ -30,7 +31,7 @@ function initHardwarePort(config: TeleinfoConfiguration) {
   const { baudRate, serialDevice, dataBits, stopBits } = config;
   const port = new SerialPort({ path: serialDevice, baudRate, dataBits, stopBits }, function (err) {
     if (err) {
-      return console.log('Init hardware port failed: ', err.message)
+      Log.error(`**** reader::initHardwarePort: failed, ${err.message}`);
     }
   })
 
@@ -43,7 +44,7 @@ function configureStream(port: SerialPortStream, config: TeleinfoConfiguration, 
   datagramStream.on('data', function (data: Buffer) {
     const newTeleInfo = parseDatagram(data, config);
 
-    console.log('new Teleinfo:', newTeleInfo);
+    debugLog(`***** reader::configureStream: new Teleinfo => ${JSON.stringify(newTeleInfo, null, 2)}`, mm2Helper);
 
     if (mm2Helper?.sendSocketNotification) {
       mm2Helper.sendSocketNotification('TELEINFO', newTeleInfo);
@@ -52,13 +53,14 @@ function configureStream(port: SerialPortStream, config: TeleinfoConfiguration, 
 }
 
 function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
-  console.log('Data (RAW, TEXT):', data, data.toString());
+  debugLog(`**** reader::parseDatagram: Data (RAW, TEXT): ${data} ${data.toString()}`);
 
   const groups = data.toString().split('\n');
 
   const teleinfoData = groups.reduce((acc: TeleInfo, groupContents) => {
     const [name, rawValue] = groupContents.split(' ');
-    console.log('+Group: ', {name, value: rawValue});
+    
+    debugLog(`**** reader::parseDatagram: +Group: ${JSON.stringify({ name, value: rawValue }, null, 2)}`);
 
     if (name === CHAR_STX) {
       // As we parse datagrams following ETX (end) control char, ignore start token
@@ -79,4 +81,10 @@ function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
   }, { meta: { unresolvedGroups: {} }});
 
   return computeAdditionalTeleinfoData(teleinfoData, config);
+}
+
+function debugLog(message: string, mm2Helper?: MM2Helper) {
+  if (!mm2Helper || mm2Helper?.config?.debug) {
+    Log.log(message);
+  }
 }

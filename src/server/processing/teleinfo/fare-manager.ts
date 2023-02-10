@@ -51,7 +51,7 @@ export function computeEstimatedPrices(data: TeleInfo, fareDetails: FareDetails)
     storeInstance.put(currentDayIndexesISKey, initialDayIndexes);
     storeInstance.persist();
   }
-  console.log({ indexes, currentDayISKey: currentDayIndexesISKey, initialDayIndexes });
+ // console.log({ indexes, currentDayISKey: currentDayIndexesISKey, initialDayIndexes });
 
   // Compute prices
   const totalPrice = computePrice(initialIndexes, indexes, currentPriceKeys, fareDetails);
