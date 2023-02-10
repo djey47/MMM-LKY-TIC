@@ -10,9 +10,7 @@ jest.mock('react-dom/client', () => ({
   }),
 }));
 
-jest.mock('../components/Main/Main', () => () => (
-  <div>Main component</div>
-));
+jest.mock('../components/Main/Main', () => () => <div>Main component</div>);
 
 import Main from '../components/Main/Main';
 import ConfigurationContext from '../contexts/ConfigurationContext';

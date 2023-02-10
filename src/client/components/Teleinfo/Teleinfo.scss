@@ -61,7 +61,7 @@
       flex-direction: column;
 
       &::after {
-        content: "";
+        content: '';
         display: block;
         border-bottom: 1px dashed var(--color-text-dimmed);
       }

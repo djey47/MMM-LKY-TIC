@@ -31,7 +31,7 @@ const mm2Helper: MM2Helper = {
   stop: function (): void {
     // Saving data store before exiting
     InstanceStore.getInstance().persist();
-  }
+  },
 };
 
 module.exports = mm2Helper;

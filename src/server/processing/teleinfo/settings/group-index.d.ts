@@ -18,10 +18,10 @@ interface GroupIndex {
     OPTARIF: string;
     PAPP: string;
     PEJP: string;
-    PTEC: string
+    PTEC: string;
   };
   /**
-  * Standard mode, only compatible with Linky counters, is not supported yet
-  */
+   * Standard mode, only compatible with Linky counters, is not supported yet
+   */
   standard: object;
 }

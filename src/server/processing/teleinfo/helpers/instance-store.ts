@@ -11,7 +11,7 @@ interface Store {
     lastReadTs?: number;
     lastWriteTs?: number;
     lastPersistTs?: number;
-  }
+  };
   data: {
     [key: string]: string | number | object | [];
   };
@@ -21,7 +21,11 @@ interface Store {
  * Instance data store singleton
  */
 export class InstanceStore {
-  private static readonly PERSIST_PATH = Path.join(AppRootDir.get(), 'config', 'MMM-LKY-TIC.datastore.json');
+  private static readonly PERSIST_PATH = Path.join(
+    AppRootDir.get(),
+    'config',
+    'MMM-LKY-TIC.datastore.json'
+  );
   private static readonly PERSIST_INTERVAL = 3600000;
   private static instance: InstanceStore;
   private static moduleConfig?: ModuleConfiguration;
@@ -58,7 +62,13 @@ export class InstanceStore {
 
   public get(key: string) {
     if (InstanceStore.moduleConfig?.debug) {
-      Log.log(`**** instance-store::get: ${JSON.stringify({ key, store: this.store }, null, 2)}`);
+      Log.log(
+        `**** instance-store::get: ${JSON.stringify(
+          { key, store: this.store },
+          null,
+          2
+        )}`
+      );
     }
 
     this.store.meta.lastReadTs = new Date().getTime();
@@ -81,10 +91,12 @@ export class InstanceStore {
     }
 
     try {
-      const contentsAsJSON =  readFileSync(InstanceStore.PERSIST_PATH, 'utf-8');
-      return JSON.parse(contentsAsJSON);  
-    } catch(e: unknown) {
-      Log.error(`!!!! MMM-LKY-TIC::instance-store::getFromPersist: ${JSON.stringify(e)}`);
+      const contentsAsJSON = readFileSync(InstanceStore.PERSIST_PATH, 'utf-8');
+      return JSON.parse(contentsAsJSON);
+    } catch (e: unknown) {
+      Log.error(
+        `!!!! MMM-LKY-TIC::instance-store::getFromPersist: ${JSON.stringify(e)}`
+      );
       return this.getDefault();
     }
   }

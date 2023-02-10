@@ -7,14 +7,14 @@ export enum TeleInfoHistoricalInputCodes {
   HCHC = 'HCHC',
   HCHP = 'HCHP',
   HHPHC = 'HHPHC',
-  IINST = "IINST",
+  IINST = 'IINST',
   IMAX = 'IMAX',
   ISOUSC = 'ISOUSC',
   MOTDETAT = 'MOTDETAT',
   OPTARIF = 'OPTARIF',
   PAPP = 'PAPP',
   PEJP = 'PEJP',
-  PTEC = 'PTEC'
+  PTEC = 'PTEC',
 }
 
 export enum TeleInfoHistoricalOutputKeys {
@@ -33,7 +33,7 @@ export enum TeleInfoHistoricalOutputKeys {
   lowHighHoursSchedule = 'lowHighHoursSchedule',
   maxCalledIntensity = 'maxCalledIntensity',
   subscribedIntensity = 'subscribedIntensity',
-  subscribedPowerOverflowWarning = 'subscribedPowerOverflowWarning'
+  subscribedPowerOverflowWarning = 'subscribedPowerOverflowWarning',
 }
 
 export enum FareOptions {
@@ -41,8 +41,8 @@ export enum FareOptions {
    * Unique fare
    */
   BASE = 'BASE',
-  /** 
-   * Normal period fare / Mobile peak period fare  
+  /**
+   * Normal period fare / Mobile peak period fare
    */
   EJP = 'EJP',
   /**
@@ -88,7 +88,7 @@ interface ExtendedTeleInfo {
     currentDay?: number[];
     total?: number[];
   };
-  meta?: ExtendedMetadata; 
+  meta?: ExtendedMetadata;
 }
 
 /**

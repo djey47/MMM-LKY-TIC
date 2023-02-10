@@ -30,8 +30,8 @@ describe('Teleinfo component', () => {
         currentDay: [1, 2],
         total: [10, 20],
       },
-  }
-  }
+    },
+  };
 
   it('should render correctly without notif data', () => {
     // given-when
@@ -51,7 +51,7 @@ describe('Teleinfo component', () => {
 
     // then
     expect(tree).toMatchSnapshot();
-  });  
+  });
 
   it('should render correctly with notif data but without supplied power information', () => {
     // given
@@ -64,11 +64,9 @@ describe('Teleinfo component', () => {
     };
 
     // when
-    const tree = renderer
-      .create(<Teleinfo {...props} />)
-      .toJSON();
+    const tree = renderer.create(<Teleinfo {...props} />).toJSON();
 
     // then
     expect(tree).toMatchSnapshot();
-  });  
+  });
 });

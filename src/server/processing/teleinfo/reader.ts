@@ -23,28 +23,46 @@ const CHAR_ETX = '\x03';
  * @param mm2Helper MM2 helper instance
  */
 export function start(config: TeleinfoConfiguration, mm2Helper?: MM2Helper) {
-  const port = config.developer.serialPortMockEnabled ? SerialMock.initMockPort(config) : initHardwarePort(config);
-  configureStream(port, config, mm2Helper);  
+  const port = config.developer.serialPortMockEnabled
+    ? SerialMock.initMockPort(config)
+    : initHardwarePort(config);
+  configureStream(port, config, mm2Helper);
 }
 
 function initHardwarePort(config: TeleinfoConfiguration) {
   const { baudRate, serialDevice, dataBits, stopBits } = config;
-  const port = new SerialPort({ path: serialDevice, baudRate, dataBits, stopBits }, function (err) {
-    if (err) {
-      Log.error(`**** reader::initHardwarePort: failed, ${err.message}`);
+  const port = new SerialPort(
+    { path: serialDevice, baudRate, dataBits, stopBits },
+    function (err) {
+      if (err) {
+        Log.error(`**** reader::initHardwarePort: failed, ${err.message}`);
+      }
     }
-  })
+  );
 
   return port;
 }
 
-function configureStream(port: SerialPortStream, config: TeleinfoConfiguration, mm2Helper?: MM2Helper) {
-  const datagramStream = port.pipe(new DelimiterParser({ delimiter: CHAR_ETX }));
+function configureStream(
+  port: SerialPortStream,
+  config: TeleinfoConfiguration,
+  mm2Helper?: MM2Helper
+) {
+  const datagramStream = port.pipe(
+    new DelimiterParser({ delimiter: CHAR_ETX })
+  );
 
   datagramStream.on('data', function (data: Buffer) {
     const newTeleInfo = parseDatagram(data, config);
 
-    debugLog(`***** reader::configureStream: new Teleinfo => ${JSON.stringify(newTeleInfo, null, 2)}`, mm2Helper);
+    debugLog(
+      `***** reader::configureStream: new Teleinfo => ${JSON.stringify(
+        newTeleInfo,
+        null,
+        2
+      )}`,
+      mm2Helper
+    );
 
     if (mm2Helper?.sendSocketNotification) {
       mm2Helper.sendSocketNotification('TELEINFO', newTeleInfo);
@@ -53,32 +71,46 @@ function configureStream(port: SerialPortStream, config: TeleinfoConfiguration, 
 }
 
 function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
-  debugLog(`**** reader::parseDatagram: Data (RAW, TEXT): ${data} ${data.toString()}`);
+  debugLog(
+    `**** reader::parseDatagram: Data (RAW, TEXT): ${data} ${data.toString()}`
+  );
 
   const groups = data.toString().split('\n');
 
-  const teleinfoData = groups.reduce((acc: TeleInfo, groupContents) => {
-    const [name, rawValue] = groupContents.split(' ');
-    
-    debugLog(`**** reader::parseDatagram: +Group: ${JSON.stringify({ name, value: rawValue }, null, 2)}`);
+  const teleinfoData = groups.reduce(
+    (acc: TeleInfo, groupContents) => {
+      const [name, rawValue] = groupContents.split(' ');
 
-    if (name === CHAR_STX) {
-      // As we parse datagrams following ETX (end) control char, ignore start token
+      debugLog(
+        `**** reader::parseDatagram: +Group: ${JSON.stringify(
+          { name, value: rawValue },
+          null,
+          2
+        )}`
+      );
+
+      if (name === CHAR_STX) {
+        // As we parse datagrams following ETX (end) control char, ignore start token
+        return acc;
+      }
+
+      const { historical } = groupIndex;
+      const teleinfoKeyName = historical[name as keyof typeof historical];
+      if (teleinfoKeyName) {
+        acc[teleinfoKeyName] = convertTeleinfoRawData(
+          teleinfoKeyName,
+          rawValue
+        );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        acc.meta!.lastUpdateTimestamp = new Date().getTime();
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        acc.meta!.unresolvedGroups[name] = rawValue;
+      }
       return acc;
-    }
-    
-    const { historical } = groupIndex;
-    const teleinfoKeyName = historical[name as keyof typeof historical];
-    if (teleinfoKeyName) {
-      acc[teleinfoKeyName] = convertTeleinfoRawData(teleinfoKeyName, rawValue);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      acc.meta!.lastUpdateTimestamp = new Date().getTime();
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      acc.meta!.unresolvedGroups[name] = rawValue;
-    }
-    return acc;
-  }, { meta: { unresolvedGroups: {} }});
+    },
+    { meta: { unresolvedGroups: {} } }
+  );
 
   return computeAdditionalTeleinfoData(teleinfoData, config);
 }

@@ -4,12 +4,15 @@
 
 import { TeleInfoHistoricalOutputKeys } from '../../../shared/domain/teleinfo';
 
-export function convertTeleinfoRawData(dataKey: string, rawValue?: string): string | number | undefined {
+export function convertTeleinfoRawData(
+  dataKey: string,
+  rawValue?: string
+): string | number | undefined {
   if (rawValue === undefined) {
     return undefined;
   }
 
-  switch(dataKey) {
+  switch (dataKey) {
     case TeleInfoHistoricalOutputKeys.apparentPower.toString():
     case TeleInfoHistoricalOutputKeys.baseIndex.toString():
     case TeleInfoHistoricalOutputKeys.ejpMobilePeakHoursIndex.toString():

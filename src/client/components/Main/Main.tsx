@@ -21,6 +21,6 @@ const Main: FunctionComponent = () => {
       )}
     </ConfigurationContext.Consumer>
   );
-}
+};
 
 export default Main;

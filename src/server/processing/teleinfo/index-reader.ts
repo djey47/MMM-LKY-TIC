@@ -7,7 +7,7 @@ const INDEX_KEYS_PER_FARE_OPTION: {
   BASE: ['baseIndex'],
   EJP: ['ejpNormalHoursIndex', 'ejpMobilePeakHoursIndex'],
   HC: ['hcLowHoursIndex', 'hcHighHoursIndex'],
-}
+};
 
 export function generateCurrentDayISKey(keyPrefix: string) {
   const dateSuffix = formatDate(new Date(), 'yyyyMMdd');
@@ -15,7 +15,7 @@ export function generateCurrentDayISKey(keyPrefix: string) {
 }
 
 export function readIndexes(data: TeleInfo) {
-  if(!data.chosenFareOption) {
+  if (!data.chosenFareOption) {
     return undefined;
   }
 

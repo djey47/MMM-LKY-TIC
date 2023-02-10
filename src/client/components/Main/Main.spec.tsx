@@ -13,11 +13,13 @@ describe('Main component', () => {
   });
 
   it('should render correctly with custom configuration', () => {
-    const tree = renderer.create(
-      <ConfigurationContext.Provider value={{ currencySymbol: 'S' }}>
-        <Main />
-      </ConfigurationContext.Provider>
-    ).toJSON();
+    const tree = renderer
+      .create(
+        <ConfigurationContext.Provider value={{ currencySymbol: 'S' }}>
+          <Main />
+        </ConfigurationContext.Provider>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

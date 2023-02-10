@@ -12,8 +12,10 @@ export function startProcessing(helperContext: MM2Helper) {
   }
 
   const teleinfoConfig = helperContext.config?.teleinfo;
-  if(!teleinfoConfig) {
-    Log.error('**** teleinfo-processor::startProcessing: configuration does not include teleinfo settings!');
+  if (!teleinfoConfig) {
+    Log.error(
+      '**** teleinfo-processor::startProcessing: configuration does not include teleinfo settings!'
+    );
     return;
   }
 

@@ -17,7 +17,7 @@ const PERIOD_LABELS_PER_FARE_OPTION: {
   BASE: ['base'],
   EJP: ['EJP:normal', 'EJP:peak'],
   HC: ['HC:low', 'HC:high'],
-}
+};
 
 const DATE_FORMAT = 'yyyy/MM/dd';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -29,12 +29,12 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   const { currencySymbol, data_TELEINFO } = props;
 
   function computeWholeSuppliedPower(categoryKey: string) {
-    const {data_TELEINFO} = props;
+    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
 
-    const {suppliedPower} = data_TELEINFO;
+    const { suppliedPower } = data_TELEINFO;
     if (!suppliedPower) {
       return undefined;
     }
@@ -49,16 +49,19 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   }
 
   function getPeriodLabel(rank: number) {
-    const {data_TELEINFO} = props;
+    const { data_TELEINFO } = props;
 
     if (!data_TELEINFO?.chosenFareOption) {
       return undefined;
     }
-    return PERIOD_LABELS_PER_FARE_OPTION[data_TELEINFO.chosenFareOption][rank] || undefined;
+    return (
+      PERIOD_LABELS_PER_FARE_OPTION[data_TELEINFO.chosenFareOption][rank] ||
+      undefined
+    );
   }
 
   function renderSuppliedDetails() {
-    const {data_TELEINFO} = props;
+    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
@@ -68,37 +71,42 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
         {data_TELEINFO.suppliedPower?.currentDay?.map((pw, rank) => {
           const periodLabel = getPeriodLabel(rank) || '';
           return (
-            <li className="teleinfo__supplied-detail-item" key={`supplied-option-${rank}`}>
+            <li
+              className="teleinfo__supplied-detail-item"
+              key={`supplied-option-${rank}`}
+            >
               <span className="teleinfo__supplied-label">{periodLabel}:</span>
+              <span className="teleinfo__supplied-value">{pw || '...'}</span>/
               <span className="teleinfo__supplied-value">
-                {pw || '...'}
+                {(data_TELEINFO.suppliedPower?.total &&
+                  data_TELEINFO.suppliedPower?.total[rank]) ||
+                  '...'}
               </span>
-              /
-              <span className="teleinfo__supplied-value">
-                {data_TELEINFO.suppliedPower?.total && data_TELEINFO.suppliedPower?.total[rank] || '...'}
-              </span>
-              <span className="teleinfo__supplied-unit">wh</span> 
-            </li>);
+              <span className="teleinfo__supplied-unit">wh</span>
+            </li>
+          );
         })}
-      </ul>);
+      </ul>
+    );
   }
 
   function renderCostsDetails() {
-    const {data_TELEINFO} = props;
+    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
 
-    return (
-      <ul className="teleinfo__costs-detail-items"></ul>
-    );
+    return <ul className="teleinfo__costs-detail-items"></ul>;
   }
 
   function presentDate(timestamp?: number) {
     if (!timestamp) {
       return '...';
     }
-    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(timestamp, DATE_FORMAT)}`;
+    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(
+      timestamp,
+      DATE_FORMAT
+    )}`;
   }
 
   if (configuration?.debug) {
@@ -108,34 +116,43 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
 
-  const firstReceivedDataDate = presentDate(data_TELEINFO?.meta?.firstDataTimestamp);
-  const lastReceivedDataDate = presentDate(data_TELEINFO?.meta?.lastUpdateTimestamp);
+  const firstReceivedDataDate = presentDate(
+    data_TELEINFO?.meta?.firstDataTimestamp
+  );
+  const lastReceivedDataDate = presentDate(
+    data_TELEINFO?.meta?.lastUpdateTimestamp
+  );
 
   return (
     <div className="teleinfo">
       {!data_TELEINFO && (
-        <p className="teleinfo__no-data">
-          No data received yet.
-        </p>
+        <p className="teleinfo__no-data">No data received yet.</p>
       )}
       {!!data_TELEINFO && (
         <>
           <section className="teleinfo__instant-section">
             <p className="teleinfo__power">
               <span className="teleinfo__power-label">Instant power:</span>
-              <span className="teleinfo__power-value">{data_TELEINFO.apparentPower}</span>
-              <span className="teleinfo__power-unit">VA</span>
-              - 
-              <span className="teleinfo__power-value">{data_TELEINFO.estimatedPower}</span>
-              <span className="teleinfo__power-unit">W(est.)</span> 
+              <span className="teleinfo__power-value">
+                {data_TELEINFO.apparentPower}
+              </span>
+              <span className="teleinfo__power-unit">VA</span>-
+              <span className="teleinfo__power-value">
+                {data_TELEINFO.estimatedPower}
+              </span>
+              <span className="teleinfo__power-unit">W(est.)</span>
             </p>
             <p className="teleinfo__intensity">
               <span className="teleinfo__intensity-label">Intensity:</span>
-              <span className="teleinfo__intensity-value">{data_TELEINFO.instantIntensity}</span>
-              <span className="teleinfo__intensity-unit">A</span> 
+              <span className="teleinfo__intensity-value">
+                {data_TELEINFO.instantIntensity}
+              </span>
+              <span className="teleinfo__intensity-unit">A</span>
             </p>
             <p className="teleinfo__supplied">
-              <span className="teleinfo__supplied-label">Supplied (today/total):</span>
+              <span className="teleinfo__supplied-label">
+                Supplied (today/total):
+              </span>
               <span className="teleinfo__supplied-value">
                 {wholeSuppliedPowerForDay || '...'}
               </span>
@@ -143,15 +160,17 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
               <span className="teleinfo__supplied-value">
                 {wholeSuppliedPowerTotal || '...'}
               </span>
-              <span className="teleinfo__supplied-unit">wh</span> 
+              <span className="teleinfo__supplied-unit">wh</span>
             </p>
             <p className="teleinfo__supplied-detail">
-              {renderSuppliedDetails()}              
+              {renderSuppliedDetails()}
             </p>
           </section>
           <section className="teleinfo__costs-section">
             <p className="teleinfo__costs">
-              <span className="teleinfo__costs-label">Costs (today/total):</span>
+              <span className="teleinfo__costs-label">
+                Costs (today/total):
+              </span>
               <span className="teleinfo__costs-value">
                 {data_TELEINFO.estimatedPrices?.currentDay || '...'}
               </span>
@@ -159,11 +178,11 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
               <span className="teleinfo__costs-value">
                 {data_TELEINFO.estimatedPrices?.total || '...'}
               </span>
-              <span className="teleinfo__costs-unit">{currencySymbol}(est.)</span> 
+              <span className="teleinfo__costs-unit">
+                {currencySymbol}(est.)
+              </span>
             </p>
-            <p className="teleinfo__costs-detail">
-              {renderCostsDetails()}
-            </p>
+            <p className="teleinfo__costs-detail">{renderCostsDetails()}</p>
           </section>
           <section className="teleinfo__dates-section">
             <p className="teleinfo__dates-start">

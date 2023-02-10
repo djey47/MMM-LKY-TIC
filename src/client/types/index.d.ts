@@ -23,7 +23,7 @@ interface MM2ModuleHelper {
    * @param moduleProperties an object with the module properties
    */
   register(moduleName: string, moduleProperties: MM2ModuleProperties): void;
-};
+}
 
 /**
  * @see ModuleConfiguration interface in ../../shared/domain/module-config.ts
@@ -32,7 +32,7 @@ interface ModuleConfiguration {
   debug?: boolean;
   currencySymbol?: string;
   teleinfo?: object;
-};
+}
 
 /**
  * @see https://docs.magicmirror.builders/development/core-module-file.html#available-module-instance-properties

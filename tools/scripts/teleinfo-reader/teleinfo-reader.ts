@@ -9,7 +9,7 @@ function exitNotice() {
 async function main() {
   const config = await Config.read();
   InstanceStore.setConfiguration({ debug: true });
-  
+
   console.log('Loaded configuration:', config);
 
   start(config);
