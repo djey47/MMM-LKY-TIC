@@ -2,6 +2,7 @@ TODO-FIXME
 ==========
 
 # TODO
+- per month: store and display supplied power / estimated costs
 - archive data store per month (see GH issue #1)
 - update README for features
 - store and display statistics per day:
