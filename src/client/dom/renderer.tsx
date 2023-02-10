@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import Main from '../components/Main/Main';
+import ConfigurationContext from '../contexts/ConfigurationContext';
 
 /**
  * MagicMirror
@@ -29,5 +30,9 @@ export const renderMainComponent = (wrapperId: string, config?: ModuleConfigurat
   }
 
   const root = createRoot(wrapperElement);
-  root.render(<Main config={config} />);
+  root.render(
+    <ConfigurationContext.Provider value={config}>
+      <Main />
+    </ConfigurationContext.Provider>
+  );
 };
