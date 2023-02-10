@@ -88,12 +88,18 @@ interface ExtendedTeleInfo {
     currentDay?: number[];
     total?: number[];
   };
-  meta?: {
-    lastUpdateTimestamp?: number;
-    unresolvedGroups: {
-      [key: string]: string;
-    };
-  } 
+  meta?: ExtendedMetadata; 
+}
+
+/**
+ * Additional data to provide more information about processing context
+ */
+export interface ExtendedMetadata {
+  firstDataTimestamp?: number;
+  lastUpdateTimestamp?: number;
+  unresolvedGroups: {
+    [key: string]: string;
+  };
 }
 
 /**

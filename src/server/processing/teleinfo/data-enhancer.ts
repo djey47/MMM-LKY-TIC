@@ -2,11 +2,11 @@
  * Extrapolates Teleinfo data
  */
 
-import { TeleInfo } from '../../../shared/domain/teleinfo';
+import { ExtendedMetadata, TeleInfo } from '../../../shared/domain/teleinfo';
 import { TeleinfoConfiguration } from '../../../shared/domain/teleinfo-config';
 import { computeEstimatedPrices } from './fare-manager';
 import { InstanceStore } from './helpers/instance-store';
-import { INITIAL_INDEXES_IS_KEY, PER_DAY_INDEXES_IS_KEY_PREFIX, PER_DAY_SUPPLIED_IS_KEY_PREFIX, TOTAL_SUPPLIED_IS_KEY } from './helpers/store-constants';
+import { FIRST_DATA_TS_IS_KEY, INITIAL_INDEXES_IS_KEY, PER_DAY_INDEXES_IS_KEY_PREFIX, PER_DAY_SUPPLIED_IS_KEY_PREFIX, TOTAL_SUPPLIED_IS_KEY } from './helpers/store-constants';
 import { generateCurrentDayISKey, readIndexes } from './index-reader';
 
 export function computeAdditionalTeleinfoData(data: TeleInfo, config: TeleinfoConfiguration): TeleInfo {
@@ -15,9 +15,26 @@ export function computeAdditionalTeleinfoData(data: TeleInfo, config: TeleinfoCo
 
   return {
     ...data,
+    meta: enhanceMetadata(data.meta),
     estimatedPower: computeEstimatedPower(powerFactor, apparentPower),
     estimatedPrices: { ...computeEstimatedPrices(data, fareDetails)},
     suppliedPower: { ...computeSuppliedPowers(data) },
+  };
+}
+
+function enhanceMetadata(meta?: ExtendedMetadata): ExtendedMetadata | undefined{
+  if (!meta) {
+    return undefined;
+  }
+
+  const storeInstance = InstanceStore.getInstance();
+
+  // First received data timestamp: use value in data store otherwise initialize it
+  const firstDataTimestamp = storeInstance.get(FIRST_DATA_TS_IS_KEY) as number || new Date().getTime();
+  storeInstance.put(FIRST_DATA_TS_IS_KEY, firstDataTimestamp);
+  return {
+    ...meta,
+    firstDataTimestamp,
   };
 }
 

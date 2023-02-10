@@ -1,3 +1,7 @@
+/* Data store keys or key prefixes */
+
+export const FIRST_DATA_TS_IS_KEY = 'FIRST_DATA_TIMESTAMP';
+
 export const INITIAL_INDEXES_IS_KEY = 'INITIAL_INDEXES';
 export const TOTAL_COSTS_IS_KEY = 'TOTAL_COSTS';
 export const TOTAL_SUPPLIED_IS_KEY = 'TOTAL_SUPPLIED';

@@ -182,31 +182,31 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     className="teleinfo__dates-section"
   >
     <p
-      className="teleinfo__dates-last"
-    >
-      <span
-        className="teleinfo__dates-last-label"
-      >
-        Last data on:
-      </span>
-      <span
-        className="teleinfo__dates-last-value"
-      >
-        12:15:26   2023/01/27
-      </span>
-    </p>
-    <p
       className="teleinfo__dates-start"
     >
       <span
         className="teleinfo__dates-start-label"
       >
-        Started on:
+        First data:
       </span>
       <span
         className="teleinfo__dates-start-value"
       >
-        ...
+        14:11:31, on 2023/01/24
+      </span>
+    </p>
+    <p
+      className="teleinfo__dates-last"
+    >
+      <span
+        className="teleinfo__dates-last-label"
+      >
+        Last data:
+      </span>
+      <span
+        className="teleinfo__dates-last-value"
+      >
+        12:15:26, on 2023/01/27
       </span>
     </p>
   </section>
@@ -343,31 +343,31 @@ exports[`Teleinfo component should render correctly with notif data but without 
     className="teleinfo__dates-section"
   >
     <p
-      className="teleinfo__dates-last"
-    >
-      <span
-        className="teleinfo__dates-last-label"
-      >
-        Last data on:
-      </span>
-      <span
-        className="teleinfo__dates-last-value"
-      >
-        12:15:26   2023/01/27
-      </span>
-    </p>
-    <p
       className="teleinfo__dates-start"
     >
       <span
         className="teleinfo__dates-start-label"
       >
-        Started on:
+        First data:
       </span>
       <span
         className="teleinfo__dates-start-value"
       >
-        ...
+        14:11:31, on 2023/01/24
+      </span>
+    </p>
+    <p
+      className="teleinfo__dates-last"
+    >
+      <span
+        className="teleinfo__dates-last-label"
+      >
+        Last data:
+      </span>
+      <span
+        className="teleinfo__dates-last-value"
+      >
+        12:15:26, on 2023/01/27
       </span>
     </p>
   </section>

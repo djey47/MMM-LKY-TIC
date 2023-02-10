@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+import ConfigurationContext from '../../contexts/ConfigurationContext';
 import Main from './Main';
 
 jest.mock('../Teleinfo/Teleinfo', () => (props: object) => (
@@ -11,8 +12,12 @@ describe('Main component', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render correctly with optional props', () => {
-    const tree = renderer.create(<Main config={{ currencySymbol: 'S' }}  />).toJSON();
+  it('should render correctly with custom configuration', () => {
+    const tree = renderer.create(
+      <ConfigurationContext.Provider value={{ currencySymbol: 'S' }}>
+        <Main />
+      </ConfigurationContext.Provider>
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

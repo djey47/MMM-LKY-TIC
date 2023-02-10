@@ -18,7 +18,8 @@ const PERIOD_LABELS_PER_FARE_OPTION: {
   HC: ['HC:low', 'HC:high'],
 }
 
-const DATE_TIME_FORMAT = 'HH:mm:ss   yyyy/MM/dd';
+const DATE_FORMAT = 'yyyy/MM/dd';
+const TIME_FORMAT = 'HH:mm:ss';
 
 const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   props: WithNotificationDataProps
@@ -91,11 +92,11 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     );
   }
 
-  function presentDate(number?: number) {
-    if (!number) {
+  function presentDate(timestamp?: number) {
+    if (!timestamp) {
       return '...';
     }
-    return formatDate(number, DATE_TIME_FORMAT);
+    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(timestamp, DATE_FORMAT)}`;
   }
 
   // TODO debug log with integrated logger
@@ -104,6 +105,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
 
+  const firstReceivedDataDate = presentDate(data_TELEINFO?.meta?.firstDataTimestamp);
   const lastReceivedDataDate = presentDate(data_TELEINFO?.meta?.lastUpdateTimestamp);
 
   return (
@@ -161,16 +163,16 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
             </p>
           </section>
           <section className="teleinfo__dates-section">
-            <p className="teleinfo__dates-last">
-              <span className="teleinfo__dates-last-label">Last data on:</span>
-              <span className="teleinfo__dates-last-value">
-                {lastReceivedDataDate}
+            <p className="teleinfo__dates-start">
+              <span className="teleinfo__dates-start-label">First data:</span>
+              <span className="teleinfo__dates-start-value">
+                {firstReceivedDataDate}
               </span>
             </p>
-            <p className="teleinfo__dates-start">
-              <span className="teleinfo__dates-start-label">Started on:</span>
-              <span className="teleinfo__dates-start-value">
-                ...
+            <p className="teleinfo__dates-last">
+              <span className="teleinfo__dates-last-label">Last data:</span>
+              <span className="teleinfo__dates-last-value">
+                {lastReceivedDataDate}
               </span>
             </p>
           </section>

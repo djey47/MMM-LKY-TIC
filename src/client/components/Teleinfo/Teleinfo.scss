@@ -22,7 +22,7 @@
     &__intensity,
     &__costs,
     &__supplied-detail,
-    &__dates-start {
+    &__dates-last {
       margin-bottom: 0.5em;
     }
 
@@ -36,6 +36,7 @@
     &__intensity-value,
     &__costs-value,
     &__supplied-value,
+    &__dates-start-value,
     &__dates-last-value {
       color: white;
     }

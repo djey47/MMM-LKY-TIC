@@ -15,6 +15,7 @@ jest.mock('../components/Main/Main', () => () => (
 ));
 
 import Main from '../components/Main/Main';
+import ConfigurationContext from '../contexts/ConfigurationContext';
 import { renderMainComponent, renderWrapper } from './renderer';
 
 describe('MM2 module React renderer', () => {
@@ -70,7 +71,11 @@ describe('MM2 module React renderer', () => {
       // then
       // @ts-ignore
       expect(global.Log.error).not.toHaveBeenCalled();
-      expect(mockRender).toHaveBeenCalledWith(<Main config={{}} />);
+      expect(mockRender).toHaveBeenCalledWith(
+        <ConfigurationContext.Provider value={{}}>
+          <Main />
+        </ConfigurationContext.Provider>
+      );
     });
   });
 });
