@@ -81,11 +81,13 @@ interface ExtendedTeleInfo {
   estimatedPower?: number;
   estimatedPrices?: {
     currentDay?: number;
+    currentMonth?: number;
     total?: number;
   };
   suppliedPower?: {
     [key: string]: number[] | undefined;
     currentDay?: number[];
+    currentMonth?: number[];
     total?: number[];
   };
   meta?: ExtendedMetadata;

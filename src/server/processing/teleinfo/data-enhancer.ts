@@ -11,9 +11,11 @@ import {
   INITIAL_INDEXES_IS_KEY,
   PER_DAY_INDEXES_IS_KEY_PREFIX,
   PER_DAY_SUPPLIED_IS_KEY_PREFIX,
+  PER_MONTH_INDEXES_IS_KEY_PREFIX,
+  PER_MONTH_SUPPLIED_IS_KEY_PREFIX,
   TOTAL_SUPPLIED_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, readIndexes } from './index-reader';
+import { generateCurrentDayISKey, generateCurrentMonthISKey, readIndexes } from './index-reader';
 
 export function computeAdditionalTeleinfoData(
   data: TeleInfo,
@@ -63,13 +65,15 @@ function computeEstimatedPower(
 
 function computeSuppliedPowers(
   data: TeleInfo
-): { currentDay?: number[]; total?: number[] } | undefined {
+)/*: { currentDay?: number[]; total?: number[] } | undefined*/ {
   const storeInstance = InstanceStore.getInstance();
   const currentIndexes = readIndexes(data);
 
+  // Total supply
   const initialIndexes = storeInstance.get(INITIAL_INDEXES_IS_KEY) as number[];
   const total = computeSuppliedPower(initialIndexes, currentIndexes);
 
+  // Supply for the current day
   const currentDayIndexesISKey = generateCurrentDayISKey(
     PER_DAY_INDEXES_IS_KEY_PREFIX
   );
@@ -77,6 +81,15 @@ function computeSuppliedPowers(
     currentDayIndexesISKey
   ) as number[];
   const currentDay = computeSuppliedPower(initialDayIndexes, currentIndexes);
+
+  // Supply for the current month
+  const currentMonthIndexesISKey = generateCurrentMonthISKey(
+    PER_MONTH_INDEXES_IS_KEY_PREFIX
+  );
+  const initialMonthIndexes = storeInstance.get(
+    currentMonthIndexesISKey
+  ) as number[];
+  const currentMonth = computeSuppliedPower(initialMonthIndexes, currentIndexes);
 
   // Store computed values for historization
   if (total) {
@@ -88,9 +101,16 @@ function computeSuppliedPowers(
     );
     storeInstance.put(currentDaySuppliedISKey, currentDay);
   }
+  if (currentMonth) {
+    const currentMonthSuppliedISKey = generateCurrentMonthISKey(
+      PER_MONTH_SUPPLIED_IS_KEY_PREFIX
+    );
+    storeInstance.put(currentMonthSuppliedISKey, currentMonth);
+  }
 
   return {
     currentDay,
+    currentMonth,
     total,
   };
 }

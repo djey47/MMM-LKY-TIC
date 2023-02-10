@@ -5,9 +5,11 @@ import {
   INITIAL_INDEXES_IS_KEY,
   PER_DAY_COSTS_IS_KEY_PREFIX,
   PER_DAY_INDEXES_IS_KEY_PREFIX,
+  PER_MONTH_COSTS_IS_KEY_PREFIX,
+  PER_MONTH_INDEXES_IS_KEY_PREFIX,
   TOTAL_COSTS_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, readIndexes } from './index-reader';
+import { generateCurrentDayISKey, generateCurrentMonthISKey, readIndexes } from './index-reader';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -22,6 +24,7 @@ export function computeEstimatedPrices(
   fareDetails: FareDetails
 ) {
   const storeInstance = InstanceStore.getInstance();
+  let shouldStoreBePersisted = false;
 
   // Get current indexes from parsed data
   const indexes = readIndexes(data);
@@ -48,6 +51,7 @@ export function computeEstimatedPrices(
   if (!initialIndexes) {
     initialIndexes = [...indexes];
     storeInstance.put(INITIAL_INDEXES_IS_KEY, initialIndexes);
+    shouldStoreBePersisted = true;
   }
   // console.log({ indexes, currentPriceKeys, initialIndexes });
 
@@ -62,9 +66,27 @@ export function computeEstimatedPrices(
   if (!initialDayIndexes) {
     initialDayIndexes = [...indexes];
     storeInstance.put(currentDayIndexesISKey, initialDayIndexes);
-    storeInstance.persist();
+    shouldStoreBePersisted = true;
   }
   // console.log({ indexes, currentDayISKey: currentDayIndexesISKey, initialDayIndexes });
+
+  // Retrieve or store indexes for the current month
+  const currentMonthIndexesISKey = generateCurrentMonthISKey(
+    PER_MONTH_INDEXES_IS_KEY_PREFIX
+  );
+  let initialMonthIndexes = storeInstance.get(currentMonthIndexesISKey) as (
+    | number
+    | undefined
+  )[];
+  if (!initialMonthIndexes) {
+    initialMonthIndexes = [...indexes];
+    storeInstance.put(currentMonthIndexesISKey, initialMonthIndexes);
+    shouldStoreBePersisted = true;
+  }
+
+  if(shouldStoreBePersisted) {
+    storeInstance.persist();
+  }
 
   // Compute prices
   const totalPrice = computePrice(
@@ -79,6 +101,12 @@ export function computeEstimatedPrices(
     currentPriceKeys,
     fareDetails
   );
+  const totalMonthPrice = computePrice(
+    initialMonthIndexes,
+    indexes,
+    currentPriceKeys,
+    fareDetails
+  );
 
   storeInstance.put(TOTAL_COSTS_IS_KEY, totalPrice);
 
@@ -87,12 +115,18 @@ export function computeEstimatedPrices(
   );
   storeInstance.put(currentDayCostsISKey, totalDayPrice);
 
+  const currentMonthCostsISKey = generateCurrentMonthISKey(
+    PER_MONTH_COSTS_IS_KEY_PREFIX
+  );
+  storeInstance.put(currentMonthCostsISKey, totalMonthPrice);
+
   // console.log({ totalPrice, totalDayPrice });
 
   return {
-    total: totalPrice === undefined ? undefined : Math.round(totalPrice),
+    total: totalPrice && Math.round(totalPrice),
     currentDay:
-      totalDayPrice === undefined ? undefined : Math.round(totalDayPrice),
+      totalDayPrice && Math.round(totalDayPrice),
+    currentMonth: totalMonthPrice && Math.round(totalMonthPrice),
   };
 }
 

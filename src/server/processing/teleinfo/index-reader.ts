@@ -10,8 +10,11 @@ const INDEX_KEYS_PER_FARE_OPTION: {
 };
 
 export function generateCurrentDayISKey(keyPrefix: string) {
-  const dateSuffix = formatDate(new Date(), 'yyyyMMdd');
-  return `${keyPrefix}${dateSuffix}`;
+  return generateCurrentISKey(keyPrefix, 'yyyyMMdd');
+}
+
+export function generateCurrentMonthISKey(keyPrefix: string) {
+  return generateCurrentISKey(keyPrefix, 'yyyyMM');
 }
 
 export function readIndexes(data: TeleInfo) {
@@ -21,4 +24,9 @@ export function readIndexes(data: TeleInfo) {
 
   const currentIndexKeys = INDEX_KEYS_PER_FARE_OPTION[data.chosenFareOption];
   return currentIndexKeys.map((k) => data[k]) as (number | undefined)[];
+}
+
+function generateCurrentISKey(keyPrefix: string, dateFormat: string) {
+  const dateSuffix = formatDate(new Date(), dateFormat);
+  return `${keyPrefix}${dateSuffix}`;
 }
