@@ -2,19 +2,24 @@ TODO-FIXME
 ==========
 
 # TODO
-- store statistics per day:
+- archive data store per month (see GH issue #1)
+- update README for features
+- store and display statistics per day:
   - [x] supplied power
-  - 
+  - [ ] min/max/avg power 
+- alert when reaching 80%+ of the maximum supply
+  => Retrieve or set the maximum supply
+  => OK / WARN / CRITICAL
+  => colors, symbols?
 - unit tests for teleinfo processing
-  => Data store: store initial indexes per day
-- Number of kwh supplied for current fare option
-  => See with backend data enhancer
-
 
 # FIXME
 - console logs: use integrated logger and debug flag when needed
 
 # DONE
+- Data store: store initial indexes per day
+- Number of kwh supplied for current fare option
+  => See with backend data enhancer
 - display supplied kwh for the day
 - Per day historization
   => Compute average powers

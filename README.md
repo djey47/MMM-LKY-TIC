@@ -13,8 +13,13 @@ MagicMirror2 module to display info about home power supply (previous generation
 See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 
 ### Displays instant data
-- apparent power in VA, and estimate in Watt (depending on your own power factor)
-- current intensity in Ampere
+
+```
+Instant power: 637VA/511W(est.)
+                  Intensity: 1A
+```
+- apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
+- current intensity in Ampere.
 
 ### Displays daily statistics
 *soon*
@@ -22,7 +27,17 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 e.g: min/max/avg power and intensity
 
 ### Displays daily electrical furniture costs
-*soon*
+
+```
+Supplied (today/total): 475/5000wh
+                  BASE: 475/5000wh
+----------------------------------
+Costs (today/total): 3/35€(est.)
+----------------------------------
+```
+
+- Supplied energy is detailed according to the chosen fare option (provided by teleinfo data: BASE, HC, EJP)
+- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). They don't include subscription and extra furniture costs into account.
 
 ## Install
 
