@@ -2,7 +2,6 @@ TODO-FIXME
 ==========
 
 # TODO
-- per month: store and display supplied power / estimated costs
 - archive data store per month (see GH issue #1)
 - update README for features
 - store and display statistics per day:
@@ -18,6 +17,7 @@ TODO-FIXME
 
 
 # DONE
+- per month: store and display supplied power / estimated costs
 - Data store: store initial indexes per day
 - Number of kwh supplied for current fare option
   => See with backend data enhancer
