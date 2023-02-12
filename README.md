@@ -26,18 +26,18 @@ Instant power: 637VA/511W(est.)
 
 e.g: min/max/avg power and intensity
 
-### Displays daily electrical furniture costs
+### Displays daily, monthly, total electrical furniture and costs
 
 ```
-Supplied (today/total): 475/5000wh
-                  BASE: 475/5000wh
-----------------------------------
-Costs (today/total): 3/35€(est.)
-----------------------------------
+Supplied (today/month/total): 475/1000/5000wh
+                        BASE: 475/1000/5000wh
+---------------------------------------------
+Costs (today/month/total): 3/8/35€(est.)
+---------------------------------------------
 ```
 
-- Supplied energy is detailed according to the chosen fare option (provided by teleinfo data: BASE, HC, EJP)
-- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). They don't include subscription and extra furniture costs into account.
+- Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
+- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they don't include subscription and extra furniture costs.
 
 ## Install
 
@@ -83,7 +83,7 @@ Costs (today/total): 3/35€(est.)
     "hcLHPricePerKwh": 0.6,
     "hcHHPricePerKwh": 0.8
   },
-  "powerFactor": .8,
+  "powerFactor": 0.8,
   "serialDevice": "/dev/ttyAMA0",
   "stopBits": 1
 }
