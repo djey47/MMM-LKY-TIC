@@ -76,7 +76,14 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
               key={`supplied-option-${rank}`}
             >
               <span className="teleinfo__supplied-label">{periodLabel}:</span>
-              <span className="teleinfo__supplied-value">{pw || '...'}</span>/
+              <span className="teleinfo__supplied-value">{pw || '...'}</span>
+              /
+              <span className="teleinfo__supplied-value">
+                {(data_TELEINFO.suppliedPower?.currentMonth &&
+                  data_TELEINFO.suppliedPower?.currentMonth[rank]) ||
+                  '...'}
+              </span>
+              /
               <span className="teleinfo__supplied-value">
                 {(data_TELEINFO.suppliedPower?.total &&
                   data_TELEINFO.suppliedPower?.total[rank]) ||
@@ -114,6 +121,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   }
 
   const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
+  const wholeSuppliedPowerForMonth = computeWholeSuppliedPower('currentMonth');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
 
   const firstReceivedDataDate = presentDate(
@@ -151,10 +159,14 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
             </p>
             <p className="teleinfo__supplied">
               <span className="teleinfo__supplied-label">
-                Supplied (today/total):
+                Supplied (today/month/total):
               </span>
               <span className="teleinfo__supplied-value">
                 {wholeSuppliedPowerForDay || '...'}
+              </span>
+              /
+              <span className="teleinfo__supplied-value">
+                {wholeSuppliedPowerForMonth || '...'}
               </span>
               /
               <span className="teleinfo__supplied-value">
@@ -169,10 +181,14 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
           <section className="teleinfo__costs-section">
             <p className="teleinfo__costs">
               <span className="teleinfo__costs-label">
-                Costs (today/total):
+                Costs (today/month/total):
               </span>
               <span className="teleinfo__costs-value">
                 {data_TELEINFO.estimatedPrices?.currentDay || '...'}
+              </span>
+              /
+              <span className="teleinfo__costs-value">
+                {data_TELEINFO.estimatedPrices?.currentMonth || '...'}
               </span>
               /
               <span className="teleinfo__costs-value">

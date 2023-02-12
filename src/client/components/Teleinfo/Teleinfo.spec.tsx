@@ -24,11 +24,16 @@ describe('Teleinfo component', () => {
       apparentPower: 250,
       chosenFareOption: 'BASE',
       estimatedPower: 225,
-      estimatedPrice: 55,
+      estimatedPrices:{
+        currentDay: 5.5,
+        currentMonth: 55,
+        total: 500
+      },
       instantIntensity: 1,
       suppliedPower: {
         currentDay: [1, 2],
-        total: [10, 20],
+        currentMonth: [10, 20],
+        total: [100, 200],
       },
     },
   };

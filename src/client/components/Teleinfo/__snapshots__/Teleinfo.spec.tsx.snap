@@ -62,7 +62,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/total):
+        Supplied (today/month/total):
       </span>
       <span
         className="teleinfo__supplied-value"
@@ -74,6 +74,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         className="teleinfo__supplied-value"
       >
         30
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        300
       </span>
       <span
         className="teleinfo__supplied-unit"
@@ -107,6 +113,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           >
             10
           </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            100
+          </span>
           <span
             className="teleinfo__supplied-unit"
           >
@@ -132,6 +144,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           >
             20
           </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            200
+          </span>
           <span
             className="teleinfo__supplied-unit"
           >
@@ -150,18 +168,24 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/total):
+        Costs (today/month/total):
       </span>
       <span
         className="teleinfo__costs-value"
       >
-        ...
+        5.5
       </span>
       /
       <span
         className="teleinfo__costs-value"
       >
-        ...
+        55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        500
       </span>
       <span
         className="teleinfo__costs-unit"
@@ -275,8 +299,14 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/total):
+        Supplied (today/month/total):
       </span>
+      <span
+        className="teleinfo__supplied-value"
+      >
+        ...
+      </span>
+      /
       <span
         className="teleinfo__supplied-value"
       >
@@ -311,18 +341,24 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/total):
+        Costs (today/month/total):
       </span>
       <span
         className="teleinfo__costs-value"
       >
-        ...
+        5.5
       </span>
       /
       <span
         className="teleinfo__costs-value"
       >
-        ...
+        55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        500
       </span>
       <span
         className="teleinfo__costs-unit"
