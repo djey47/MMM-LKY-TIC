@@ -5,6 +5,7 @@ import { withNotifications } from '../../hoc/with-notifications';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 
 import './Teleinfo.scss';
+import classNames from 'classnames';
 
 export interface WithNotificationDataProps {
   currencySymbol: string;
@@ -97,16 +98,23 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
       return undefined;
     }
 
+    const isSubscribedPowerOverflowWarning = data_TELEINFO.subscribedPowerOverflowWarning !== undefined;
+
+    const intensityClassName = classNames(
+      'teleinfo__intensity',
+      { 'with-overflow': isSubscribedPowerOverflowWarning } 
+    );
+
     return (
       <>
-        <p className="teleinfo__intensity">
+        <p className={intensityClassName}>
           <span className="teleinfo__intensity-label">Intensity:</span>
           <span className="teleinfo__intensity-value">
             {data_TELEINFO.instantIntensity}
           </span>
           <span className="teleinfo__intensity-unit">A</span>
         </p>
-        {data_TELEINFO.subscribedPowerOverflowWarning !== undefined && (
+        { isSubscribedPowerOverflowWarning && (
           <p className="teleinfo__over-intensity">
             <span className="teleinfo__over-intensity-label">Overuse:</span>
             <span className="teleinfo__over-intensity-value">

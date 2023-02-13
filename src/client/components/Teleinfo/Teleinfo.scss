@@ -22,11 +22,16 @@
       flex-direction: row;
     }
 
+    &__intensity,
     &__over-intensity,
     &__costs,
     &__supplied-detail,
     &__dates-last {
       margin-bottom: 0.5em;
+    }
+
+    &__intensity.with-overflow {
+      margin-bottom: 0;
     }
 
     &__dates-start,

@@ -275,7 +275,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       </span>
     </p>
     <p
-      className="teleinfo__intensity"
+      className="teleinfo__intensity with-overflow"
     >
       <span
         className="teleinfo__intensity-label"
