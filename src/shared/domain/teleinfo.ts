@@ -71,7 +71,7 @@ interface OriginTeleInfo {
   lowHighHoursSchedule?: string;
   maxCalledIntensity?: number;
   subscribedIntensity?: number;
-  subscribedPowerOverflowWarning?: string;
+  subscribedPowerOverflowWarning?: number;
 }
 
 /**

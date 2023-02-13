@@ -34,5 +34,5 @@ export function initMockPort(config: TeleinfoConfiguration) {
 }
 
 function generateDatagram(pApp: number, hcLHIndex: number, hcHHIndex: number) {
-  return `\x02\nADCO 032161613293 <\nOPTARIF HC.. <\nISOUSC 45 ?\nHCHC 00${hcLHIndex} "\nHCHP 00${hcHHIndex} 1\nPTEC HP..  \nIINST 001 X\nIMAX 090 H\nPAPP 00${pApp} *\nHHPHC A ,\nMOTDETAT 000000 B\x03`;
+  return `\x02\nADCO 032161613293 <\nOPTARIF HC.. <\nISOUSC 45 ?\nHCHC 00${hcLHIndex} "\nHCHP 00${hcHHIndex} 1\nPTEC HP..  \nIINST 001 X\nADPS 001 X\nIMAX 090 H\nPAPP 00${pApp} *\nHHPHC A ,\nMOTDETAT 000000 B\x03`;
 }
