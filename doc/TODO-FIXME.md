@@ -2,8 +2,9 @@ TODO-FIXME
 ==========
 
 # TODO
+- migrate to dart-sass (also update canvas)
+  => replace sass @imports with @use
 - archive data store per month (see GH issue #1)
-- update README for features
 - store and display statistics per day:
   - [x] supplied power
   - [ ] min/max/avg power 
@@ -14,9 +15,12 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
-
+- fix unit test failing on CI (Teleinfo.spec.tsx) 
+  => mock datefns/format
 
 # DONE
+- update README for features
+- display power overuse warning with ADPS field
 - per month: store and display supplied power / estimated costs
 - Data store: store initial indexes per day
 - Number of kwh supplied for current fare option
