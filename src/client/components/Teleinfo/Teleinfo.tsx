@@ -43,6 +43,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     if (!suppliedPowers) {
       return undefined;
     }
+
     return suppliedPowers.reduce((sum, current) => {
       return sum + current;
     }, 0);
@@ -57,6 +58,64 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     return (
       PERIOD_LABELS_PER_FARE_OPTION[data_TELEINFO.chosenFareOption][rank] ||
       undefined
+    );
+  }
+
+  function displayDate(timestamp?: number) {
+    if (!timestamp) {
+      return '...';
+    }
+    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(
+      timestamp,
+      DATE_FORMAT
+    )}`;
+  }
+
+  function renderPower() {
+    if (!data_TELEINFO) {
+      return undefined;
+    }
+    
+    return (
+      <p className="teleinfo__power">
+        <span className="teleinfo__power-label">Instant power:</span>
+        <span className="teleinfo__power-value">
+          {data_TELEINFO.apparentPower}
+        </span>
+        <span className="teleinfo__power-unit">VA</span>
+        -
+        <span className="teleinfo__power-value">
+          {data_TELEINFO.estimatedPower}
+        </span>
+        <span className="teleinfo__power-unit">W(est.)</span>
+      </p>
+    );
+  }
+
+  function renderIntensity() {
+    if(!data_TELEINFO) {
+      return undefined;
+    }
+
+    return (
+      <>
+        <p className="teleinfo__intensity">
+          <span className="teleinfo__intensity-label">Intensity:</span>
+          <span className="teleinfo__intensity-value">
+            {data_TELEINFO.instantIntensity}
+          </span>
+          <span className="teleinfo__intensity-unit">A</span>
+        </p>
+        {data_TELEINFO.subscribedPowerOverflowWarning !== undefined && (
+          <p className="teleinfo__over-intensity">
+            <span className="teleinfo__over-intensity-label">Overuse:</span>
+            <span className="teleinfo__over-intensity-value">
+              {data_TELEINFO.subscribedPowerOverflowWarning}
+            </span>
+            <span className="teleinfo__over-intensity-unit">A</span>
+          </p>
+        )}
+      </>
     );
   }
 
@@ -106,16 +165,6 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     return <ul className="teleinfo__costs-detail-items"></ul>;
   }
 
-  function presentDate(timestamp?: number) {
-    if (!timestamp) {
-      return '...';
-    }
-    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(
-      timestamp,
-      DATE_FORMAT
-    )}`;
-  }
-
   if (configuration?.debug) {
     Log.log(JSON.stringify({ data_TELEINFO }, null, 2));
   }
@@ -124,10 +173,10 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   const wholeSuppliedPowerForMonth = computeWholeSuppliedPower('currentMonth');
   const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
 
-  const firstReceivedDataDate = presentDate(
+  const firstReceivedDataDate = displayDate(
     data_TELEINFO?.meta?.firstDataTimestamp
   );
-  const lastReceivedDataDate = presentDate(
+  const lastReceivedDataDate = displayDate(
     data_TELEINFO?.meta?.lastUpdateTimestamp
   );
 
@@ -139,24 +188,8 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
       {!!data_TELEINFO && (
         <>
           <section className="teleinfo__instant-section">
-            <p className="teleinfo__power">
-              <span className="teleinfo__power-label">Instant power:</span>
-              <span className="teleinfo__power-value">
-                {data_TELEINFO.apparentPower}
-              </span>
-              <span className="teleinfo__power-unit">VA</span>-
-              <span className="teleinfo__power-value">
-                {data_TELEINFO.estimatedPower}
-              </span>
-              <span className="teleinfo__power-unit">W(est.)</span>
-            </p>
-            <p className="teleinfo__intensity">
-              <span className="teleinfo__intensity-label">Intensity:</span>
-              <span className="teleinfo__intensity-value">
-                {data_TELEINFO.instantIntensity}
-              </span>
-              <span className="teleinfo__intensity-unit">A</span>
-            </p>
+            {renderPower()}
+            {renderIntensity()}
             <p className="teleinfo__supplied">
               <span className="teleinfo__supplied-label">
                 Supplied (today/month/total):

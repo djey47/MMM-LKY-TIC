@@ -17,9 +17,13 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 ```
 Instant power: 637VA/511W(est.)
                   Intensity: 1A
+                    Overuse: 3A
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
-- current intensity in Ampere.
+- current intensity in Ampere
+- when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere:
+```
+```
 
 ### Displays daily statistics
 *soon*

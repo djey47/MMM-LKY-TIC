@@ -1,3 +1,5 @@
+@import "../../styles/common";
+
 /** @define teleinfo */
 
 .mmm-lky-tic-wrapper {
@@ -11,6 +13,7 @@
     }
 
     &__power,
+    &__over-intensity,
     &__intensity,
     &__costs,
     &__supplied,
@@ -19,7 +22,7 @@
       flex-direction: row;
     }
 
-    &__intensity,
+    &__over-intensity,
     &__costs,
     &__supplied-detail,
     &__dates-last {
@@ -42,13 +45,20 @@
     }
 
     &__intensity,
+    &__over-intensity,
     &__supplied-detail,
     &__dates {
       margin-left: auto;
     }
 
+    &__over-intensity {
+      animation: blinker 2s linear infinite;
+      color: $warning-text;
+    }
+
     &__power-label,
     &__intensity-label,
+    &__over-intensity-label,
     &__costs-label,
     &__supplied-label {
       margin-right: 0.5em;

@@ -58,6 +58,25 @@ describe('Teleinfo component', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('should render correctly with notif data and power overuse', () => {
+    // given
+    const props: WithNotificationDataProps = {
+      ...propsWithFullNotifData,
+      data_TELEINFO: {
+        ...propsWithFullNotifData.data_TELEINFO,
+        subscribedPowerOverflowWarning: 1,
+      },
+    };
+
+    // when
+    const tree = renderer
+      .create(<Teleinfo {...props} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should render correctly with notif data but without supplied power information', () => {
     // given
     const props: WithNotificationDataProps = {
