@@ -2,23 +2,31 @@ TODO-FIXME
 ==========
 
 # TODO
+- display daily costs with more precision (2 decimals)
+- quick status display with icons/labels
+  => connection status to TIC: disconnected (no data or too old data received) or connected
+  => Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
+  => supply status: eco / medium / high
+  => cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
 - migrate to dart-sass (also update canvas)
   => replace sass @imports with @use
 - archive data store per month (see GH issue #1)
 - store and display statistics per day:
   - [x] supplied power
   - [ ] min/max/avg power 
-- alert when reaching 80%+ of the maximum supply
-  => Retrieve or set the maximum supply
-  => OK / WARN / CRITICAL
-  => colors, symbols?
 - unit tests for teleinfo processing
 
 # FIXME
-- fix unit test failing on CI (Teleinfo.spec.tsx) 
-  => mock datefns/format
+
 
 # DONE
+- alert when reaching 80%+ of the maximum supply
+  => Retrieve or set the maximum supply // or use the overflow warning field
+  => OK / WARN / CRITICAL
+  => colors, symbols?
+- install font awesome: https://fontawesome.com/v6/docs/web/use-with/react/#contentHeader
+- fix unit test failing on CI (Teleinfo.spec.tsx) 
+  => mock datefns/format
 - update README for features
 - display power overuse warning with ADPS field
 - per month: store and display supplied power / estimated costs
