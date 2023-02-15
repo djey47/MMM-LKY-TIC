@@ -1,9 +1,9 @@
 # MMM-LKY-TIC
 
 [ ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit)
-[![Codeship Status for djey47/MMM-LKY-TIC](https://app.codeship.com/projects/27c90cc5-d5e1-4956-af95-ea1154fffda4/status?branch=master)](https://app.codeship.com/projects/462252)
+![Build status](https://github.com/djey47/MMM-LKY-TIC/actions/workflows/ci.yml/badge.svg?branch=main&event=push)
 
-MagicMirror2 module to display info about home power supply (previous generation and Linky(tm) devices providing data via 'teleinfo' serial output). 
+MagicMirror2 module to display info about home power supply (previous generation and Linky(tm) devices providing data via 'teleinfo/TIC' serial output). 
 
 *For now only historical data mode, single-phased settlement, is handled.*
 
