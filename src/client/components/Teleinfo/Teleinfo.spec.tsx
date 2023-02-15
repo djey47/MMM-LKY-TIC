@@ -1,9 +1,12 @@
 // Must be located BEFORE the imports
+const mockFormatDate = jest.fn((ts: number, format: string) => `${format}(${ts})`);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockWithNotifications = jest.fn((c, s) => c);
 
 import renderer from 'react-test-renderer';
 import Teleinfo, { WithNotificationDataProps } from './Teleinfo';
+
+jest.mock('date-fns/format', () => mockFormatDate);
 
 jest.mock('../../hoc/with-notifications', () => ({
   withNotifications: mockWithNotifications,

@@ -216,7 +216,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__dates-start-value"
       >
-        14:11:31, on 2023/01/24
+        HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
       </span>
     </p>
     <p
@@ -230,7 +230,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__dates-last-value"
       >
-        12:15:26, on 2023/01/27
+        HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>
   </section>
@@ -472,7 +472,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__dates-start-value"
       >
-        14:11:31, on 2023/01/24
+        HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
       </span>
     </p>
     <p
@@ -486,7 +486,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__dates-last-value"
       >
-        12:15:26, on 2023/01/27
+        HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>
   </section>
@@ -645,7 +645,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__dates-start-value"
       >
-        14:11:31, on 2023/01/24
+        HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
       </span>
     </p>
     <p
@@ -659,7 +659,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__dates-last-value"
       >
-        12:15:26, on 2023/01/27
+        HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>
   </section>
