@@ -1,27 +1,17 @@
-import formatDate from 'date-fns/format';
+import classNames from 'classnames';
 import { FunctionComponent, useContext } from 'react';
+import { TeleInfo } from '../../../shared/domain/teleinfo';
 import ConfigurationContext from '../../contexts/ConfigurationContext';
 import { withNotifications } from '../../hoc/with-notifications';
-import { TeleInfo } from '../../../shared/domain/teleinfo';
+import { displayDate, getPeriodLabel } from '../../shared/displayHelper';
+import QuickStatus from '../QuickStatus/QuickStatus';
 
 import './Teleinfo.scss';
-import classNames from 'classnames';
 
 export interface WithNotificationDataProps {
   currencySymbol: string;
   data_TELEINFO?: TeleInfo;
 }
-
-const PERIOD_LABELS_PER_FARE_OPTION: {
-  [key: string]: string[];
-} = {
-  BASE: ['base'],
-  EJP: ['EJP:normal', 'EJP:peak'],
-  HC: ['HC:low', 'HC:high'],
-};
-
-const DATE_FORMAT = 'yyyy/MM/dd';
-const TIME_FORMAT = 'HH:mm:ss';
 
 const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   props: WithNotificationDataProps
@@ -48,28 +38,6 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     return suppliedPowers.reduce((sum, current) => {
       return sum + current;
     }, 0);
-  }
-
-  function getPeriodLabel(rank: number) {
-    const { data_TELEINFO } = props;
-
-    if (!data_TELEINFO?.chosenFareOption) {
-      return undefined;
-    }
-    return (
-      PERIOD_LABELS_PER_FARE_OPTION[data_TELEINFO.chosenFareOption][rank] ||
-      undefined
-    );
-  }
-
-  function displayDate(timestamp?: number) {
-    if (!timestamp) {
-      return '...';
-    }
-    return `${formatDate(timestamp, TIME_FORMAT)}, on ${formatDate(
-      timestamp,
-      DATE_FORMAT
-    )}`;
   }
 
   function renderPower() {
@@ -136,7 +104,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
     return (
       <ul className="teleinfo__supplied-detail-items">
         {data_TELEINFO.suppliedPower?.currentDay?.map((pw, rank) => {
-          const periodLabel = getPeriodLabel(rank) || '';
+          const periodLabel = getPeriodLabel(data_TELEINFO.chosenFareOption, rank);
           return (
             <li
               className="teleinfo__supplied-detail-item"
@@ -190,6 +158,9 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
 
   return (
     <div className="teleinfo">
+      <section className="teleinfo__quick-status">
+        <QuickStatus data={data_TELEINFO} />
+      </section>
       {!data_TELEINFO && (
         <p className="teleinfo__no-data">No data received yet.</p>
       )}

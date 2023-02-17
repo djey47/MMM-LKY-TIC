@@ -5,6 +5,46 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
   className="teleinfo"
 >
   <section
+    className="teleinfo__quick-status"
+  >
+    <div
+      data={
+        {
+          "apparentPower": 250,
+          "chosenFareOption": "BASE",
+          "estimatedPower": 225,
+          "estimatedPrices": {
+            "currentDay": 5.5,
+            "currentMonth": 55,
+            "total": 500,
+          },
+          "instantIntensity": 1,
+          "meta": {
+            "firstDataTimestamp": 1674565891995,
+            "lastUpdateTimestamp": 1674818126026,
+            "unresolvedGroups": {},
+          },
+          "suppliedPower": {
+            "currentDay": [
+              1,
+              2,
+            ],
+            "currentMonth": [
+              10,
+              20,
+            ],
+            "total": [
+              100,
+              200,
+            ],
+          },
+        }
+      }
+    >
+      QuickStatus component
+    </div>
+  </section>
+  <section
     className="teleinfo__instant-section"
   >
     <p
@@ -241,6 +281,47 @@ exports[`Teleinfo component should render correctly with notif data and power ov
 <div
   className="teleinfo"
 >
+  <section
+    className="teleinfo__quick-status"
+  >
+    <div
+      data={
+        {
+          "apparentPower": 250,
+          "chosenFareOption": "BASE",
+          "estimatedPower": 225,
+          "estimatedPrices": {
+            "currentDay": 5.5,
+            "currentMonth": 55,
+            "total": 500,
+          },
+          "instantIntensity": 1,
+          "meta": {
+            "firstDataTimestamp": 1674565891995,
+            "lastUpdateTimestamp": 1674818126026,
+            "unresolvedGroups": {},
+          },
+          "subscribedPowerOverflowWarning": 1,
+          "suppliedPower": {
+            "currentDay": [
+              1,
+              2,
+            ],
+            "currentMonth": [
+              10,
+              20,
+            ],
+            "total": [
+              100,
+              200,
+            ],
+          },
+        }
+      }
+    >
+      QuickStatus component
+    </div>
+  </section>
   <section
     className="teleinfo__instant-section"
   >
@@ -498,6 +579,33 @@ exports[`Teleinfo component should render correctly with notif data but without 
   className="teleinfo"
 >
   <section
+    className="teleinfo__quick-status"
+  >
+    <div
+      data={
+        {
+          "apparentPower": 250,
+          "chosenFareOption": "BASE",
+          "estimatedPower": 225,
+          "estimatedPrices": {
+            "currentDay": 5.5,
+            "currentMonth": 55,
+            "total": 500,
+          },
+          "instantIntensity": 1,
+          "meta": {
+            "firstDataTimestamp": 1674565891995,
+            "lastUpdateTimestamp": 1674818126026,
+            "unresolvedGroups": {},
+          },
+          "suppliedPower": {},
+        }
+      }
+    >
+      QuickStatus component
+    </div>
+  </section>
+  <section
     className="teleinfo__instant-section"
   >
     <p
@@ -670,6 +778,13 @@ exports[`Teleinfo component should render correctly without notif data 1`] = `
 <div
   className="teleinfo"
 >
+  <section
+    className="teleinfo__quick-status"
+  >
+    <div>
+      QuickStatus component
+    </div>
+  </section>
   <p
     className="teleinfo__no-data"
   >

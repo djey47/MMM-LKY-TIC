@@ -1,0 +1,28 @@
+@import "../../styles/common";
+
+/** @define quickstatus */
+
+.mmm-lky-tic-wrapper {
+  .quick-status {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid var(--color-text-dimmed);
+
+    &__items {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    &__link-item,
+    &__supply-item {
+      margin: 0 0.5em;
+    }
+
+    &__link-picto.not-connected,
+    &__supply-picto.supply-critical {
+      animation: blinker 1s linear infinite;
+    }
+  }
+}

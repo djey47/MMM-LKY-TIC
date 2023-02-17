@@ -4,6 +4,7 @@ const mockFormatDate = jest.fn((ts: number, format: string) => `${format}(${ts})
 const mockWithNotifications = jest.fn((c, s) => c);
 
 import renderer from 'react-test-renderer';
+import { QuickStatusProps } from '../QuickStatus/QuickStatus';
 import Teleinfo, { WithNotificationDataProps } from './Teleinfo';
 
 jest.mock('date-fns/format', () => mockFormatDate);
@@ -11,6 +12,8 @@ jest.mock('date-fns/format', () => mockFormatDate);
 jest.mock('../../hoc/with-notifications', () => ({
   withNotifications: mockWithNotifications,
 }));
+
+jest.mock('../QuickStatus/QuickStatus', () => (props: QuickStatusProps) => <div {...props}>QuickStatus component</div>);
 
 describe('Teleinfo component', () => {
   const defaultProps: WithNotificationDataProps = {

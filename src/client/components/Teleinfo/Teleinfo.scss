@@ -46,7 +46,7 @@
     &__supplied-value,
     &__dates-start-value,
     &__dates-last-value {
-      color: white;
+      color: $highlighted-text;
     }
 
     &__intensity,
@@ -58,7 +58,7 @@
 
     &__over-intensity {
       animation: blinker 2s linear infinite;
-      color: $warning-text;
+      color: $critical-text;
     }
 
     &__power-label,

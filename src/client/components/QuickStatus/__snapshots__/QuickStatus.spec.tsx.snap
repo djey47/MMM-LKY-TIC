@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuickStatus component should render correctly with data 1`] = `
+<div
+  className="quick-status"
+>
+  <ul
+    className="quick-status__items"
+  >
+    <li
+      className="quick-status__link-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__link-picto not-connected","color":"red","icon":"faPlugCircleExclamation"}
+      </div>
+    </li>
+    <li
+      className="quick-status__supply-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__supply-picto","color":"green","icon":"faLeaf"}
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`QuickStatus component should render correctly without data: no teleinfo data after more than 30 seconds 1`] = `
+<div
+  className="quick-status"
+>
+  <ul
+    className="quick-status__items"
+  >
+    <li
+      className="quick-status__link-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__link-picto","color":"red","icon":"faPlugCircleExclamation"}
+      </div>
+    </li>
+    <li
+      className="quick-status__supply-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__supply-picto","color":"white","icon":"faCircleQuestion"}
+      </div>
+    </li>
+  </ul>
+</div>
+`;
