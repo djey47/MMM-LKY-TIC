@@ -12,6 +12,25 @@ MagicMirror2 module to display info about home power supply (previous generation
 ### Uses latest MMM-React-Canvas-ts bootstrapper:
 See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 
+### Provides quick supply status via icons
+```
+(L)  (S)
+--------
+```
+- **L** for Link state: a plug symbol indicates link status between counter and the module:
+  - With bolt, green => data was received less than 5 seconds ago
+  - With exclamation mark, yellow => data was received less than 10 seconds ago
+  - With exclamation mark, orange => data was received less than 30 seconds ago
+  - With exclamation mark, red, blinking => data was received more than 30 seconds ago
+  - With exclamation mark, red => no data received from the start.
+- **S** for Supply state: indicates current electrical consumption:
+  - Question mark: unable to determine supply state
+  - Green leaf: current intensity is less than third of subscribed intensity
+  - Yellow bolt: current is less than two thirds of subscribed
+  - Orange bolt: current is less than five sixths of subscribed
+  - Red bolt: current is more than five sixths of subscribed
+  - Red bolt, blinking: power overflow has been detected over subscribed.
+
 ### Displays instant data
 
 ```
