@@ -2,6 +2,7 @@ TODO-FIXME
 ==========
 
 # TODO
+- store indexes at configured hours for historization
 - display daily costs with more precision (2 decimals)
 - quick status display with icons/labels
   => connection status to TIC: disconnected (no data or too old data received) or connected
