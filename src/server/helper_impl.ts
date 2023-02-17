@@ -28,9 +28,9 @@ const mm2Helper: MM2Helper = {
     }
   },
 
-  stop: function (): void {
+  stop: async function (): Promise<void> {
     // Saving data store before exiting
-    InstanceStore.getInstance().persist();
+    await InstanceStore.getInstance().persist();
   },
 };
 
