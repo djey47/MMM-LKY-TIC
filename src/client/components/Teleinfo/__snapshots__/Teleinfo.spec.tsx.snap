@@ -14,7 +14,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           "chosenFareOption": "BASE",
           "estimatedPower": 225,
           "estimatedPrices": {
-            "currentDay": 5.5,
+            "currentDay": 5.567,
             "currentMonth": 55,
             "total": 500,
           },
@@ -213,7 +213,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__costs-value"
       >
-        5.5
+        5.57
       </span>
       /
       <span
@@ -291,7 +291,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           "chosenFareOption": "BASE",
           "estimatedPower": 225,
           "estimatedPrices": {
-            "currentDay": 5.5,
+            "currentDay": 5.567,
             "currentMonth": 55,
             "total": 500,
           },
@@ -510,7 +510,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__costs-value"
       >
-        5.5
+        5.57
       </span>
       /
       <span
@@ -588,7 +588,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
           "chosenFareOption": "BASE",
           "estimatedPower": 225,
           "estimatedPrices": {
-            "currentDay": 5.5,
+            "currentDay": 5.567,
             "currentMonth": 55,
             "total": 500,
           },
@@ -710,7 +710,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__costs-value"
       >
-        5.5
+        5.57
       </span>
       /
       <span

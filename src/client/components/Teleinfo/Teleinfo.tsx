@@ -3,7 +3,7 @@ import { FunctionComponent, useContext } from 'react';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 import ConfigurationContext from '../../contexts/ConfigurationContext';
 import { withNotifications } from '../../hoc/with-notifications';
-import { displayDate, getPeriodLabel } from '../../shared/displayHelper';
+import { displayDate, displayPriceWithTwoDecimals, getPeriodLabel } from '../../shared/displayHelper';
 import QuickStatus from '../QuickStatus/QuickStatus';
 
 import './Teleinfo.scss';
@@ -196,7 +196,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
                 Costs (today/month/total):
               </span>
               <span className="teleinfo__costs-value">
-                {data_TELEINFO.estimatedPrices?.currentDay || '...'}
+                {displayPriceWithTwoDecimals(data_TELEINFO.estimatedPrices?.currentDay)}
               </span>
               /
               <span className="teleinfo__costs-value">

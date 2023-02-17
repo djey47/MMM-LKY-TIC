@@ -31,7 +31,7 @@ describe('Teleinfo component', () => {
       chosenFareOption: 'BASE',
       estimatedPower: 225,
       estimatedPrices:{
-        currentDay: 5.5,
+        currentDay: 5.567,
         currentMonth: 55,
         total: 500
       },

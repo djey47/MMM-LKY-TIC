@@ -125,7 +125,7 @@ export function computeEstimatedPrices(
   return {
     total: totalPrice && Math.round(totalPrice),
     currentDay:
-      totalDayPrice && Math.round(totalDayPrice),
+      totalDayPrice,
     currentMonth: totalMonthPrice && Math.round(totalMonthPrice),
   };
 }

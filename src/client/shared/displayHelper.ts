@@ -18,3 +18,11 @@ export function displayDate(timestamp?: number) {
   )}`;
 }
 
+export function displayPriceWithTwoDecimals(value?: number) {
+  if (!value) {
+    return '...';
+  }
+
+  return Math.round((value + Number.EPSILON) * 100) / 100;
+}
+
