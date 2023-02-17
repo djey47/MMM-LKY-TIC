@@ -8,6 +8,8 @@ TODO-FIXME
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
   - [] Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
   - [x] supply status: eco / medium / high / critical
+    => Based on overflow power warning (critical) and on current intensity VS subscribed intensity (eco to high)
+    => could be enhanced with custom settings based on instant power (thresholds)
   - [] cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
     => Backend computation
     => Need indexes from configured hours for more reliability
