@@ -5,10 +5,13 @@ TODO-FIXME
 - store indexes at configured hours for historization
 - display daily costs with more precision (2 decimals)
 - quick status display with icons/labels
-  => connection status to TIC: disconnected (no data or too old data received) or connected
-  => Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
-  => supply status: eco / medium / high
-  => cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
+  - [x] connection status to TIC: disconnected (no data or too old data received) or connected
+  - [] Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
+  - [x] supply status: eco / medium / high / critical
+  - [] cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
+    => Backend computation
+    => Need indexes from configured hours for more reliability
+    => By default, extrapolate current value to the end of the day
 - migrate to dart-sass (also update canvas)
   => replace sass @imports with @use
 - archive data store per month (see GH issue #1)
