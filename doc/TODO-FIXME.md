@@ -24,7 +24,10 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
-
+- SIGINT signal sent by PM2 does not seem to execute async stop call
+  => data store persist is not called
+  => but works with terminal INT (CTRL-C) or electron quit menu command...
+  => test sync call and provide sync persist if needed
 
 # DONE
 - provide instance store persist in synchronous mode
