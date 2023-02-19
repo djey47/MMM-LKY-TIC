@@ -1,22 +1,22 @@
 // Must be located BEFORE the imports
 const mockFormatDate = jest.fn((ts: number, format: string) => `${format}(${ts})`);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockUseWithNotifications = jest.fn();
 
+import React from 'react';
 import renderer from 'react-test-renderer';
 import { QuickStatusProps } from '../QuickStatus/QuickStatus';
-import Teleinfo, { NotificationData, TeleinfoProps } from './Teleinfo';
+import Teleinfo, { NotificationData } from './Teleinfo';
 
 jest.mock('date-fns/format', () => mockFormatDate);
+
+const mockUseContext = jest.spyOn(React, 'useContext');
 
 jest.mock('../../hooks/with-notifications/with-notifications', () => mockUseWithNotifications);
 
 jest.mock('../QuickStatus/QuickStatus', () => (props: QuickStatusProps) => <div {...props}>QuickStatus component</div>);
 
 describe('Teleinfo component', () => {
-  const defaultProps: TeleinfoProps = {
-    currencySymbol: '€',
-  };
+  const defaultProps = {};
   const fullNotifData: NotificationData = {
     data_TELEINFO: {
       meta: {
@@ -46,6 +46,10 @@ describe('Teleinfo component', () => {
 
   beforeEach(() => {
     mockUseWithNotifications.mockReset();
+    mockUseContext.mockReset();
+    mockUseContext.mockReturnValue({
+      currencySymbol: '€',
+    });
   });
 
   it('should render correctly without notif data', () => {

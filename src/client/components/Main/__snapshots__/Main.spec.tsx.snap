@@ -1,24 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main component should render correctly with custom configuration 1`] = `
-<div
-  className="main dimmed light small"
->
-  <div
-    currencySymbol="S"
-  >
-    Teleinfo component
-  </div>
-</div>
-`;
-
 exports[`Main component should render correctly with default props 1`] = `
 <div
   className="main dimmed light small"
 >
-  <div
-    currencySymbol=""
-  >
+  <div>
     Teleinfo component
   </div>
 </div>

@@ -8,22 +8,14 @@ import QuickStatus from '../QuickStatus/QuickStatus';
 
 import './Teleinfo.scss';
 
-export interface TeleinfoProps {
-  currencySymbol: string;
-}
-
 export interface NotificationData {
   data_TELEINFO?: TeleInfo;
   data_TELEINFO_HEARTBEAT?: TeleInfoHeartbeat;
 }
 
-const Teleinfo: FunctionComponent<TeleinfoProps> = (
-  props: TeleinfoProps
-) => {
+const Teleinfo: FunctionComponent<Record<string, never>> = () => {
   const configuration = useContext(ConfigurationContext);
   const {data_TELEINFO, data_TELEINFO_HEARTBEAT} = useWithNotifications(['TELEINFO', 'TELEINFO_HEARTBEAT']) as NotificationData;
-
-  const { currencySymbol } = props;
 
   function computeWholeSuppliedPower(categoryKey: string) {
     if (!data_TELEINFO) {
@@ -144,7 +136,8 @@ const Teleinfo: FunctionComponent<TeleinfoProps> = (
     return <ul className="teleinfo__costs-detail-items"></ul>;
   }
 
-  if (configuration?.debug) {
+  const { currencySymbol, debug } = configuration || {};
+  if (debug) {
     Log.log(JSON.stringify({ data_TELEINFO }, null, 2));
   }
 
