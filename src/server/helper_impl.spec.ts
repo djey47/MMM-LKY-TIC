@@ -1,3 +1,6 @@
+jest.useFakeTimers();
+jest.spyOn(global, 'clearInterval');
+
 jest.mock('./utils/mm2_facades', () => ({
   Log: {
     log: jest.fn(),
@@ -8,6 +11,17 @@ jest.mock('./utils/mm2_facades', () => ({
 const mockStartProcessing = jest.fn();
 jest.mock('./processing/teleinfo/teleinfo-processor', () => ({
   startProcessing: mockStartProcessing,
+}));
+
+const mockStorePersist = jest.fn();
+const mockStoreSetConfiguration = jest.fn();
+jest.mock('./processing/teleinfo/helpers/instance-store', () => ({
+  InstanceStore: ({
+    getInstance: () => ({
+      persist: mockStorePersist,
+    }),
+    setConfiguration: mockStoreSetConfiguration,
+  }),
 }));
 
 import * as impl from './helper_impl';
@@ -28,6 +42,7 @@ describe('MM2 helper implementation', () => {
 
   describe('socketNotificationReceived function', () => {
     beforeEach(() => {
+      mockStoreSetConfiguration.mockReset();
       mockStartProcessing.mockReset();
     });
 
@@ -50,8 +65,27 @@ describe('MM2 helper implementation', () => {
       // then
       expect(nodeHelper.config).toEqual({ key1: 'value1' });
       expect(nodeHelper.started).toBe(true);
+      expect(mockStoreSetConfiguration).toHaveBeenCalledWith({ key1: 'value1' });
       expect(sendSocketNotificationMock).toHaveBeenCalledWith('INIT');
       expect(mockStartProcessing).toHaveBeenCalledWith(nodeHelper);
+    });
+  });
+
+  describe('stop function', () => {
+    beforeEach(() => {
+      mockStorePersist.mockReset();
+    });
+
+    it('should stop heartbeat and trigger a last store persist', async () => {
+      // given
+      nodeHelper.heartbeatTimerId = 90;
+
+      // when
+      await nodeHelper.stop();
+
+      // then
+      expect(global.clearInterval).toHaveBeenCalledWith(90);
+      expect(mockStorePersist).toHaveBeenCalled();
     });
   });
 });
