@@ -10,6 +10,7 @@ import './QuickStatus.scss';
 
 export interface QuickStatusProps {
   data?: TeleInfo;
+  hearbeatTs?: number;
 }
 
 /**
@@ -38,7 +39,8 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
 
     if(props.data) {
       const lastReceivedTime = props.data.meta?.lastUpdateTimestamp || 0;
-      const idleDuration = timeDifferenceInSeconds(new Date(), lastReceivedTime);
+      const heartbeatTime = props.hearbeatTs || 0;
+      const idleDuration = timeDifferenceInSeconds(heartbeatTime, lastReceivedTime);
       
       if (idleDuration > 30) {
         options.color = 'red';

@@ -2,7 +2,9 @@ import renderer from 'react-test-renderer';
 import QuickStatus, { QuickStatusProps } from '../QuickStatus/QuickStatus';
 
 describe('QuickStatus component', () => {
-  const defaultProps: QuickStatusProps = {};
+  const defaultProps: QuickStatusProps = {
+    hearbeatTs: 1674818126026, // +0s
+  };
   const propsWithData: QuickStatusProps = {
     ...defaultProps,
     data: {
@@ -30,8 +32,28 @@ describe('QuickStatus component', () => {
   };
 
   it('should render correctly without data: no teleinfo data after more than 30 seconds', () => {
-    // given-when
-    const tree = renderer.create(<QuickStatus {...defaultProps} />).toJSON();
+    // given
+    const propsWithDelayedData: QuickStatusProps = {
+      ...defaultProps,
+      hearbeatTs: 1674818157056, // +31s
+    };
+
+    // when
+    const tree = renderer.create(<QuickStatus {...propsWithDelayedData} />).toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly with data: no teleinfo data after more than 10 seconds', () => {
+    // given
+    const propsWithDelayedData: QuickStatusProps = {
+      ...propsWithData,
+      hearbeatTs: 1674818137057, // +11s
+    };
+
+    // when
+    const tree = renderer.create(<QuickStatus {...propsWithDelayedData} />).toJSON();
 
     // then
     expect(tree).toMatchSnapshot();
@@ -41,6 +63,25 @@ describe('QuickStatus component', () => {
     // given-when
     const tree = renderer
       .create(<QuickStatus {...propsWithData} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly with data and power overuse of 2A', () => {
+    // given
+    const propsWithPowerOveruseData: QuickStatusProps = {
+      ...propsWithData,
+      data: {
+        ...propsWithData.data,
+        subscribedPowerOverflowWarning: 2,
+      },
+    };
+
+    // when
+    const tree = renderer
+      .create(<QuickStatus {...propsWithPowerOveruseData} />)
       .toJSON();
 
     // then

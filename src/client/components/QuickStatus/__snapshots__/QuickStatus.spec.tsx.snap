@@ -12,7 +12,61 @@ exports[`QuickStatus component should render correctly with data 1`] = `
     >
       <div>
         FontAwesomeIcon component 
-        {"className":"quick-status__link-picto not-connected","color":"red","icon":"faPlugCircleExclamation"}
+        {"className":"quick-status__link-picto","color":"green","icon":"faPlugCircleBolt"}
+      </div>
+    </li>
+    <li
+      className="quick-status__supply-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__supply-picto","color":"green","icon":"faLeaf"}
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`QuickStatus component should render correctly with data and power overuse of 2A 1`] = `
+<div
+  className="quick-status"
+>
+  <ul
+    className="quick-status__items"
+  >
+    <li
+      className="quick-status__link-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__link-picto","color":"green","icon":"faPlugCircleBolt"}
+      </div>
+    </li>
+    <li
+      className="quick-status__supply-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__supply-picto supply-critical","color":"red","icon":"faBoltLightning"}
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`QuickStatus component should render correctly with data: no teleinfo data after more than 10 seconds 1`] = `
+<div
+  className="quick-status"
+>
+  <ul
+    className="quick-status__items"
+  >
+    <li
+      className="quick-status__link-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__link-picto","color":"orange","icon":"faPlugCircleExclamation"}
       </div>
     </li>
     <li

@@ -108,3 +108,10 @@ export interface ExtendedMetadata {
  * Whole Teleinfo data (collected and computed)
  */
 export interface TeleInfo extends OriginTeleInfo, ExtendedTeleInfo {}
+
+/**
+ * Contains date at which heartbeat notification has been emitted
+ */
+export interface TeleInfoHeartbeat {
+  ts: number;
+}
