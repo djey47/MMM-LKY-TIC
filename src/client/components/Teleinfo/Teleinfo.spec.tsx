@@ -1,26 +1,23 @@
 // Must be located BEFORE the imports
 const mockFormatDate = jest.fn((ts: number, format: string) => `${format}(${ts})`);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const mockWithNotifications = jest.fn((c, s) => c);
+const mockUseWithNotifications = jest.fn();
 
 import renderer from 'react-test-renderer';
 import { QuickStatusProps } from '../QuickStatus/QuickStatus';
-import Teleinfo, { WithNotificationDataProps } from './Teleinfo';
+import Teleinfo, { NotificationData, TeleinfoProps } from './Teleinfo';
 
 jest.mock('date-fns/format', () => mockFormatDate);
 
-jest.mock('../../hoc/with-notifications', () => ({
-  withNotifications: mockWithNotifications,
-}));
+jest.mock('../../hooks/with-notifications/with-notifications', () => mockUseWithNotifications);
 
 jest.mock('../QuickStatus/QuickStatus', () => (props: QuickStatusProps) => <div {...props}>QuickStatus component</div>);
 
 describe('Teleinfo component', () => {
-  const defaultProps: WithNotificationDataProps = {
+  const defaultProps: TeleinfoProps = {
     currencySymbol: '€',
   };
-  const propsWithFullNotifData: WithNotificationDataProps = {
-    ...defaultProps,
+  const fullNotifData: NotificationData = {
     data_TELEINFO: {
       meta: {
         firstDataTimestamp: 1674565891995,
@@ -42,22 +39,34 @@ describe('Teleinfo component', () => {
         total: [100, 200],
       },
     },
+    data_TELEINFO_HEARTBEAT: {
+      ts: 1674818126028
+    },
   };
 
+  beforeEach(() => {
+    mockUseWithNotifications.mockReset();
+  });
+
   it('should render correctly without notif data', () => {
-    // given-when
+    // given
+    mockUseWithNotifications.mockReturnValue({});
+
+    // when
     const tree = renderer.create(<Teleinfo {...defaultProps} />).toJSON();
 
     // then
     expect(tree).toMatchSnapshot();
-    expect(mockWithNotifications).toHaveBeenCalled();
-    expect(mockWithNotifications.mock.calls[0][1]).toEqual(['TELEINFO']);
+    expect(mockUseWithNotifications).toHaveBeenCalledWith(['TELEINFO', 'TELEINFO_HEARTBEAT']);
   });
 
   it('should render correctly with notif data', () => {
-    // given-when
+    // given
+    mockUseWithNotifications.mockReturnValue(fullNotifData)
+
+    // when
     const tree = renderer
-      .create(<Teleinfo {...propsWithFullNotifData} />)
+      .create(<Teleinfo {...defaultProps} />)
       .toJSON();
 
     // then
@@ -66,17 +75,18 @@ describe('Teleinfo component', () => {
 
   it('should render correctly with notif data and power overuse', () => {
     // given
-    const props: WithNotificationDataProps = {
-      ...propsWithFullNotifData,
+    const dataWithPowerOveruse: NotificationData = {
+      ...fullNotifData,
       data_TELEINFO: {
-        ...propsWithFullNotifData.data_TELEINFO,
+        ...fullNotifData.data_TELEINFO,
         subscribedPowerOverflowWarning: 1,
       },
     };
+    mockUseWithNotifications.mockReturnValue(dataWithPowerOveruse)
 
     // when
     const tree = renderer
-      .create(<Teleinfo {...props} />)
+      .create(<Teleinfo {...defaultProps} />)
       .toJSON();
 
     // then
@@ -85,16 +95,17 @@ describe('Teleinfo component', () => {
 
   it('should render correctly with notif data but without supplied power information', () => {
     // given
-    const props: WithNotificationDataProps = {
-      ...propsWithFullNotifData,
+    const dataWithoutSuppliedPowerInfo: NotificationData = {
+      ...fullNotifData,
       data_TELEINFO: {
-        ...propsWithFullNotifData.data_TELEINFO,
+        ...fullNotifData.data_TELEINFO,
         suppliedPower: {},
       },
     };
+    mockUseWithNotifications.mockReturnValue(dataWithoutSuppliedPowerInfo)
 
     // when
-    const tree = renderer.create(<Teleinfo {...props} />).toJSON();
+    const tree = renderer.create(<Teleinfo {...defaultProps} />).toJSON();
 
     // then
     expect(tree).toMatchSnapshot();

@@ -1,26 +1,31 @@
 import classNames from 'classnames';
 import { FunctionComponent, useContext } from 'react';
-import { TeleInfo } from '../../../shared/domain/teleinfo';
+import { TeleInfo, TeleInfoHeartbeat } from '../../../shared/domain/teleinfo';
 import ConfigurationContext from '../../contexts/ConfigurationContext';
-import { withNotifications } from '../../hoc/with-notifications';
+import useWithNotifications from '../../hooks/with-notifications/with-notifications';
 import { displayDate, displayPriceWithTwoDecimals, getPeriodLabel } from '../../shared/displayHelper';
 import QuickStatus from '../QuickStatus/QuickStatus';
 
 import './Teleinfo.scss';
 
-export interface WithNotificationDataProps {
+export interface TeleinfoProps {
   currencySymbol: string;
-  data_TELEINFO?: TeleInfo;
 }
 
-const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
-  props: WithNotificationDataProps
+export interface NotificationData {
+  data_TELEINFO?: TeleInfo;
+  data_TELEINFO_HEARTBEAT?: TeleInfoHeartbeat;
+}
+
+const Teleinfo: FunctionComponent<TeleinfoProps> = (
+  props: TeleinfoProps
 ) => {
   const configuration = useContext(ConfigurationContext);
-  const { currencySymbol, data_TELEINFO } = props;
+  const {data_TELEINFO, data_TELEINFO_HEARTBEAT} = useWithNotifications(['TELEINFO', 'TELEINFO_HEARTBEAT']) as NotificationData;
+
+  const { currencySymbol } = props;
 
   function computeWholeSuppliedPower(categoryKey: string) {
-    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
@@ -96,7 +101,6 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   }
 
   function renderSuppliedDetails() {
-    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
@@ -133,7 +137,6 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   }
 
   function renderCostsDetails() {
-    const { data_TELEINFO } = props;
     if (!data_TELEINFO) {
       return undefined;
     }
@@ -159,7 +162,7 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   return (
     <div className="teleinfo">
       <section className="teleinfo__quick-status">
-        <QuickStatus data={data_TELEINFO} />
+        <QuickStatus data={data_TELEINFO} hearbeatTs={data_TELEINFO_HEARTBEAT?.ts}/>
       </section>
       {!data_TELEINFO && (
         <p className="teleinfo__no-data">No data received yet.</p>
@@ -232,4 +235,4 @@ const Teleinfo: FunctionComponent<WithNotificationDataProps> = (
   );
 };
 
-export default withNotifications(Teleinfo, ['TELEINFO']);
+export default Teleinfo;

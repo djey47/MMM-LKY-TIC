@@ -6,7 +6,7 @@
 import kebabCase from 'kebab-case';
 import * as Notifications from '../support/notifications';
 import { renderWrapper, renderMainComponent } from './dom/renderer';
-import { NotificationCatcher } from './hoc/with-notifications';
+import { NotificationCatcher } from './hooks/with-notifications/notification-catcher';
 
 /**
  * Custom MM2 module name

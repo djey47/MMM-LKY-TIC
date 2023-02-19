@@ -40,6 +40,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           },
         }
       }
+      hearbeatTs={1674818126028}
     >
       QuickStatus component
     </div>
@@ -318,6 +319,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           },
         }
       }
+      hearbeatTs={1674818126028}
     >
       QuickStatus component
     </div>
@@ -601,6 +603,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
           "suppliedPower": {},
         }
       }
+      hearbeatTs={1674818126028}
     >
       QuickStatus component
     </div>
