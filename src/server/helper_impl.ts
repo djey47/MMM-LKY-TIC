@@ -28,12 +28,12 @@ const mm2Helper: MM2Helper = {
     }
   },
 
-  stop: async function (): Promise<void> {
+  stop: function () {
     // Stops heartbeat
     clearInterval(this.heartbeatTimerId);
 
     // Saving data store before exiting
-    await InstanceStore.getInstance().persist();
+    InstanceStore.getInstance().persistSync();
   },
 };
 

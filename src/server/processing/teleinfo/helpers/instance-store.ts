@@ -1,5 +1,5 @@
 import AppRootDir from 'app-root-dir';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { writeFile } from 'fs/promises';
 import Path from 'path';
 import { ModuleConfiguration } from '../../../../shared/domain/module-config';
@@ -82,6 +82,16 @@ export class InstanceStore {
 
     if (InstanceStore.moduleConfig?.debug) {
       Log.log('**** instance-store::persist: done');
+    }
+  }  
+  
+  public persistSync() {
+    const contentsAsJSON = JSON.stringify(this.store, null, 2);
+    writeFileSync(InstanceStore.PERSIST_PATH, contentsAsJSON, 'utf-8');
+    this.store.meta.lastPersistTs = new Date().getTime();
+
+    if (InstanceStore.moduleConfig?.debug) {
+      Log.log('**** instance-store::persistSync: done');
     }
   }
 
