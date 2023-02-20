@@ -14,8 +14,9 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 
 ### Provides quick supply status via icons
 ```
-(L)  (S)
---------
+-------------
+(L)  (S)  (F)
+-------------
 ```
 - **L** for Link state: a plug symbol indicates link status between counter and the module:
   - With bolt, green => data was received less than 5 seconds ago
@@ -30,6 +31,7 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
   - Orange bolt: current is less than five sixths of subscribed
   - Red bolt: current is more than five sixths of subscribed
   - Red bolt, blinking: power overflow has been detected over subscribed.
+- **F** for Fare period: displays current fare period, according to chosen fare option and time of the day.
 
 ### Displays instant data
 
@@ -40,9 +42,7 @@ Instant power: 637VA/511W(est.)
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
 - current intensity in Ampere
-- when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere:
-```
-```
+- when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere.
 
 ### Displays daily statistics
 *soon*
