@@ -16,13 +16,18 @@
     }
 
     &__link-item,
-    &__supply-item {
+    &__supply-item,
+    &__fare-period-item {
       margin: 0 0.5em;
     }
 
     &__link-picto.not-connected,
     &__supply-picto.supply-critical {
       animation: blinker 1s linear infinite;
+    }
+
+    &__fare-period-item {
+      font-size: 0.8em;
     }
   }
 }

@@ -23,6 +23,15 @@ exports[`QuickStatus component should render correctly with data 1`] = `
         {"className":"quick-status__supply-picto","color":"green","icon":"faLeaf"}
       </div>
     </li>
+    <li
+      className="quick-status__fare-period-item"
+    >
+      <span
+        text="base"
+      >
+        Badge atom component
+      </span>
+    </li>
   </ul>
 </div>
 `;
@@ -49,6 +58,15 @@ exports[`QuickStatus component should render correctly with data and power overu
         FontAwesomeIcon component 
         {"className":"quick-status__supply-picto supply-critical","color":"red","icon":"faBoltLightning"}
       </div>
+    </li>
+    <li
+      className="quick-status__fare-period-item"
+    >
+      <span
+        text="base"
+      >
+        Badge atom component
+      </span>
     </li>
   </ul>
 </div>
@@ -77,6 +95,15 @@ exports[`QuickStatus component should render correctly with data: no teleinfo da
         {"className":"quick-status__supply-picto","color":"green","icon":"faLeaf"}
       </div>
     </li>
+    <li
+      className="quick-status__fare-period-item"
+    >
+      <span
+        text="base"
+      >
+        Badge atom component
+      </span>
+    </li>
   </ul>
 </div>
 `;
@@ -102,6 +129,14 @@ exports[`QuickStatus component should render correctly without data: no teleinfo
       <div>
         FontAwesomeIcon component 
         {"className":"quick-status__supply-picto","color":"white","icon":"faCircleQuestion"}
+      </div>
+    </li>
+    <li
+      className="quick-status__fare-period-item"
+    >
+      <div>
+        FontAwesomeIcon component 
+        {"className":"quick-status__current-fare-period-picto","color":"white","icon":"faCircleQuestion"}
       </div>
     </li>
   </ul>

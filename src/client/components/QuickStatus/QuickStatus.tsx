@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import timeDifferenceInSeconds from 'date-fns/differenceInSeconds';
 import { FunctionComponent } from 'react';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
+import { getCurrentPeriodLabel } from '../../shared/displayHelper';
+import Badge from '../atoms/Badge/Badge';
 
 import './QuickStatus.scss';
 
@@ -25,6 +27,9 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
         </li>
         <li key="qs-supply" className="quick-status__supply-item">
           {renderSupplyItem()}
+        </li>        
+        <li key="qs-fare-period" className="quick-status__fare-period-item">
+          {renderFarePeriodItem()}
         </li>
       </>
     );
@@ -102,6 +107,19 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
         <FontAwesomeIcon className={itemClassName} color={options.color} icon={options.icon} />
       </>
     );
+  }
+
+  function renderFarePeriodItem() {
+    if(props.data?.currentFarePeriod) {
+      return (
+        <>
+          <Badge text={getCurrentPeriodLabel(props.data?.currentFarePeriod)} />
+        </>
+      ); 
+    }
+    return (
+      <FontAwesomeIcon className="quick-status__current-fare-period-picto" color="white" icon={faCircleQuestion} />
+    ) 
   }
 
   return (

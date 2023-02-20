@@ -1,5 +1,8 @@
 import renderer from 'react-test-renderer';
+import { BadgeProps } from '../atoms/Badge/Badge';
 import QuickStatus, { QuickStatusProps } from '../QuickStatus/QuickStatus';
+
+jest.mock('../atoms/Badge/Badge', () => (props: BadgeProps) => <span {...props}>Badge atom component</span>);
 
 describe('QuickStatus component', () => {
   const defaultProps: QuickStatusProps = {
@@ -16,6 +19,7 @@ describe('QuickStatus component', () => {
       },
       apparentPower: 250,
       chosenFareOption: 'BASE',
+      currentFarePeriod: 'BASE',
       estimatedPower: 225,
       estimatedPrices:{
         currentDay: 5.5,
