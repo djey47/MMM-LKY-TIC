@@ -1,0 +1,12 @@
+@import "../../../styles/common";
+
+/** @define badge */
+
+.mmm-lky-tic-wrapper {
+  .badge {
+    border: 1px solid $highlighted-border;
+    border-radius: 4px;
+    padding: $size-xs;
+    color: $highlighted-text;
+  }
+}
