@@ -7,7 +7,7 @@ TODO-FIXME
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
     => does not work for now as the component does not update till new data arrives (see withNotification HOC to trigger the refresh every 5 seconds via setInterval - ? requires a retry count in state ?)
     => useState does not work in a hook - need to write a hook instead, try in template
-  - [] Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
+  - [x] Fare period label, BASE, HC: HC/HP or EJP: NORMAL/PEAK
   - [x] supply status: eco / medium / high / critical
     => Based on overflow power warning (critical) and on current intensity VS subscribed intensity (eco to high)
     => could be enhanced with custom settings based on instant power (thresholds)
@@ -27,6 +27,7 @@ TODO-FIXME
 
 
 # DONE
+- provide instance store persist in synchronous mode
 - Teleinfo component: remove currencySymbol from props, use context instead
 - display daily costs with more precision (2 decimals)
 - alert when reaching 80%+ of the maximum supply
