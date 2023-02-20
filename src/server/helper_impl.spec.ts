@@ -13,12 +13,12 @@ jest.mock('./processing/teleinfo/teleinfo-processor', () => ({
   startProcessing: mockStartProcessing,
 }));
 
-const mockStorePersist = jest.fn();
+const mockStorePersistSync = jest.fn();
 const mockStoreSetConfiguration = jest.fn();
 jest.mock('./processing/teleinfo/helpers/instance-store', () => ({
   InstanceStore: ({
     getInstance: () => ({
-      persist: mockStorePersist,
+      persistSync: mockStorePersistSync,
     }),
     setConfiguration: mockStoreSetConfiguration,
   }),
@@ -73,19 +73,19 @@ describe('MM2 helper implementation', () => {
 
   describe('stop function', () => {
     beforeEach(() => {
-      mockStorePersist.mockReset();
+      mockStorePersistSync.mockReset();
     });
 
-    it('should stop heartbeat and trigger a last store persist', async () => {
+    it('should stop heartbeat and trigger a last store persist', () => {
       // given
       nodeHelper.heartbeatTimerId = 90;
 
       // when
-      await nodeHelper.stop();
+      nodeHelper.stop();
 
       // then
       expect(global.clearInterval).toHaveBeenCalledWith(90);
-      expect(mockStorePersist).toHaveBeenCalled();
+      expect(mockStorePersistSync).toHaveBeenCalled();
     });
   });
 });
