@@ -247,30 +247,18 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     className="teleinfo__dates-section"
   >
     <p
-      className="teleinfo__dates-start"
+      className="teleinfo__dates-start-last"
     >
       <span
-        className="teleinfo__dates-start-label"
+        className="teleinfo__dates-start-last-label"
       >
-        First data:
+        First-last data:
       </span>
       <span
-        className="teleinfo__dates-start-value"
+        className="teleinfo__dates-start-last-value"
       >
         HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
-      </span>
-    </p>
-    <p
-      className="teleinfo__dates-last"
-    >
-      <span
-        className="teleinfo__dates-last-label"
-      >
-        Last data:
-      </span>
-      <span
-        className="teleinfo__dates-last-value"
-      >
+         - 
         HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>
@@ -545,30 +533,18 @@ exports[`Teleinfo component should render correctly with notif data and power ov
     className="teleinfo__dates-section"
   >
     <p
-      className="teleinfo__dates-start"
+      className="teleinfo__dates-start-last"
     >
       <span
-        className="teleinfo__dates-start-label"
+        className="teleinfo__dates-start-last-label"
       >
-        First data:
+        First-last data:
       </span>
       <span
-        className="teleinfo__dates-start-value"
+        className="teleinfo__dates-start-last-value"
       >
         HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
-      </span>
-    </p>
-    <p
-      className="teleinfo__dates-last"
-    >
-      <span
-        className="teleinfo__dates-last-label"
-      >
-        Last data:
-      </span>
-      <span
-        className="teleinfo__dates-last-value"
-      >
+         - 
         HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>
@@ -746,30 +722,18 @@ exports[`Teleinfo component should render correctly with notif data but without 
     className="teleinfo__dates-section"
   >
     <p
-      className="teleinfo__dates-start"
+      className="teleinfo__dates-start-last"
     >
       <span
-        className="teleinfo__dates-start-label"
+        className="teleinfo__dates-start-last-label"
       >
-        First data:
+        First-last data:
       </span>
       <span
-        className="teleinfo__dates-start-value"
+        className="teleinfo__dates-start-last-value"
       >
         HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
-      </span>
-    </p>
-    <p
-      className="teleinfo__dates-last"
-    >
-      <span
-        className="teleinfo__dates-last-label"
-      >
-        Last data:
-      </span>
-      <span
-        className="teleinfo__dates-last-value"
-      >
+         - 
         HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
       </span>
     </p>

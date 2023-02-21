@@ -209,16 +209,10 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
             <p className="teleinfo__costs-detail">{renderCostsDetails()}</p>
           </section>
           <section className="teleinfo__dates-section">
-            <p className="teleinfo__dates-start">
-              <span className="teleinfo__dates-start-label">First data:</span>
-              <span className="teleinfo__dates-start-value">
-                {firstReceivedDataDate}
-              </span>
-            </p>
-            <p className="teleinfo__dates-last">
-              <span className="teleinfo__dates-last-label">Last data:</span>
-              <span className="teleinfo__dates-last-value">
-                {lastReceivedDataDate}
+            <p className="teleinfo__dates-start-last">
+              <span className="teleinfo__dates-start-last-label">First-last data:</span>
+              <span className="teleinfo__dates-start-last-value">
+                {firstReceivedDataDate}&nbsp;-&nbsp;{lastReceivedDataDate}
               </span>
             </p>
           </section>
