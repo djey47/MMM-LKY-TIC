@@ -2,6 +2,7 @@ TODO-FIXME
 ==========
 
 # TODO
+- provide interfaces for stored items
 - store indexes at configured hours for historization
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
@@ -25,12 +26,12 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
+
+# DONE
 - SIGINT signal sent by PM2 does not seem to execute async stop call
   => data store persist is not called
   => but works with terminal INT (CTRL-C) or electron quit menu command...
   => test sync call and provide sync persist if needed
-
-# DONE
 - provide instance store persist in synchronous mode
 - Teleinfo component: remove currencySymbol from props, use context instead
 - display daily costs with more precision (2 decimals)
