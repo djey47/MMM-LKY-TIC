@@ -102,6 +102,42 @@ describe('Teleinfo component', () => {
 
     // then
     expect(tree).toMatchSnapshot();
+  });  
+  
+  it('should render correctly with notif data and power stats', () => {
+    // given
+    const dataWithPowerOveruse: NotificationData = {
+      ...fullNotifData,
+      data_TELEINFO: {
+        ...fullNotifData.data_TELEINFO,
+        statistics: {
+          instantPower: {
+            currentDay: {
+              min: 0,
+              max: 155,
+            },
+            currentMonth: {
+              min: 0,
+              max: 200,
+            },
+            overall: {
+              min: 0,
+              max: 500,
+            }
+          },
+        },
+        subscribedPowerOverflowWarning: 1,
+      },
+    };
+    mockUseWithNotifications.mockReturnValue(dataWithPowerOveruse)
+
+    // when
+    const tree = renderer
+      .create(<Teleinfo {...defaultProps} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
   });
 
   it('should render correctly with notif data but without supplied power information', () => {

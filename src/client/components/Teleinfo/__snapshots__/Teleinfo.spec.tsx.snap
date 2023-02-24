@@ -70,7 +70,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       >
         VA
       </span>
-      -
+      [~
       <span
         className="teleinfo__power-value"
       >
@@ -79,7 +79,39 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__power-unit"
       >
-        W(est.)
+        W
+      </span>
+      ]
+    </p>
+    <p
+      className="teleinfo__power-stats"
+    >
+      <span
+        className="teleinfo__power-stats-label"
+      >
+        Max (today/month/overall):
+      </span>
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
       </span>
     </p>
     <p
@@ -213,7 +245,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (today/month/total): ~
       </span>
       <span
         className="teleinfo__costs-value"
@@ -236,7 +268,6 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         className="teleinfo__costs-unit"
       >
         €
-        (est.)
       </span>
     </p>
     <p
@@ -341,7 +372,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       >
         VA
       </span>
-      -
+      [~
       <span
         className="teleinfo__power-value"
       >
@@ -350,7 +381,39 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__power-unit"
       >
-        W(est.)
+        W
+      </span>
+      ]
+    </p>
+    <p
+      className="teleinfo__power-stats"
+    >
+      <span
+        className="teleinfo__power-stats-label"
+      >
+        Max (today/month/overall):
+      </span>
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
       </span>
     </p>
     <p
@@ -503,7 +566,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (today/month/total): ~
       </span>
       <span
         className="teleinfo__costs-value"
@@ -526,7 +589,339 @@ exports[`Teleinfo component should render correctly with notif data and power ov
         className="teleinfo__costs-unit"
       >
         €
-        (est.)
+      </span>
+    </p>
+    <p
+      className="teleinfo__costs-detail"
+    >
+      <ul
+        className="teleinfo__costs-detail-items"
+      />
+    </p>
+  </section>
+  <section
+    className="teleinfo__dates-section"
+  >
+    <p
+      className="teleinfo__dates-start-last"
+    >
+      <span
+        className="teleinfo__dates-start-last-label"
+      >
+        First-last data:
+      </span>
+      <span
+        className="teleinfo__dates-start-last-value"
+      >
+        HH:mm:ss(1674565891995), on yyyy/MM/dd(1674565891995)
+         - 
+        HH:mm:ss(1674818126026), on yyyy/MM/dd(1674818126026)
+      </span>
+    </p>
+  </section>
+</div>
+`;
+
+exports[`Teleinfo component should render correctly with notif data and power stats 1`] = `
+<div
+  className="teleinfo"
+>
+  <section
+    className="teleinfo__quick-status"
+  >
+    <div
+      data={
+        {
+          "apparentPower": 250,
+          "chosenFareOption": "BASE",
+          "estimatedPower": 225,
+          "estimatedPrices": {
+            "currentDay": 5.567,
+            "currentMonth": 55,
+            "total": 500,
+          },
+          "instantIntensity": 1,
+          "meta": {
+            "firstDataTimestamp": 1674565891995,
+            "lastUpdateTimestamp": 1674818126026,
+            "unresolvedGroups": {},
+          },
+          "statistics": {
+            "instantPower": {
+              "currentDay": {
+                "max": 155,
+                "min": 0,
+              },
+              "currentMonth": {
+                "max": 200,
+                "min": 0,
+              },
+              "overall": {
+                "max": 500,
+                "min": 0,
+              },
+            },
+          },
+          "subscribedPowerOverflowWarning": 1,
+          "suppliedPower": {
+            "currentDay": [
+              1,
+              2,
+            ],
+            "currentMonth": [
+              10,
+              20,
+            ],
+            "total": [
+              100,
+              200,
+            ],
+          },
+        }
+      }
+      hearbeatTs={1674818126028}
+    >
+      QuickStatus component
+    </div>
+  </section>
+  <section
+    className="teleinfo__instant-section"
+  >
+    <p
+      className="teleinfo__power"
+    >
+      <span
+        className="teleinfo__power-label"
+      >
+        Instant power:
+      </span>
+      <span
+        className="teleinfo__power-value"
+      >
+        250
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
+      </span>
+      [~
+      <span
+        className="teleinfo__power-value"
+      >
+        225
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        W
+      </span>
+      ]
+    </p>
+    <p
+      className="teleinfo__power-stats"
+    >
+      <span
+        className="teleinfo__power-stats-label"
+      >
+        Max (today/month/overall):
+      </span>
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        155
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        200
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        500
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
+      </span>
+    </p>
+    <p
+      className="teleinfo__intensity with-overflow"
+    >
+      <span
+        className="teleinfo__intensity-label"
+      >
+        Intensity:
+      </span>
+      <span
+        className="teleinfo__intensity-value"
+      >
+        1
+      </span>
+      <span
+        className="teleinfo__intensity-unit"
+      >
+        A
+      </span>
+    </p>
+    <p
+      className="teleinfo__over-intensity"
+    >
+      <span
+        className="teleinfo__over-intensity-label"
+      >
+        Overuse:
+      </span>
+      <span
+        className="teleinfo__over-intensity-value"
+      >
+        1
+      </span>
+      <span
+        className="teleinfo__over-intensity-unit"
+      >
+        A
+      </span>
+    </p>
+    <p
+      className="teleinfo__supplied"
+    >
+      <span
+        className="teleinfo__supplied-label"
+      >
+        Supplied (today/month/total):
+      </span>
+      <span
+        className="teleinfo__supplied-value"
+      >
+        3
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        30
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        300
+      </span>
+      <span
+        className="teleinfo__supplied-unit"
+      >
+        wh
+      </span>
+    </p>
+    <p
+      className="teleinfo__supplied-detail"
+    >
+      <ul
+        className="teleinfo__supplied-detail-items"
+      >
+        <li
+          className="teleinfo__supplied-detail-item"
+        >
+          <span
+            className="teleinfo__supplied-label"
+          >
+            base
+            :
+          </span>
+          <span
+            className="teleinfo__supplied-value"
+          >
+            1
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            10
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            100
+          </span>
+          <span
+            className="teleinfo__supplied-unit"
+          >
+            wh
+          </span>
+        </li>
+        <li
+          className="teleinfo__supplied-detail-item"
+        >
+          <span
+            className="teleinfo__supplied-label"
+          >
+            :
+          </span>
+          <span
+            className="teleinfo__supplied-value"
+          >
+            2
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            20
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
+            200
+          </span>
+          <span
+            className="teleinfo__supplied-unit"
+          >
+            wh
+          </span>
+        </li>
+      </ul>
+    </p>
+  </section>
+  <section
+    className="teleinfo__costs-section"
+  >
+    <p
+      className="teleinfo__costs"
+    >
+      <span
+        className="teleinfo__costs-label"
+      >
+        Costs (today/month/total): ~
+      </span>
+      <span
+        className="teleinfo__costs-value"
+      >
+        5.57
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        500
+      </span>
+      <span
+        className="teleinfo__costs-unit"
+      >
+        €
       </span>
     </p>
     <p
@@ -617,7 +1012,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       >
         VA
       </span>
-      -
+      [~
       <span
         className="teleinfo__power-value"
       >
@@ -626,7 +1021,39 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__power-unit"
       >
-        W(est.)
+        W
+      </span>
+      ]
+    </p>
+    <p
+      className="teleinfo__power-stats"
+    >
+      <span
+        className="teleinfo__power-stats-label"
+      >
+        Max (today/month/overall):
+      </span>
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      /
+      <span
+        className="teleinfo__power-stats-value"
+      >
+        ...
+      </span>
+      <span
+        className="teleinfo__power-unit"
+      >
+        VA
       </span>
     </p>
     <p
@@ -696,7 +1123,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (today/month/total): ~
       </span>
       <span
         className="teleinfo__costs-value"
@@ -719,7 +1146,6 @@ exports[`Teleinfo component should render correctly with notif data but without 
         className="teleinfo__costs-unit"
       >
         €
-        (est.)
       </span>
     </p>
     <p

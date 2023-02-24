@@ -13,6 +13,7 @@
     }
 
     &__power,
+    &__power-stats,
     &__over-intensity,
     &__intensity,
     &__costs,
@@ -22,6 +23,7 @@
       flex-direction: row;
     }
 
+    &__power-stats,
     &__supplied-detail {
       font-size: 0.8em;
     }
@@ -44,6 +46,7 @@
     }
 
     &__power-value,
+    &__power-stats-value,
     &__intensity-value,
     &__costs-value,
     &__supplied-value,
@@ -53,7 +56,6 @@
 
     &__intensity,
     &__over-intensity,
-    &__supplied-detail,
     &__dates {
       margin-left: auto;
     }
@@ -65,9 +67,9 @@
     }
 
     &__power-label,
+    &__power-stats-label,
     &__intensity-label,
     &__over-intensity-label,
-    &__costs-label,
     &__supplied-label,
     &__dates-start-last-label {
       margin-right: 0.5em;
