@@ -5,7 +5,7 @@ import { PER_DAY_STATS_IS_KEY_PREFIX, PER_MONTH_STATS_IS_KEY_PREFIX, OVERALL_STA
 import { StoredStatistics } from './helpers/store-models';
 
 export function computeStatistics(data: TeleInfo) {
-  const instantPowerStats = computeTopicStats('estimatedPower', data.estimatedPower);
+  const instantPowerStats = computeTopicStats('apparentPower', data.apparentPower);
   const instantIntensityStats = computeTopicStats('instantIntensity', data.instantIntensity);
   return {
     instantPower: instantPowerStats,
