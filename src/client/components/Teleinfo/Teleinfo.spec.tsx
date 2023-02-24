@@ -87,6 +87,9 @@ describe('Teleinfo component', () => {
       ...fullNotifData,
       data_TELEINFO: {
         ...fullNotifData.data_TELEINFO,
+        statistics: {
+          ...fullNotifData.data_TELEINFO?.statistics,
+        },
         subscribedPowerOverflowWarning: 1,
       },
     };
@@ -107,6 +110,9 @@ describe('Teleinfo component', () => {
       ...fullNotifData,
       data_TELEINFO: {
         ...fullNotifData.data_TELEINFO,
+        statistics: {
+          ...fullNotifData.data_TELEINFO?.statistics,
+        },
         suppliedPower: {},
       },
     };

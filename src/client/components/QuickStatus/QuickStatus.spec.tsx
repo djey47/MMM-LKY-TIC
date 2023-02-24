@@ -83,6 +83,9 @@ describe('QuickStatus component', () => {
       ...propsWithData,
       data: {
         ...propsWithData.data,
+        statistics: {
+          ...propsWithData.data?.statistics,
+        },
         subscribedPowerOverflowWarning: 2,
       },
     };

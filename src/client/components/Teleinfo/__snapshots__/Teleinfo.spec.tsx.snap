@@ -24,6 +24,10 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
             "lastUpdateTimestamp": 1674818126026,
             "unresolvedGroups": {},
           },
+          "statistics": {
+            "instantIntensity": {},
+            "instantPower": {},
+          },
           "suppliedPower": {
             "currentDay": [
               1,
@@ -289,6 +293,10 @@ exports[`Teleinfo component should render correctly with notif data and power ov
             "firstDataTimestamp": 1674565891995,
             "lastUpdateTimestamp": 1674818126026,
             "unresolvedGroups": {},
+          },
+          "statistics": {
+            "instantIntensity": {},
+            "instantPower": {},
           },
           "subscribedPowerOverflowWarning": 1,
           "suppliedPower": {
@@ -575,6 +583,10 @@ exports[`Teleinfo component should render correctly with notif data but without 
             "firstDataTimestamp": 1674565891995,
             "lastUpdateTimestamp": 1674818126026,
             "unresolvedGroups": {},
+          },
+          "statistics": {
+            "instantIntensity": {},
+            "instantPower": {},
           },
           "suppliedPower": {},
         }
