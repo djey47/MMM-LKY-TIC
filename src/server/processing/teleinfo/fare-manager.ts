@@ -9,7 +9,8 @@ import {
   PER_MONTH_INDEXES_IS_KEY_PREFIX,
   TOTAL_COSTS_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, generateCurrentMonthISKey, readIndexes } from './index-reader';
+import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
+import { readIndexes } from './index-reader';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];

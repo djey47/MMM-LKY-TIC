@@ -5,6 +5,7 @@
 import { ExtendedMetadata, TeleInfo } from '../../../shared/domain/teleinfo';
 import { TeleinfoConfiguration } from '../../../shared/domain/teleinfo-config';
 import { computeEstimatedPrices } from './fare-manager';
+import { computeStatistics } from './stats';
 import { InstanceStore } from './helpers/instance-store';
 import {
   FIRST_DATA_TS_IS_KEY,
@@ -15,7 +16,8 @@ import {
   PER_MONTH_SUPPLIED_IS_KEY_PREFIX,
   TOTAL_SUPPLIED_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, generateCurrentMonthISKey, readIndexes } from './index-reader';
+import { readIndexes } from './index-reader';
+import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
 
 export function computeAdditionalTeleinfoData(
   data: TeleInfo,
@@ -24,12 +26,17 @@ export function computeAdditionalTeleinfoData(
   const { apparentPower } = data;
   const { fareDetails, powerFactor } = config;
 
-  return {
+  const enhancedData = {
     ...data,
     meta: enhanceMetadata(data.meta),
     estimatedPower: computeEstimatedPower(powerFactor, apparentPower),
     estimatedPrices: { ...computeEstimatedPrices(data, fareDetails) },
     suppliedPower: { ...computeSuppliedPowers(data) },
+  };
+
+  return {
+    ...enhancedData,
+    statistics: { ...computeStatistics(enhancedData) },
   };
 }
 
@@ -65,7 +72,7 @@ function computeEstimatedPower(
 
 function computeSuppliedPowers(
   data: TeleInfo
-)/*: { currentDay?: number[]; total?: number[] } | undefined*/ {
+) {
   const storeInstance = InstanceStore.getInstance();
   const currentIndexes = readIndexes(data);
 

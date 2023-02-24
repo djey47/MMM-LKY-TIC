@@ -109,7 +109,10 @@ function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
       }
       return acc;
     },
-    { meta: { unresolvedGroups: {} } }
+    {
+      meta: { unresolvedGroups: {} },
+      statistics: {},
+    }
   );
 
   return computeAdditionalTeleinfoData(teleinfoData, config);

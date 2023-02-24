@@ -12,6 +12,9 @@ export const TOTAL_COSTS_IS_KEY = 'TOTAL_COSTS';
 /** Total supplied energy from the first data received until present */
 export const TOTAL_SUPPLIED_IS_KEY = 'TOTAL_SUPPLIED';
 
+/** Total statistsics from the first data received until present */
+export const TOTAL_STATS_IS_KEY = 'TOTAL_STATS';
+
 /** Indexes at the beginning of the day */
 export const PER_DAY_INDEXES_IS_KEY_PREFIX = 'DAY_INDEXES_';
 
@@ -20,6 +23,9 @@ export const PER_DAY_COSTS_IS_KEY_PREFIX = 'DAY_COSTS_';
 
 /** Supplied energy for the day */
 export const PER_DAY_SUPPLIED_IS_KEY_PREFIX = 'DAY_SUPPLIED_';
+
+/** Statistics for the day */
+export const PER_DAY_STATS_IS_KEY_PREFIX = 'DAY_STATS_';
 
 /** Indexes at the beginning of the month */
 export const PER_MONTH_INDEXES_IS_KEY_PREFIX = 'MONTH_INDEXES_';
@@ -30,3 +36,5 @@ export const PER_MONTH_COSTS_IS_KEY_PREFIX = 'MONTH_COSTS_';
 /** Supplied energy for the month */
 export const PER_MONTH_SUPPLIED_IS_KEY_PREFIX = 'MONTH_SUPPLIED_';
 
+/** Statistics for the month */
+export const PER_MONTH_STATS_IS_KEY_PREFIX = 'MONTH_STATS_';
