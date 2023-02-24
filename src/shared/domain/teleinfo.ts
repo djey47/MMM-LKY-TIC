@@ -85,7 +85,7 @@ export interface Statistics {
 export interface TopicStatistics {
   currentDay?: StatisticsValues;
   currentMonth?: StatisticsValues;
-  total?: StatisticsValues;
+  overall?: StatisticsValues;
 }
 
 export interface StatisticsValues {

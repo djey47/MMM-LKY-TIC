@@ -13,7 +13,7 @@ export const TOTAL_COSTS_IS_KEY = 'TOTAL_COSTS';
 export const TOTAL_SUPPLIED_IS_KEY = 'TOTAL_SUPPLIED';
 
 /** Total statistsics from the first data received until present */
-export const TOTAL_STATS_IS_KEY = 'TOTAL_STATS';
+export const OVERALL_STATS_IS_KEY = 'OVERALL_STATS';
 
 /** Indexes at the beginning of the day */
 export const PER_DAY_INDEXES_IS_KEY_PREFIX = 'DAY_INDEXES_';

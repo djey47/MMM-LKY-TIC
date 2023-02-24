@@ -1,7 +1,7 @@
 import { StatisticsValues, TeleInfo, TopicStatistics } from '../../../shared/domain/teleinfo';
 import { InstanceStore } from './helpers/instance-store';
 import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
-import { PER_DAY_STATS_IS_KEY_PREFIX, PER_MONTH_STATS_IS_KEY_PREFIX, TOTAL_STATS_IS_KEY } from './helpers/store-constants';
+import { PER_DAY_STATS_IS_KEY_PREFIX, PER_MONTH_STATS_IS_KEY_PREFIX, OVERALL_STATS_IS_KEY } from './helpers/store-constants';
 import { StoredStatistics } from './helpers/store-models';
 
 export function computeStatistics(data: TeleInfo) {
@@ -19,11 +19,11 @@ function computeTopicStats(name: string, value?: number): TopicStatistics | unde
   }
   const currentDay = computePeriodicStats(value, generateCurrentDayISKey(PER_DAY_STATS_IS_KEY_PREFIX), name);
   const currentMonth = computePeriodicStats(value, generateCurrentMonthISKey(PER_MONTH_STATS_IS_KEY_PREFIX), name);
-  const total = computePeriodicStats(value, TOTAL_STATS_IS_KEY, name);
+  const overall = computePeriodicStats(value, OVERALL_STATS_IS_KEY, name);
   return {
     currentDay,
     currentMonth,
-    total,
+    overall,
   };
 }
 
