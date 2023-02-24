@@ -33,6 +33,10 @@ describe('Teleinfo component', () => {
         total: 500
       },
       instantIntensity: 1,
+      statistics: {
+        instantIntensity: {},
+        instantPower: {},
+      },
       suppliedPower: {
         currentDay: [1, 2],
         currentMonth: [10, 20],

@@ -77,6 +77,23 @@ interface OriginTeleInfo {
 /**
  * Computed data
  */
+export interface Statistics {
+  instantPower?: TopicStatistics;
+  instantIntensity?: TopicStatistics;
+}
+
+export interface TopicStatistics {
+  currentDay?: StatisticsValues;
+  currentMonth?: StatisticsValues;
+  total?: StatisticsValues;
+}
+
+export interface StatisticsValues {
+  min: number;
+  max: number;
+  average?: number;
+}
+
 interface ExtendedTeleInfo {
   estimatedPower?: number;
   estimatedPrices?: {
@@ -90,6 +107,7 @@ interface ExtendedTeleInfo {
     currentMonth?: number[];
     total?: number[];
   };
+  statistics: Statistics;
   meta?: ExtendedMetadata;
 }
 
