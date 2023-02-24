@@ -36,26 +36,27 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 ### Displays instant data
 
 ```
-Instant power: 637VA/511W(est.)
-                  Intensity: 1A
-                    Overuse: 3A
+Instant power: 637VA/[~511W]
+Max (today/month/overall): 650/2500/3554VA
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
+- daily/monthly/overall statistics:
+  - max value
+```
+                             Intensity: 1A
+                               Overuse: 3A
+```
 - current intensity in Ampere
 - when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere.
 
-### Displays daily statistics
-*soon*
-
-e.g: min/max/avg power and intensity
 
 ### Displays daily, monthly, total electrical furniture and costs
 
 ```
 Supplied (today/month/total): 475/1000/5000wh
-                        BASE: 475/1000/5000wh
+BASE: 475/1000/5000wh
 ---------------------------------------------
-Costs (today/month/total): 3/8/35€(est.)
+Costs (today/month/total): ~3/8/35€
 ---------------------------------------------
 ```
 
