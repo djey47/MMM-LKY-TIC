@@ -2,7 +2,6 @@ TODO-FIXME
 ==========
 
 # TODO
-- provide interfaces for stored items
 - store indexes at configured hours for historization
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
@@ -28,6 +27,7 @@ TODO-FIXME
 # FIXME
 
 # DONE
+- provide interfaces for stored items
 - SIGINT signal sent by PM2 does not seem to execute async stop call
   => data store persist is not called
   => but works with terminal INT (CTRL-C) or electron quit menu command...
