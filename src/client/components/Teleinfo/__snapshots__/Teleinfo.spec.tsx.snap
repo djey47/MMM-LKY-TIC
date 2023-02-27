@@ -86,33 +86,68 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
     <p
       className="teleinfo__power-stats"
     >
-      <span
-        className="teleinfo__power-stats-label"
+      <p
+        className="teleinfo__power-stats-group"
       >
-        Max (today/month/overall):
-      </span>
-      <span
-        className="teleinfo__power-stats-value"
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Min (today/month/overall):
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
+      <p
+        className="teleinfo__power-stats-group"
       >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      <span
-        className="teleinfo__power-unit"
-      >
-        VA
-      </span>
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Max:
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
     </p>
     <p
       className="teleinfo__intensity"
@@ -388,33 +423,68 @@ exports[`Teleinfo component should render correctly with notif data and power ov
     <p
       className="teleinfo__power-stats"
     >
-      <span
-        className="teleinfo__power-stats-label"
+      <p
+        className="teleinfo__power-stats-group"
       >
-        Max (today/month/overall):
-      </span>
-      <span
-        className="teleinfo__power-stats-value"
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Min (today/month/overall):
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
+      <p
+        className="teleinfo__power-stats-group"
       >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      <span
-        className="teleinfo__power-unit"
-      >
-        VA
-      </span>
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Max:
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
     </p>
     <p
       className="teleinfo__intensity with-overflow"
@@ -650,15 +720,15 @@ exports[`Teleinfo component should render correctly with notif data and power st
             "instantPower": {
               "currentDay": {
                 "max": 155,
-                "min": 0,
+                "min": 1,
               },
               "currentMonth": {
                 "max": 200,
-                "min": 0,
+                "min": 1.5,
               },
               "overall": {
                 "max": 500,
-                "min": 0,
+                "min": 1.55,
               },
             },
           },
@@ -721,33 +791,68 @@ exports[`Teleinfo component should render correctly with notif data and power st
     <p
       className="teleinfo__power-stats"
     >
-      <span
-        className="teleinfo__power-stats-label"
+      <p
+        className="teleinfo__power-stats-group"
       >
-        Max (today/month/overall):
-      </span>
-      <span
-        className="teleinfo__power-stats-value"
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Min (today/month/overall):
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          1
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          1.5
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          1.55
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
+      <p
+        className="teleinfo__power-stats-group"
       >
-        155
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        200
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        500
-      </span>
-      <span
-        className="teleinfo__power-unit"
-      >
-        VA
-      </span>
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Max:
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          155
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          200
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          500
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
     </p>
     <p
       className="teleinfo__intensity with-overflow"
@@ -1028,33 +1133,68 @@ exports[`Teleinfo component should render correctly with notif data but without 
     <p
       className="teleinfo__power-stats"
     >
-      <span
-        className="teleinfo__power-stats-label"
+      <p
+        className="teleinfo__power-stats-group"
       >
-        Max (today/month/overall):
-      </span>
-      <span
-        className="teleinfo__power-stats-value"
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Min (today/month/overall):
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
+      <p
+        className="teleinfo__power-stats-group"
       >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      /
-      <span
-        className="teleinfo__power-stats-value"
-      >
-        ...
-      </span>
-      <span
-        className="teleinfo__power-unit"
-      >
-        VA
-      </span>
+        <span
+          className="teleinfo__power-stats-label"
+        >
+          Max:
+        </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        <span
+          className="teleinfo__power-unit"
+        >
+          VA
+        </span>
+      </p>
     </p>
     <p
       className="teleinfo__intensity"

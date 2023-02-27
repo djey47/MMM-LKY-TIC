@@ -113,15 +113,15 @@ describe('Teleinfo component', () => {
         statistics: {
           instantPower: {
             currentDay: {
-              min: 0,
+              min: 1,
               max: 155,
             },
             currentMonth: {
-              min: 0,
+              min: 1.5,
               max: 200,
             },
             overall: {
-              min: 0,
+              min: 1.55,
               max: 500,
             }
           },

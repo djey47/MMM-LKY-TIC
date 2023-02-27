@@ -13,7 +13,7 @@
     }
 
     &__power,
-    &__power-stats,
+    &__power-stats-group,
     &__over-intensity,
     &__intensity,
     &__costs,
@@ -21,6 +21,12 @@
     &__supplied-detail {
       display: flex;
       flex-direction: row;
+    }
+
+    &__supplied-detail-items,
+    &__power-stats {
+      display: flex;
+      flex-direction: column;
     }
 
     &__power-stats,

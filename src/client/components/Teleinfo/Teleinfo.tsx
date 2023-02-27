@@ -58,22 +58,34 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
           ]
         </p>
         <p className="teleinfo__power-stats">
-          <span className="teleinfo__power-stats-label">Max (today/month/overall):</span>
-          <span className="teleinfo__power-stats-value">
-            {data_TELEINFO.statistics.instantPower?.currentDay?.max || '...'} 
-          </span>
-          /
-          <span className="teleinfo__power-stats-value">
-            {data_TELEINFO.statistics.instantPower?.currentMonth?.max || '...'} 
-          </span>
-          /
-          <span className="teleinfo__power-stats-value">
-            {data_TELEINFO.statistics.instantPower?.overall?.max || '...'} 
-          </span>
-          <span className="teleinfo__power-unit">VA</span>
+          {renderPowerStats('min', 'Min (today/month/overall):')}
+          {renderPowerStats('max', 'Max:')}
         </p>
       </>
     );
+  }
+
+  function renderPowerStats(statItemKey: string, label: string) {
+    if (!data_TELEINFO) {
+      return undefined;
+    }
+  
+    return (
+      <p className="teleinfo__power-stats-group">
+        <span className="teleinfo__power-stats-label">{label}</span>
+        <span className="teleinfo__power-stats-value">
+          {(data_TELEINFO.statistics.instantPower?.currentDay && data_TELEINFO.statistics.instantPower?.currentDay[statItemKey]) || '...'} 
+        </span>
+        /
+        <span className="teleinfo__power-stats-value">
+          {(data_TELEINFO.statistics.instantPower?.currentMonth && data_TELEINFO.statistics.instantPower?.currentMonth[statItemKey]) || '...'} 
+        </span>
+        /
+        <span className="teleinfo__power-stats-value">
+          {(data_TELEINFO.statistics.instantPower?.overall && data_TELEINFO.statistics.instantPower?.overall[statItemKey]) || '...'} 
+        </span>
+        <span className="teleinfo__power-unit">VA</span>
+      </p>);
   }
 
   function renderIntensity() {

@@ -89,6 +89,7 @@ export interface TopicStatistics {
 }
 
 export interface StatisticsValues {
+  [key: string]: number | undefined;
   min: number;
   max: number;
   average?: number;
