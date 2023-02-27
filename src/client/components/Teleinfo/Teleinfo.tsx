@@ -122,6 +122,36 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
     );
   }
 
+  function renderSupplied() {
+    return (
+      <>
+        <p className="teleinfo__supplied">
+          <span className="teleinfo__supplied-label">
+            Supplied (today/month/total):
+          </span>
+          {renderSuppliedValue('currentDay')}
+          /
+          {renderSuppliedValue('currentMonth')}
+          /
+          {renderSuppliedValue('total')}
+          <span className="teleinfo__supplied-unit">Wh</span>
+        </p>
+        <p className="teleinfo__supplied-detail">
+          {renderSuppliedDetails()}
+        </p>
+      </>
+    );
+  }
+
+  function renderSuppliedValue(period: string) {
+    const wholeSuppliedPower = computeWholeSuppliedPower(period);
+    return (
+      <span className="teleinfo__supplied-value">
+        {wholeSuppliedPower || '...'}
+      </span>
+    );
+  }
+
   function renderSuppliedDetails() {
     if (!data_TELEINFO) {
       return undefined;
@@ -171,10 +201,6 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
     Log.log(JSON.stringify({ data_TELEINFO }, null, 2));
   }
 
-  const wholeSuppliedPowerForDay = computeWholeSuppliedPower('currentDay');
-  const wholeSuppliedPowerForMonth = computeWholeSuppliedPower('currentMonth');
-  const wholeSuppliedPowerTotal = computeWholeSuppliedPower('total');
-
   const firstReceivedDataDate = displayDate(
     data_TELEINFO?.meta?.firstDataTimestamp
   );
@@ -195,26 +221,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
           <section className="teleinfo__instant-section">
             {renderPower()}
             {renderIntensity()}
-            <p className="teleinfo__supplied">
-              <span className="teleinfo__supplied-label">
-                Supplied (today/month/total):
-              </span>
-              <span className="teleinfo__supplied-value">
-                {wholeSuppliedPowerForDay || '...'}
-              </span>
-              /
-              <span className="teleinfo__supplied-value">
-                {wholeSuppliedPowerForMonth || '...'}
-              </span>
-              /
-              <span className="teleinfo__supplied-value">
-                {wholeSuppliedPowerTotal || '...'}
-              </span>
-              <span className="teleinfo__supplied-unit">Wh</span>
-            </p>
-            <p className="teleinfo__supplied-detail">
-              {renderSuppliedDetails()}
-            </p>
+            {renderSupplied()}
           </section>
           <section className="teleinfo__costs-section">
             <p className="teleinfo__costs">
