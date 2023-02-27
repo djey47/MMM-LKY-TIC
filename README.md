@@ -37,11 +37,14 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 
 ```
 Instant power: 637VA/[~511W]
-Max (today/month/overall): 650/2500/3554VA
+Min (today/month/overall): 220/210/200VA
+Max: 650/2500/3554VA
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
 - daily/monthly/overall statistics:
-  - max value
+  - minimum value
+  - maximum value
+---
 ```
                              Intensity: 1A
                                Overuse: 3A
