@@ -18,6 +18,7 @@ import {
 } from './helpers/store-constants';
 import { readIndexes } from './index-reader';
 import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
+import { StoredIndexes } from './helpers/store-models';
 
 export function computeAdditionalTeleinfoData(
   data: TeleInfo,
@@ -77,7 +78,7 @@ function computeSuppliedPowers(
   const currentIndexes = readIndexes(data);
 
   // Total supply
-  const initialIndexes = storeInstance.get(INITIAL_INDEXES_IS_KEY) as number[];
+  const initialIndexes = storeInstance.get(INITIAL_INDEXES_IS_KEY) as StoredIndexes;
   const total = computeSuppliedPower(initialIndexes, currentIndexes);
 
   // Supply for the current day

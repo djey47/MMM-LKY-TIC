@@ -11,6 +11,7 @@ import {
 } from './helpers/store-constants';
 import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
 import { readIndexes } from './index-reader';
+import { StoredIndexes } from './helpers/store-models';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -45,10 +46,7 @@ export function computeEstimatedPrices(
   }
 
   // Retrieve initial indexes from instance store or save them for the first time
-  let initialIndexes = storeInstance.get(INITIAL_INDEXES_IS_KEY) as (
-    | number
-    | undefined
-  )[];
+  let initialIndexes = storeInstance.get(INITIAL_INDEXES_IS_KEY) as StoredIndexes;
   if (!initialIndexes) {
     initialIndexes = [...indexes];
     storeInstance.put(INITIAL_INDEXES_IS_KEY, initialIndexes);
@@ -60,10 +58,7 @@ export function computeEstimatedPrices(
   const currentDayIndexesISKey = generateCurrentDayISKey(
     PER_DAY_INDEXES_IS_KEY_PREFIX
   );
-  let initialDayIndexes = storeInstance.get(currentDayIndexesISKey) as (
-    | number
-    | undefined
-  )[];
+  let initialDayIndexes = storeInstance.get(currentDayIndexesISKey) as StoredIndexes;
   if (!initialDayIndexes) {
     initialDayIndexes = [...indexes];
     storeInstance.put(currentDayIndexesISKey, initialDayIndexes);
@@ -75,10 +70,7 @@ export function computeEstimatedPrices(
   const currentMonthIndexesISKey = generateCurrentMonthISKey(
     PER_MONTH_INDEXES_IS_KEY_PREFIX
   );
-  let initialMonthIndexes = storeInstance.get(currentMonthIndexesISKey) as (
-    | number
-    | undefined
-  )[];
+  let initialMonthIndexes = storeInstance.get(currentMonthIndexesISKey) as StoredIndexes;
   if (!initialMonthIndexes) {
     initialMonthIndexes = [...indexes];
     storeInstance.put(currentMonthIndexesISKey, initialMonthIndexes);
