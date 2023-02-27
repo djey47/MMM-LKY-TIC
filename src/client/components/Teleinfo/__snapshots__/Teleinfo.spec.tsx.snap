@@ -196,7 +196,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__supplied-unit"
       >
-        wh
+        Wh
       </span>
     </p>
     <p
@@ -234,7 +234,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
         <li
@@ -265,7 +265,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
       </ul>
@@ -552,7 +552,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__supplied-unit"
       >
-        wh
+        Wh
       </span>
     </p>
     <p
@@ -590,7 +590,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
         <li
@@ -621,7 +621,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
       </ul>
@@ -920,7 +920,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
       <span
         className="teleinfo__supplied-unit"
       >
-        wh
+        Wh
       </span>
     </p>
     <p
@@ -958,7 +958,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
         <li
@@ -989,7 +989,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
           <span
             className="teleinfo__supplied-unit"
           >
-            wh
+            Wh
           </span>
         </li>
       </ul>
@@ -1243,7 +1243,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__supplied-unit"
       >
-        wh
+        Wh
       </span>
     </p>
     <p

@@ -150,7 +150,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
                   data_TELEINFO.suppliedPower?.total[rank]) ||
                   '...'}
               </span>
-              <span className="teleinfo__supplied-unit">wh</span>
+              <span className="teleinfo__supplied-unit">Wh</span>
             </li>
           );
         })}
@@ -210,7 +210,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
               <span className="teleinfo__supplied-value">
                 {wholeSuppliedPowerTotal || '...'}
               </span>
-              <span className="teleinfo__supplied-unit">wh</span>
+              <span className="teleinfo__supplied-unit">Wh</span>
             </p>
             <p className="teleinfo__supplied-detail">
               {renderSuppliedDetails()}
