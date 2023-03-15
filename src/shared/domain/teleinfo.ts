@@ -93,6 +93,8 @@ export interface StatisticsValues {
   min: number;
   max: number;
   average?: number;
+  minTimestamp?: number;
+  maxTimestamp?: number;
 }
 
 interface ExtendedTeleInfo {

@@ -30,21 +30,26 @@ function computeTopicStats(name: string, value?: number): TopicStatistics | unde
 function computePeriodicStats(value: number, isKey: string, topicName: string): StatisticsValues {
   const storeInstance = InstanceStore.getInstance();
 
+  const currentTime = new Date().getTime();
   const storedStats = storeInstance.get(isKey) as StoredStatistics;
   let newStatsValues: StatisticsValues;
   if (storedStats && storedStats[topicName]) {
     const currentStats = storedStats[topicName];
+    const isNewMininum = value < (currentStats?.min || Number.POSITIVE_INFINITY);
+    const isNewMaximum = value > (currentStats?.max || Number.NEGATIVE_INFINITY);
     newStatsValues = {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      min: value < currentStats!.min ? value : currentStats!.min,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      max: value > currentStats!.max ? value : currentStats!.max,
+      min: isNewMininum ? value : currentStats?.min || 0,
+      minTimestamp: isNewMininum ? currentTime : currentStats?.minTimestamp || 0,
+      max: isNewMaximum ? value : currentStats?.max || Number.MAX_VALUE,
+      maxTimestamp: isNewMaximum ? currentTime : currentStats?.maxTimestamp || 0,
       // TODO average
     }
   } else {
     newStatsValues = {
       min: value,
       max: value,
+      minTimestamp: currentTime,
+      maxTimestamp: currentTime,
     };
   }
 
