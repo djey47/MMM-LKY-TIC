@@ -21,7 +21,8 @@ TODO-FIXME
 - store and display statistics per day:
   - [x] supplied power
   - [ ] min/max/avg power 
-  - [ ] min/max/avg intensity 
+  - [ ] min/max/avg intensity
+  - [x] store timestamps for min and max values
 - unit tests for teleinfo processing
 
 # FIXME
