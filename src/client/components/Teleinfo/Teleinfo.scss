@@ -12,6 +12,33 @@
       font-style: italic;
     }
 
+    &__power-value {
+      font-size: var(--font-size-large);
+    }
+
+    &__power-unit,
+    &__power-stats-unit,
+    &__intensity-unit,
+    &__supplied-unit,
+    &__costs-unit {
+      color: $highlighted-text;
+    }
+
+    &__power-unit {
+      font-size: var(--font-size-medium);
+    }
+
+    &__power-stats-unit,
+    &__intensity-unit,
+    &__supplied-unit,
+    &__costs-unit {
+      font-size: var(--font-size-xsmall);
+    }
+
+    &__power {
+      justify-content: center;
+    }
+
     &__power,
     &__power-stats-group,
     &__over-intensity,
@@ -21,6 +48,11 @@
     &__supplied-detail {
       display: flex;
       flex-direction: row;
+      align-items: baseline;
+    }
+
+    &__supplied-detail {
+      justify-content: right;
     }
 
     &__supplied-detail-items,
@@ -30,8 +62,14 @@
     }
 
     &__power-stats,
-    &__supplied-detail {
-      font-size: 0.8em;
+    &__supplied,
+    &__costs {
+      font-size: var(--font-size-small);
+    }
+
+    &__supplied-detail,
+    &__over-intensity {
+      font-size: var(--font-size-xsmall);
     }
 
     &__intensity,
@@ -67,16 +105,15 @@
     }
 
     &__over-intensity {
-      font-size: 0.8em;
       animation: blinker 2s linear infinite;
       color: $critical-text;
     }
 
-    &__power-label,
     &__power-stats-label,
     &__intensity-label,
     &__over-intensity-label,
     &__supplied-label,
+    &__costs-label,
     &__dates-start-last-label {
       margin-right: 0.5em;
     }

@@ -4,7 +4,7 @@
 
 .mmm-lky-tic-wrapper {
   .badge {
-    font-size: 0.8em;
+    font-size: var(--font-size-small);
     border: 1px solid $highlighted-border;
     border-radius: 4px;
     padding: $size-xs;
