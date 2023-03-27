@@ -1,6 +1,9 @@
 /* Color variables */
 
+$dimmed-border: var(--color-text-dimmed);
 $highlighted-border: white;
+
 $highlighted-text: white;
+$normal-text: var(--color-text);
 $warning-text: orange;
 $critical-text: red;

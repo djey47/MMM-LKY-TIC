@@ -178,7 +178,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
                   data_TELEINFO.suppliedPower?.total[rank]) ||
                   '...'}
               </span>
-              <span className="teleinfo__supplied-unit">Wh</span>
+              <span className="teleinfo__supplied-detail-unit">Wh</span>
             </li>
           );
         })}

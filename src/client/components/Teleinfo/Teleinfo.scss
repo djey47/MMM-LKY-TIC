@@ -4,9 +4,10 @@
 
 .mmm-lky-tic-wrapper {
   .teleinfo {
+    color: $normal-text;
     display: flex;
     flex-direction: column;
-    font-size: 0.9em;
+    font-size: var(--font-size-normal);
 
     &__no-data {
       font-style: italic;
@@ -20,6 +21,7 @@
     &__power-stats-unit,
     &__intensity-unit,
     &__supplied-unit,
+    &__supplied-detail-unit,
     &__costs-unit {
       color: $highlighted-text;
     }
@@ -33,6 +35,11 @@
     &__supplied-unit,
     &__costs-unit {
       font-size: var(--font-size-xsmall);
+    }
+
+    &__over-intensity-unit,
+    &__supplied-detail-unit {
+      font-size: $font-2xs;
     }
 
     &__power {
@@ -77,7 +84,7 @@
     &__costs,
     &__supplied-detail,
     &__dates-start-last {
-      margin-bottom: 0.5em;
+      margin-bottom: $size-m;
     }
 
     &__intensity.with-overflow {
@@ -86,7 +93,7 @@
 
     &__dates-start-last {
       font-style: italic;
-      font-size: 0.8em;
+      font-size: var(--font-size-xsmall);
     }
 
     &__power-value,
@@ -115,7 +122,7 @@
     &__supplied-label,
     &__costs-label,
     &__dates-start-last-label {
-      margin-right: 0.5em;
+      margin-right: $text-separator-m;
     }
 
     &__instant-section,
@@ -127,13 +134,13 @@
       &::after {
         content: "";
         display: block;
-        border-bottom: 1px dashed var(--color-text-dimmed);
+        border-bottom: 1px dashed $dimmed-border;
       }
     }
 
     &__costs-section,
     &__dates-section {
-      padding-top: 0.5em;
+      padding-top: $size-m;
     }
   }
 }

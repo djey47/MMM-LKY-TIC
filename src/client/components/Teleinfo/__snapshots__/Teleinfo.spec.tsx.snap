@@ -226,7 +226,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
             100
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
@@ -257,7 +257,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
             200
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
@@ -577,7 +577,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
             100
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
@@ -608,7 +608,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
             200
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
@@ -940,7 +940,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
             100
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
@@ -971,7 +971,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
             200
           </span>
           <span
-            className="teleinfo__supplied-unit"
+            className="teleinfo__supplied-detail-unit"
           >
             Wh
           </span>
