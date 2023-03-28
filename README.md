@@ -36,7 +36,7 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 ### Displays instant data
 
 ```
-Instant power: 637VA/[~511W]
+                637VA~511W
 Min (today/month/overall): 220/210/200VA
 Max: 650/2500/3554VA
 ```
@@ -57,7 +57,7 @@ Max: 650/2500/3554VA
 
 ```
 Supplied (today/month/total): 475/1000/5000wh
-BASE: 475/1000/5000wh
+                        BASE: 475/1000/5000wh
 ---------------------------------------------
 Costs (today/month/total): ~3/8/35€
 ---------------------------------------------
