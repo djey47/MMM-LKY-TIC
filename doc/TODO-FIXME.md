@@ -26,6 +26,8 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
+- teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
+  => needs to be remade without any link to MM2, datastore, advanced stats
 
 # DONE
 - provide interfaces for stored items
