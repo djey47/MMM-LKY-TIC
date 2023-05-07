@@ -139,7 +139,36 @@ Small CLI program to diagnose reading of teleinfo data on serial input: `npm run
 
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
 
-## MISC
+### Diagnostics with picocom
+It's also possible to capture raw data on serial input, using `picocom` command line tool.
+
+https://linux.die.net/man/8/picocom
+
+Make sure it's installed via your distribution's packet manager, then:
+
+`sudo picocom -b 1200 -d 7 -p e -f n /dev/ttyAMA0`
+
+with (assuming teleinfo data is on *historical* mode):
+  
+- -b = 1200 (bauds rate)
+- -d = 7 (databits) 
+- -p = e (even parity)
+- -f = n (no flow control`
+- by default, stop bit count is set to 1.
+
+For people looking for alternatives, `minicom` should also work with equivalent settings.
+
+## Troubleshooting
+
+### No serial data seems to be received...
+...whereas the hardware module LED is blinking!
+
+Sometimes (might happen after a device reboot), the serial device requires reinitialization. To do this:
+1. stop MagicMirror
+2. use `picocom` tool command above
+3. check raw data is correctly displayed
+4. exit picocom (`CTRL-A` keys by default)
+5. finally start MagicMirror. 
 
 ## Credits
 
