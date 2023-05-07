@@ -7,6 +7,10 @@ MagicMirror2 module to display info about home power supply (previous generation
 
 *For now only historical data mode, single-phased settlement, is handled.*
 
+Module is currently under development, working for use case above.
+
+![Sample 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Sample1.png?raw=true)
+
 ## Features
 
 ### Uses latest MMM-React-Canvas-ts bootstrapper:
