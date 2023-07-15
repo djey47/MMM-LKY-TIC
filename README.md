@@ -145,6 +145,10 @@ Since this module relies on `serialport` npm dependency which uses native module
 - `powerFactor`: allows estimating instant power in watts (value will depend on your electrical settlement, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
 - `serialDevice`: device name to capture teleinfo data from.  
 
+## Logs
+
+Module output can be rather verbose, especially when debug mode is enabled. To avoid running out of storage space quickly if you're controlling MagicMiror with tools such as PM2, it is highly recommended to add log file rotation mechanism!
+
 ## Development
 
 See [template documentation](https://github.com/djey47/MMM-React-Canvas-ts#developing-your-own-module) for more details.
