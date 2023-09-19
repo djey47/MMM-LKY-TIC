@@ -76,22 +76,16 @@ Costs (today/month/total): ~3/8/35€
 1. Is your device able to access/read the serial port at all? Some utilities in deicated section below may help you
 2. Make sure node v18.12.1 or newer is installed
 
-### Preparing MagicMirror
+### Install note
 
-Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` has to be added and built *from Magic Mirror install directory*:
-
-1. Add electron-rebuild utility: `npm add --save-dev electron-rebuild`
-2. Add dependency to MagicMirror: `npm add @serialport/bindings-cpp`
-3. Remove existing prebuilt bindings: `rm -rf node_modules/@serialport/bindings-cpp/prebuilds`
-4. Build native modules for electron: `node_modules/.bin/electron-rebuild -f -w @serialport/bindings-cpp`.
+Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` electron bindings have to be added and built *from module directory*. The `postinstall` npm script should set everything up for you.
 
 ### Installing this module
 1. Clone repository into location of your choice (may be MagicMirror /modules/ subdirectory)
 2. Run `npm install` inside repository folder
-3. Run npm `run build:module` (development) or `npm run build:module-prod` (optimized)
-4. Check that `MMM-LKY-TIC.js`, `styles.css` and `node_helper.js` files have been created into current folder
-5. (If external location chosen at step 1) Back to MagicMirror folder, create symbolic link from /modules/MMM-LKY-TIC/ subdirectory, to module repository directory: e.g `ln -s ~/dev/MMM-LKY-TIC/`
-6. Add the module to MagicMirror config and customize it according to your needs (see below).
+3. Check that `MMM-LKY-TIC.js`, `styles.css` and `node_helper.js` files have been created into current folder
+4. (If external location chosen at step 1) Back to MagicMirror folder, create symbolic link from /modules/MMM-LKY-TIC/ subdirectory, to module repository directory: e.g `ln -s ~/dev/MMM-LKY-TIC/`
+5. Add the module to MagicMirror config and customize it according to your needs (see below).
 
 ## Configuration
 
