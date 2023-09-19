@@ -53,7 +53,7 @@ function configureStream(
   );
 
   datagramStream.on('data', function (data: Buffer) {
-    const newTeleInfo = parseDatagram(data, config);
+    const newTeleInfo = parseDatagram(data, config, mm2Helper);
 
     debugLog(
       `***** reader::configureStream: new Teleinfo => ${JSON.stringify(
@@ -70,9 +70,10 @@ function configureStream(
   });
 }
 
-function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
+function parseDatagram(data: Buffer, config: TeleinfoConfiguration, mm2Helper?: MM2Helper): TeleInfo {
   debugLog(
-    `**** reader::parseDatagram: Data (RAW, TEXT): ${data} ${data.toString()}`
+    `**** reader::parseDatagram: Data (RAW, TEXT): ${data} ${data.toString()}`,
+    mm2Helper
   );
 
   const groups = data.toString().split('\n');
@@ -86,7 +87,7 @@ function parseDatagram(data: Buffer, config: TeleinfoConfiguration): TeleInfo {
           { name, value: rawValue },
           null,
           2
-        )}`
+        )}`, mm2Helper
       );
 
       if (name === CHAR_STX) {
