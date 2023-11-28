@@ -23,6 +23,7 @@ TODO-FIXME
   - [ ] min/max/avg power 
   - [ ] min/max/avg intensity
   - [x] store timestamps for min and max values
+- display per-year info and stats instead of total
 - unit tests for teleinfo processing
 
 # FIXME
