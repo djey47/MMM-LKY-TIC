@@ -67,6 +67,8 @@ Costs (d/m/y/t): ~3/8/25/35€
 ---------------------------------------------
 ```
 
+Per current day/month/year and total:
+
 - Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
 - Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they don't include subscription and extra furniture costs.
 
