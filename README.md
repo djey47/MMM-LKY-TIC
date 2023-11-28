@@ -41,11 +41,11 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
 
 ```
                 637VA~511W
-Min (today/month/overall): 220/210/200VA
-Max: 650/2500/3554VA
+Min (d/m/y/o): 220/210/200/200VA
+Max: 650/2500/3000/3554VA
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
-- daily/monthly/overall statistics:
+- daily/monthly/yearly/overall statistics:
   - minimum value
   - maximum value
 ---
@@ -60,10 +60,10 @@ Max: 650/2500/3554VA
 ### Displays daily, monthly, total electrical furniture and costs
 
 ```
-Supplied (today/month/total): 475/1000/5000wh
-                        BASE: 475/1000/5000wh
+Supplied (d/m/y/t): 475/1000/2500/5000wh
+                        BASE: 475/1000/1500/5000wh
 ---------------------------------------------
-Costs (today/month/total): ~3/8/35€
+Costs (d/m/y/t): ~3/8/25/35€
 ---------------------------------------------
 ```
 
@@ -73,7 +73,7 @@ Costs (today/month/total): ~3/8/35€
 ## Install
 
 ### Prerequisites
-1. Is your device able to access/read the serial port at all? Some utilities in deicated section below may help you
+1. Is your device able to access/read the serial port at all? Some utilities in dedicated section below may help you
 2. Make sure node v18.12.1 or newer is installed
 
 ### Install note
@@ -155,9 +155,7 @@ Small CLI program to diagnose reading of teleinfo data on serial input: `npm run
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
 
 ### Diagnostics with picocom
-It's also possible to capture raw data on serial input, using `picocom` command line tool.
-
-https://linux.die.net/man/8/picocom
+It's also possible to capture raw data on serial input, using `picocom` command line tool: https://linux.die.net/man/8/picocom
 
 Make sure it's installed via your distribution's packet manager, then:
 
