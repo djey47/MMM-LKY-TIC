@@ -85,6 +85,7 @@ export interface Statistics {
 export interface TopicStatistics {
   currentDay?: StatisticsValues;
   currentMonth?: StatisticsValues;
+  currentYear?: StatisticsValues;
   overall?: StatisticsValues;
 }
 
@@ -102,12 +103,14 @@ interface ExtendedTeleInfo {
   estimatedPrices?: {
     currentDay?: number;
     currentMonth?: number;
+    currentYear?: number;
     total?: number;
   };
   suppliedPower?: {
     [key: string]: number[] | undefined;
     currentDay?: number[];
     currentMonth?: number[];
+    currentYear?: number[];
     total?: number[];
   };
   statistics: Statistics;

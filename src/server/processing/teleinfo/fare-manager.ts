@@ -7,9 +7,10 @@ import {
   PER_DAY_INDEXES_IS_KEY_PREFIX,
   PER_MONTH_COSTS_IS_KEY_PREFIX,
   PER_MONTH_INDEXES_IS_KEY_PREFIX,
+  PER_YEAR_INDEXES_IS_KEY_PREFIX,
   TOTAL_COSTS_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
+import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import { readIndexes } from './index-reader';
 import { StoredIndexes } from './helpers/store-models';
 
@@ -77,6 +78,17 @@ export function computeEstimatedPrices(
     shouldStoreBePersisted = true;
   }
 
+  // Retrieve or store indexes for the current year
+  const currentYearIndexesISKey = generateCurrentYearISKey(
+    PER_YEAR_INDEXES_IS_KEY_PREFIX
+  );
+  let initialYearIndexes = storeInstance.get(currentYearIndexesISKey) as StoredIndexes;
+  if (!initialYearIndexes) {
+    initialYearIndexes = [...indexes];
+    storeInstance.put(currentYearIndexesISKey, initialYearIndexes);
+    shouldStoreBePersisted = true;
+  }
+
   if(shouldStoreBePersisted) {
     storeInstance.persist();
   }
@@ -100,6 +112,12 @@ export function computeEstimatedPrices(
     currentPriceKeys,
     fareDetails
   );
+  const totalYearhPrice = computePrice(
+    initialYearIndexes,
+    indexes,
+    currentPriceKeys,
+    fareDetails
+  );
 
   storeInstance.put(TOTAL_COSTS_IS_KEY, totalPrice);
 
@@ -110,6 +128,11 @@ export function computeEstimatedPrices(
 
   const currentMonthCostsISKey = generateCurrentMonthISKey(
     PER_MONTH_COSTS_IS_KEY_PREFIX
+  );
+  storeInstance.put(currentMonthCostsISKey, totalMonthPrice);
+
+  const currentYearCostsISKey = generateCurrentYearISKey(
+    PER_YEAR_COSTS_IS_KEY_PREFIX
   );
   storeInstance.put(currentMonthCostsISKey, totalMonthPrice);
 

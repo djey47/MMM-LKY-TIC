@@ -14,10 +14,12 @@ import {
   PER_DAY_SUPPLIED_IS_KEY_PREFIX,
   PER_MONTH_INDEXES_IS_KEY_PREFIX,
   PER_MONTH_SUPPLIED_IS_KEY_PREFIX,
+  PER_YEAR_INDEXES_IS_KEY_PREFIX,
+  PER_YEAR_SUPPLIED_IS_KEY_PREFIX,
   TOTAL_SUPPLIED_IS_KEY,
 } from './helpers/store-constants';
 import { readIndexes } from './index-reader';
-import { generateCurrentDayISKey, generateCurrentMonthISKey } from './helpers/instance-store-keys';
+import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import { StoredIndexes } from './helpers/store-models';
 
 export function computeAdditionalTeleinfoData(
@@ -99,6 +101,15 @@ function computeSuppliedPowers(
   ) as number[];
   const currentMonth = computeSuppliedPower(initialMonthIndexes, currentIndexes);
 
+  // Supply for the current year
+  const currentYearIndexesISKey = generateCurrentYearISKey(
+    PER_YEAR_INDEXES_IS_KEY_PREFIX
+  );
+  const initialYearIndexes = storeInstance.get(
+    currentYearIndexesISKey
+  ) as number[];
+  const currentYear = computeSuppliedPower(initialYearIndexes, currentIndexes);
+
   // Store computed values for historization
   if (total) {
     storeInstance.put(TOTAL_SUPPLIED_IS_KEY, total);
@@ -115,10 +126,17 @@ function computeSuppliedPowers(
     );
     storeInstance.put(currentMonthSuppliedISKey, currentMonth);
   }
+  if (currentYear) {
+    const currentYearSuppliedISKey = generateCurrentYearISKey(
+      PER_YEAR_SUPPLIED_IS_KEY_PREFIX
+    );
+    storeInstance.put(currentYearSuppliedISKey, currentYear);
+  }
 
   return {
     currentDay,
     currentMonth,
+    currentYear,
     total,
   };
 }

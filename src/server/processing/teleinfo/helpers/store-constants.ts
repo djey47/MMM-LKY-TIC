@@ -38,3 +38,15 @@ export const PER_MONTH_SUPPLIED_IS_KEY_PREFIX = 'MONTH_SUPPLIED_';
 
 /** Statistics for the month */
 export const PER_MONTH_STATS_IS_KEY_PREFIX = 'MONTH_STATS_';
+
+/** Indexes at the beginning of the year */
+export const PER_YEAR_INDEXES_IS_KEY_PREFIX = 'YEAR_INDEXES_';
+
+/** Total costs for the year */
+export const PER_YEAR_COSTS_IS_KEY_PREFIX = 'YEAR_COSTS_';
+
+/** Supplied energy for the year */
+export const PER_YEAR_SUPPLIED_IS_KEY_PREFIX = 'YEAR_SUPPLIED_';
+
+/** Statistics for the year */
+export const PER_YEAR_STATS_IS_KEY_PREFIX = 'YEAR_STATS_';
