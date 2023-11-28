@@ -30,6 +30,7 @@ describe('Teleinfo component', () => {
       estimatedPrices:{
         currentDay: 5.567,
         currentMonth: 55,
+        currentYear: 475,
         total: 500
       },
       instantIntensity: 1,
@@ -40,6 +41,7 @@ describe('Teleinfo component', () => {
       suppliedPower: {
         currentDay: [1, 2],
         currentMonth: [10, 20],
+        currentYear: [90, 150],
         total: [100, 200],
       },
     },

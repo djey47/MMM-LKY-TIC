@@ -56,7 +56,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
           <span className="teleinfo__power-unit">W</span>
         </p>
         <p className="teleinfo__power-stats">
-          {renderPowerStats('min', 'Min (today/month/overall):')}
+          {renderPowerStats('min', 'Min (d/m/y/o):')}
           {renderPowerStats('max', 'Max:')}
         </p>
       </>
@@ -77,6 +77,10 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
         /
         <span className="teleinfo__power-stats-value">
           {(data_TELEINFO.statistics.instantPower?.currentMonth && data_TELEINFO.statistics.instantPower?.currentMonth[statItemKey]) || '...'} 
+        </span>
+        /
+        <span className="teleinfo__power-stats-value">
+          {(data_TELEINFO.statistics.instantPower?.currentYear && data_TELEINFO.statistics.instantPower?.currentYear[statItemKey]) || '...'} 
         </span>
         /
         <span className="teleinfo__power-stats-value">
@@ -125,11 +129,13 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
       <>
         <p className="teleinfo__supplied">
           <span className="teleinfo__supplied-label">
-            Supplied (today/month/total):
+            Supplied (d/m/y/t):
           </span>
           {renderSuppliedValue('currentDay')}
           /
           {renderSuppliedValue('currentMonth')}
+          /
+          {renderSuppliedValue('currentYear')}
           /
           {renderSuppliedValue('total')}
           <span className="teleinfo__supplied-unit">Wh</span>
@@ -170,6 +176,12 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
               <span className="teleinfo__supplied-value">
                 {(data_TELEINFO.suppliedPower?.currentMonth &&
                   data_TELEINFO.suppliedPower?.currentMonth[rank]) ||
+                  '...'}
+              </span>
+              /
+              <span className="teleinfo__supplied-value">
+                {(data_TELEINFO.suppliedPower?.currentYear &&
+                  data_TELEINFO.suppliedPower?.currentYear[rank]) ||
                   '...'}
               </span>
               /
@@ -224,7 +236,7 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
           <section className="teleinfo__costs-section">
             <p className="teleinfo__costs">
               <span className="teleinfo__costs-label">
-                Costs (today/month/total):
+                Costs (d/m/y/t):
               </span>
               <span className="teleinfo__costs-value">
                 ~{displayPriceWithTwoDecimals(data_TELEINFO.estimatedPrices?.currentDay)}
@@ -232,6 +244,10 @@ const Teleinfo: FunctionComponent<Record<string, never>> = () => {
               /
               <span className="teleinfo__costs-value">
                 {data_TELEINFO.estimatedPrices?.currentMonth || '...'}
+              </span>
+              /
+              <span className="teleinfo__costs-value">
+                {data_TELEINFO.estimatedPrices?.currentYear || '...'}
               </span>
               /
               <span className="teleinfo__costs-value">

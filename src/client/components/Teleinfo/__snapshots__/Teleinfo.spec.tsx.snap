@@ -16,6 +16,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           "estimatedPrices": {
             "currentDay": 5.567,
             "currentMonth": 55,
+            "currentYear": 475,
             "total": 500,
           },
           "instantIntensity": 1,
@@ -36,6 +37,10 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
             "currentMonth": [
               10,
               20,
+            ],
+            "currentYear": [
+              90,
+              150,
             ],
             "total": [
               100,
@@ -86,8 +91,14 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         <span
           className="teleinfo__power-stats-label"
         >
-          Min (today/month/overall):
+          Min (d/m/y/o):
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -119,6 +130,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         >
           Max:
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -168,7 +185,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/month/total):
+        Supplied (d/m/y/t):
       </span>
       <span
         className="teleinfo__supplied-value"
@@ -180,6 +197,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         className="teleinfo__supplied-value"
       >
         30
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        240
       </span>
       /
       <span
@@ -223,6 +246,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           <span
             className="teleinfo__supplied-value"
           >
+            90
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             100
           </span>
           <span
@@ -254,6 +283,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
           <span
             className="teleinfo__supplied-value"
           >
+            150
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             200
           </span>
           <span
@@ -274,7 +309,7 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (d/m/y/t):
       </span>
       <span
         className="teleinfo__costs-value"
@@ -287,6 +322,12 @@ exports[`Teleinfo component should render correctly with notif data 1`] = `
         className="teleinfo__costs-value"
       >
         55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        475
       </span>
       /
       <span
@@ -347,6 +388,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           "estimatedPrices": {
             "currentDay": 5.567,
             "currentMonth": 55,
+            "currentYear": 475,
             "total": 500,
           },
           "instantIntensity": 1,
@@ -368,6 +410,10 @@ exports[`Teleinfo component should render correctly with notif data and power ov
             "currentMonth": [
               10,
               20,
+            ],
+            "currentYear": [
+              90,
+              150,
             ],
             "total": [
               100,
@@ -418,8 +464,14 @@ exports[`Teleinfo component should render correctly with notif data and power ov
         <span
           className="teleinfo__power-stats-label"
         >
-          Min (today/month/overall):
+          Min (d/m/y/o):
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -451,6 +503,12 @@ exports[`Teleinfo component should render correctly with notif data and power ov
         >
           Max:
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -519,7 +577,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/month/total):
+        Supplied (d/m/y/t):
       </span>
       <span
         className="teleinfo__supplied-value"
@@ -531,6 +589,12 @@ exports[`Teleinfo component should render correctly with notif data and power ov
         className="teleinfo__supplied-value"
       >
         30
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        240
       </span>
       /
       <span
@@ -574,6 +638,12 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           <span
             className="teleinfo__supplied-value"
           >
+            90
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             100
           </span>
           <span
@@ -605,6 +675,12 @@ exports[`Teleinfo component should render correctly with notif data and power ov
           <span
             className="teleinfo__supplied-value"
           >
+            150
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             200
           </span>
           <span
@@ -625,7 +701,7 @@ exports[`Teleinfo component should render correctly with notif data and power ov
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (d/m/y/t):
       </span>
       <span
         className="teleinfo__costs-value"
@@ -638,6 +714,12 @@ exports[`Teleinfo component should render correctly with notif data and power ov
         className="teleinfo__costs-value"
       >
         55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        475
       </span>
       /
       <span
@@ -698,6 +780,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
           "estimatedPrices": {
             "currentDay": 5.567,
             "currentMonth": 55,
+            "currentYear": 475,
             "total": 500,
           },
           "instantIntensity": 1,
@@ -731,6 +814,10 @@ exports[`Teleinfo component should render correctly with notif data and power st
             "currentMonth": [
               10,
               20,
+            ],
+            "currentYear": [
+              90,
+              150,
             ],
             "total": [
               100,
@@ -781,7 +868,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
         <span
           className="teleinfo__power-stats-label"
         >
-          Min (today/month/overall):
+          Min (d/m/y/o):
         </span>
         <span
           className="teleinfo__power-stats-value"
@@ -793,6 +880,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
           className="teleinfo__power-stats-value"
         >
           1.5
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
         </span>
         /
         <span
@@ -824,6 +917,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
           className="teleinfo__power-stats-value"
         >
           200
+        </span>
+        /
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
         </span>
         /
         <span
@@ -882,7 +981,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/month/total):
+        Supplied (d/m/y/t):
       </span>
       <span
         className="teleinfo__supplied-value"
@@ -894,6 +993,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
         className="teleinfo__supplied-value"
       >
         30
+      </span>
+      /
+      <span
+        className="teleinfo__supplied-value"
+      >
+        240
       </span>
       /
       <span
@@ -937,6 +1042,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
           <span
             className="teleinfo__supplied-value"
           >
+            90
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             100
           </span>
           <span
@@ -968,6 +1079,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
           <span
             className="teleinfo__supplied-value"
           >
+            150
+          </span>
+          /
+          <span
+            className="teleinfo__supplied-value"
+          >
             200
           </span>
           <span
@@ -988,7 +1105,7 @@ exports[`Teleinfo component should render correctly with notif data and power st
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (d/m/y/t):
       </span>
       <span
         className="teleinfo__costs-value"
@@ -1001,6 +1118,12 @@ exports[`Teleinfo component should render correctly with notif data and power st
         className="teleinfo__costs-value"
       >
         55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        475
       </span>
       /
       <span
@@ -1061,6 +1184,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
           "estimatedPrices": {
             "currentDay": 5.567,
             "currentMonth": 55,
+            "currentYear": 475,
             "total": 500,
           },
           "instantIntensity": 1,
@@ -1118,8 +1242,14 @@ exports[`Teleinfo component should render correctly with notif data but without 
         <span
           className="teleinfo__power-stats-label"
         >
-          Min (today/month/overall):
+          Min (d/m/y/o):
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -1151,6 +1281,12 @@ exports[`Teleinfo component should render correctly with notif data but without 
         >
           Max:
         </span>
+        <span
+          className="teleinfo__power-stats-value"
+        >
+          ...
+        </span>
+        /
         <span
           className="teleinfo__power-stats-value"
         >
@@ -1200,8 +1336,14 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__supplied-label"
       >
-        Supplied (today/month/total):
+        Supplied (d/m/y/t):
       </span>
+      <span
+        className="teleinfo__supplied-value"
+      >
+        ...
+      </span>
+      /
       <span
         className="teleinfo__supplied-value"
       >
@@ -1242,7 +1384,7 @@ exports[`Teleinfo component should render correctly with notif data but without 
       <span
         className="teleinfo__costs-label"
       >
-        Costs (today/month/total):
+        Costs (d/m/y/t):
       </span>
       <span
         className="teleinfo__costs-value"
@@ -1255,6 +1397,12 @@ exports[`Teleinfo component should render correctly with notif data but without 
         className="teleinfo__costs-value"
       >
         55
+      </span>
+      /
+      <span
+        className="teleinfo__costs-value"
+      >
+        475
       </span>
       /
       <span

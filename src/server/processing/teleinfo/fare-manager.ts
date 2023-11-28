@@ -7,6 +7,7 @@ import {
   PER_DAY_INDEXES_IS_KEY_PREFIX,
   PER_MONTH_COSTS_IS_KEY_PREFIX,
   PER_MONTH_INDEXES_IS_KEY_PREFIX,
+  PER_YEAR_COSTS_IS_KEY_PREFIX,
   PER_YEAR_INDEXES_IS_KEY_PREFIX,
   TOTAL_COSTS_IS_KEY,
 } from './helpers/store-constants';
@@ -112,7 +113,7 @@ export function computeEstimatedPrices(
     currentPriceKeys,
     fareDetails
   );
-  const totalYearhPrice = computePrice(
+  const totalYearPrice = computePrice(
     initialYearIndexes,
     indexes,
     currentPriceKeys,
@@ -134,7 +135,7 @@ export function computeEstimatedPrices(
   const currentYearCostsISKey = generateCurrentYearISKey(
     PER_YEAR_COSTS_IS_KEY_PREFIX
   );
-  storeInstance.put(currentMonthCostsISKey, totalMonthPrice);
+  storeInstance.put(currentYearCostsISKey, totalYearPrice);
 
   // console.log({ totalPrice, totalDayPrice });
 
@@ -143,6 +144,7 @@ export function computeEstimatedPrices(
     currentDay:
       totalDayPrice,
     currentMonth: totalMonthPrice && Math.round(totalMonthPrice),
+    currentYear: totalYearPrice && Math.round(totalYearPrice),
   };
 }
 
