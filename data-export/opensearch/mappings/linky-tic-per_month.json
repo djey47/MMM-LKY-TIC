@@ -1,0 +1,79 @@
+{
+  "properties": {
+    "costs": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "date"
+    },
+    "indexes": {
+      "properties": {
+        "period1": {
+          "type": "integer"
+        },
+        "period2": {
+          "type": "integer"
+        }
+      }
+    },
+    "options": {
+      "properties": {
+        "fareOption": {
+          "type": "text"
+        },
+        "period1Label": {
+          "type": "text"
+        },
+        "period2Label": {
+          "type": "text"
+        }
+      }
+    },
+    "statistics": {
+      "properties": {
+        "apparentPower": {
+          "properties": {
+            "max": {
+              "type": "integer"
+            },
+            "maxDate": {
+              "type": "date"
+            },
+            "min": {
+              "type": "integer"
+            },
+            "minDate": {
+              "type": "date"
+            }
+          }
+        },
+        "instantIntensity": {
+          "properties": {
+            "max": {
+              "type": "integer"
+            },
+            "maxDate": {
+              "type": "date"
+            },
+            "min": {
+              "type": "integer"
+            },
+            "minDate": {
+              "type": "date"
+            }
+          }
+        }
+      }
+    },
+    "supplied": {
+      "properties": {
+        "period1": {
+          "type": "integer"
+        },
+        "period2": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

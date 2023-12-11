@@ -22,6 +22,7 @@
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
     "tool:teleinfo-reader": "ts-node ./tools/scripts/teleinfo-reader/teleinfo-reader.ts",
+    "tool:opensearch-data-export": "ts-node ./tools/scripts/opensearch-data-export/opensearch-data-export.ts",
     "dev": "chokidar \"./src/**/*\" \"./support/**/*\" \"./tools/webpack/*\" -i \"./**/*.spec.*\" -c \"npm run build:client\""
   },
   "keywords": [
@@ -34,6 +35,7 @@
   ],
   "devDependencies": {
     "@electron/rebuild": "3.3.0",
+    "@opensearch-project/opensearch": "^2.4.0",
     "@types/app-root-dir": "0.1.1",
     "@types/edit-json-file": "1.7.0",
     "@types/jest": "29.2.5",

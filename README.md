@@ -152,9 +152,12 @@ See [template documentation](https://github.com/djey47/MMM-React-Canvas-ts#devel
 ## Utilities
 
 ### teleinfo-reader
-Small CLI program to diagnose reading of teleinfo data on serial input: `npm run tool:teleinfo-reader`
+Small CLI program to diagnose reading of teleinfo data on serial input: `npm run tool:teleinfo-reader`.
 
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
+
+### opensearch-data-export
+This script will push info from the persisted datastore to opensearch indexes.
 
 ### Diagnostics with picocom
 It's also possible to capture raw data on serial input, using `picocom` command line tool: https://linux.die.net/man/8/picocom
