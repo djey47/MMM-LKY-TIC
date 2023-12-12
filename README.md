@@ -157,7 +157,13 @@ Small CLI program to diagnose reading of teleinfo data on serial input: `npm run
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
 
 ### opensearch-data-export
-This script will push info from the persisted datastore to opensearch indexes.
+This script will push info from the persisted datastore to an opensearch index: `npm run tool:opensearch-data-export <data store file> <index name>`.
+
+- `data store file`: path to the data store JSON file
+- `index name`: index name to use on opensearch instance
+
+Configuration is set via `tools/scripts/opensearch-data-export/config/opensearch-data-export.json`.
+
 
 ### Diagnostics with picocom
 It's also possible to capture raw data on serial input, using `picocom` command line tool: https://linux.die.net/man/8/picocom
@@ -171,7 +177,7 @@ with (assuming teleinfo data is on *historical* mode):
 - -b = 1200 (bauds rate)
 - -d = 7 (databits) 
 - -p = e (even parity)
-- -f = n (no flow control`
+- -f = n (no flow control)
 - by default, stop bit count is set to 1.
 
 For people looking for alternatives, `minicom` should also work with equivalent settings.

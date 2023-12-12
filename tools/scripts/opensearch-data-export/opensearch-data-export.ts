@@ -1,12 +1,18 @@
 import fs from 'fs/promises';
-import appRootDir from 'app-root-dir';
 import { Client } from '@opensearch-project/opensearch';
-import path from 'path';
+import parseDate from 'date-fns/parse';
+import toDate from 'date-fns/toDate';
 import config from './config/opensearch-data-export.json';
+
+import type { EntryValue, StatsItem, Stats, Store, StoreEntries } from './model/datastore';
+import type { DocStatsItem, DocumentByDate } from './model/opensearch';
+import type { GroupedData } from './model/export';
+
+const IGNORED_STORE_KEYS_PREFIXES = ['FIRST_DATA_TIMESTAMP', 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
 
 function createOpenSearchClient() {
   const { opensearchInstance, user, password } = config;
-  const url = new URL(config.opensearchInstance);
+  const url = new URL(opensearchInstance);
 
   // Optional client certificates if you don't want to use HTTP basic authentication.
   // var client_cert_path = '/full/path/to/client.pem'
@@ -14,7 +20,7 @@ function createOpenSearchClient() {
 
   // Create a client with SSL/TLS enabled.
   const client = new Client({
-    node: `${url.protocol}://${user}:${password}@${url.hostname}:${url.port}`,
+    node: `${url.protocol}//${user}:${password}@${url.hostname}:${url.port}`,
     ssl: {
       rejectUnauthorized: false,
     },
@@ -22,51 +28,124 @@ function createOpenSearchClient() {
   return client;
 }
 
-async function readDatastore() {
-  const datastoreFilePath = path.join(
-    appRootDir.get(),
-    'config',
-    'MMM-LKY-TIC.datastore.json'
-  );
-  const contents = await fs.readFile(datastoreFilePath, 'utf8');
-  return JSON.parse(contents);
+async function readDatastore(storeFilePath: string) {
+  const contents = await fs.readFile(storeFilePath, 'utf8');
+  return JSON.parse(contents) as Store;
 }
 
-async function main(args) {
-  console.log('Loaded configuration:', config);
+function extractDate(storeKey: string) {
+  return storeKey.substring(storeKey.length - 8);
+}
 
-  const [datastorePath, dayOrMonth, indexName] = args;
+function convertStats(statsItem: StatsItem): DocStatsItem {
+  const { min, max, minTimestamp, maxTimestamp } = statsItem;
+  return {
+    max,
+    maxDate: toDate(maxTimestamp),
+    min,
+    minDate: toDate(minTimestamp),
+  };
+}
 
-  console.log('Ready!');
+function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryValue) {
+  const date = extractDate(storeKey)
+  let docItem = target[date];
+  if (!docItem) {
+    docItem = {
+      date: parseDate(date, 'yyyyMMdd', new Date()),
+      options: {
+        fareOption: 'HP/HC',
+        period1Label: 'HP',
+        period2Label: 'HC',  
+      },
+    };
+    target[date] = docItem;
+  }
+
+  const isIndexesData = storeKey.includes('_INDEXES_');
+  const isSuppliedData = storeKey.includes('_SUPPLIED_');
+  const isCostsData = storeKey.includes('_COSTS_');
+  const isStatsData = storeKey.includes('_STATS_');
+
+  if (isIndexesData || isSuppliedData) {
+    const [period1, period2] = storeValue as number[];
+    const periodicItemKey = isIndexesData ? 'indexes' : 'supplied';
+    docItem[periodicItemKey] = { period1, period2 };
+  } else if (isCostsData) {
+    docItem.costs = storeValue as number;
+  } else if (isStatsData) {
+    const { apparentPower, instantIntensity } = storeValue as Stats;
+    docItem.statistics = {
+      apparentPower: convertStats(apparentPower),
+      instantIntensity: convertStats(instantIntensity),
+    };
+  }
+
+  // console.log({ dateItem });
+
+}
+
+function groupData(data: StoreEntries): GroupedData {
+  return Object.entries(data).reduce((grouped: GroupedData, [storeKey, storeValue]) => {
+    if (IGNORED_STORE_KEYS_PREFIXES.some((prefix) => storeKey.startsWith(prefix))) {
+      return grouped;
+    }
+
+    const { perDay, perMonth } = grouped;
+    let category: DocumentByDate;
+    if (storeKey.startsWith('DAY')) {
+      category = perDay;
+    } else if (storeKey.startsWith('MONTH')) {
+      category = perMonth;
+    }
+
+    parseData(category, storeKey, storeValue);
+
+    return grouped;
+  }, {
+    perDay: {},
+    perMonth: {},
+  });
+}
+
+async function main(args: string[]) {
+  if (args.length !== 4) {
+    console.error('Arguments: <store json file> <index name>')
+    return;
+  }
+
+  const [, , storeFilePath, indexName] = args;
+
+  console.log('> Loaded configuration:', config);
 
   const client = createOpenSearchClient();
 
-  const dataStore = await readDatastore();
+  const dataStore = await readDatastore(storeFilePath);
 
-  Object.entries(dataStore).reduce(acc, ([k, v]) => {
-    
-  }, {});
+  console.log('> Ready!', { args });
 
-  console.log('Adding document:');
+  const groupedData = groupData(dataStore.data);
 
-  const document = {
-    title: 'The Outsider',
-    author: 'Stephen King',
-    year: '2018',
-    genre: 'Crime fiction',
-  };
+  // console.log({ groupedData });
 
-  const id = ``;
+  const docPromises = Object.entries(groupedData.perDay)
+    .map(([dateKey, document]) => {
+      console.log('Adding document:', { dateKey });
 
-  var response = await client.index({
-    id: id,
-    index: indexName,
-    body: document,
-    refresh: true,
-  });
+      return client.index({
+        id: `day-${dateKey}`,
+        index: indexName,
+        body: document,
+        refresh: true,
+      });
+    });
 
-  console.log(response.body);
+  /*const responses = */
+  await Promise.all(docPromises);
 
+  // console.log(responses);
+
+  console.log('Done!');
 }
 
 main(process.argv);
