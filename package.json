@@ -1,5 +1,5 @@
 {
-  "name": "mmm-lkx-tic",
+  "name": "mmm-lky-tic",
   "version": "1.0.0",
   "description": "MagicMirror² module to display info about home power supply - FRANCE TELEINFO ENEDIS.",
   "main": "index.js",
