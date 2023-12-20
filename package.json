@@ -1,8 +1,9 @@
 {
-  "name": "MMM-LKY-TIC",
+  "name": "mmm-lky-tic",
   "version": "1.0.0",
-  "description": "MagicMirror2 module",
+  "description": "MagicMirror² module to display info about home power supply - FRANCE TELEINFO ENEDIS.",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "install": "npm run build:module-prod",
     "postinstall": "rm -rf node_modules/@serialport/bindings-cpp/prebuilds && node_modules/.bin/electron-rebuild -f -w @serialport/bindings-cpp",
