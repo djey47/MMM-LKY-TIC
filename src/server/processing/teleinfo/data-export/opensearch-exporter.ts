@@ -51,6 +51,8 @@ export async function exportDataToOpensearch(entries: StoreDataEntries, config: 
   if (config.debug) {
     Log.info(`'**** opensearch-exporter::exportDataToOpensearch responses=${JSON.stringify(responses)}`);
   }
+
+  Log.info(`**** opensearch-exporter::exportDataToOpensearch Export ended for ${responses.length} documents!`);
 }
 
 function createOpenSearchClient(config: OpensearchConfiguration) {
