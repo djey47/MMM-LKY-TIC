@@ -3,6 +3,8 @@ TODO-FIXME
 
 # TODO
 - store indexes at configured hours for historization
+  - [x] Manual data store indexing
+  - [X] per-day auto indexing to opensearch
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
     => does not work for now as the component does not update till new data arrives (see withNotification HOC to trigger the refresh every 5 seconds via setInterval - ? requires a retry count in state ?)
@@ -27,7 +29,7 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
-- teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
+- [ ] teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
   => needs to be remade without any link to MM2, datastore, advanced stats
 
 # DONE
