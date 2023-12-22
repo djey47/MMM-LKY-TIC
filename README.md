@@ -72,6 +72,28 @@ Per current day/month/year and total:
 - Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
 - Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they don't include subscription and extra furniture costs.
 
+
+### Exports local data to Opensearch index
+
+More info about [Opensearch](https://opensearch.org/docs/latest/). This features requires a fully working  Opensearch node + Opensearch dashboards stack (using Docker containers is supported and recommended). 
+
+![Opensearch 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Opensearch1.png?raw=true)
+
+When enabled (see *Configuration -> Teleinfo* section below), collected data is exported to the Opensearch index of your choice. Using this, you'll be able to display data in Opensearch dashboards (see above screenshot).
+
+Examples of index mapping can be found here: `data-export/opensearch/mappings`.
+
+**Notes:**
+
+- For now, only per-day data is exported
+- Export is processed at following events:
+  - Start of current MagicMirror module
+  - When MagicMirror and this module are running, and a day change is detected, so at 12 a.m.
+- Make sure the Opensearch instance is accessible from you MagicMirror device, and ready to receive data; as no immediate retry is attempted on failure. The next export occurrence will be either the day after, or if you decide to restart MagicMirror 
+- The index might not exist already, it will be created when necessary
+- Similar feature is also available on-demand, within command line tools, not depending on MagicMirror. See *Utilities* section below for details. Please also note it may not be updated in the future!
+
+
 ## Install
 
 ### Prerequisites
@@ -112,6 +134,17 @@ Since this module relies on `serialport` npm dependency which uses native module
 {
   "baudRate": 1200,
   "dataBits": 7,
+  "dataExport": {
+    "target": "opensearch",
+    "settings": {
+      "opensearch": {
+        "index-name": "my-lky-per-day-index",
+        "instance": "https://my-nas:9200",
+        "user": "os-user",
+        "password": "os-password"
+      }
+    }
+  }
   "developer": {
     "serialPortMockEnabled": false,
     "mockRefreshRate": 2500
@@ -131,6 +164,13 @@ Since this module relies on `serialport` npm dependency which uses native module
 
 - `baudRate`: transfer speed for serial link
 - `dataBits` and `stopBits`: data encoding in bits number from the serial link
+- `dataExport`: provides configuration for automatic data export (not mandatory)
+  - `target`: system to export to
+  - `settings`: per-system configuration
+    - `opensearch`
+      - `indexName`: Opensearch index to send data documents to
+      - `instance`: URL of ready-to-use Opensearch instance
+      - `user` and `password`: instance credentials 
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
   - `mockRefreshRate`: interval in ms for the emulator to produce mock teleinfo
@@ -162,7 +202,18 @@ This script will push info from the persisted datastore to an opensearch index: 
 - `data store file`: path to the data store JSON file
 - `index name`: index name to use on opensearch instance
 
-Configuration is set via `tools/scripts/opensearch-data-export/config/opensearch-data-export.json`.
+Configuration is set via `tools/scripts/opensearch-data-export/config/opensearch-data-export.json`:
+
+```json
+{
+  "opensearchInstance": "https://my-nas:9200",
+  "user": "os-user",
+  "password": "os-password"  
+}
+```
+
+- `opensearchInstance`: URL of ready-to-use Opensearch instance
+- `user` and `password`: instance credentials. 
 
 
 ### Diagnostics with picocom
