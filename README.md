@@ -79,6 +79,9 @@ More info about [Opensearch](https://opensearch.org/docs/latest/). This features
 
 ![Opensearch 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Opensearch1.png?raw=true)
 
+![Opensearch 2](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Opensearch2.png?raw=true)
+
+
 When enabled (see *Configuration -> Teleinfo* section below), collected data is exported to the Opensearch index of your choice. Using this, you'll be able to display data in Opensearch dashboards (see above screenshot).
 
 Examples of index mapping can be found here: `data-export/opensearch/mappings`.
