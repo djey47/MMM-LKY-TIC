@@ -1,4 +1,5 @@
 export type StatsItem = {
+  average?: number;
   min: number,
   minTimestamp: number,
   max: number,
