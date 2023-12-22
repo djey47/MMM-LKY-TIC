@@ -11,7 +11,7 @@ import { NotificationCatcher } from './hooks/with-notifications/notification-cat
 /**
  * Custom MM2 module name
  */
-const MODULE_NAME = 'MMM-LKY-TIC';
+const MODULE_NAME = 'mmm-lky-tic';
 
 /**
  * @private

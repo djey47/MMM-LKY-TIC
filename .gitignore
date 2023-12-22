@@ -107,8 +107,7 @@ dist
 .vscode/
 coverage/
 node_modules/
-MMM-*.js
-MMM-*.js.LICENSE.txt
+mmm-*.js*
 node_helper.js
 stats.json
 styles.css
