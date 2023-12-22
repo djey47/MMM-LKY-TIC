@@ -46,13 +46,15 @@ export async function exportDataToOpensearch(entries: StoreDataEntries, config: 
       });
     });
 
-  const responses = await Promise.all(docPromises);
+    Log.info(`**** opensearch-exporter::exportDataToOpensearch Exporting ${docPromises.length} documents`);
+
+    const responses = await Promise.all(docPromises);
 
   if (config.debug) {
     Log.info(`'**** opensearch-exporter::exportDataToOpensearch responses=${JSON.stringify(responses)}`);
   }
 
-  Log.info(`**** opensearch-exporter::exportDataToOpensearch Export ended for ${responses.length} documents!`);
+  Log.info(`**** opensearch-exporter::exportDataToOpensearch Export ended!`);
 }
 
 function createOpenSearchClient(config: OpensearchConfiguration) {
