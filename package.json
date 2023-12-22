@@ -13,7 +13,7 @@
     "lint:styles": "stylelint \"src/**/*.scss\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean:all": "rm -f MMM-*.js* node_helper.js styles.css",
+    "clean:all": "rm -f MMM-*.js* mmm-*.js* node_helper.js styles.css",
     "build:module": "npm run clean:all && npm run build:client && npm run build:helper",
     "build:module-prod": "npm run clean:all && npm run build:client-prod && npm run build:helper-prod",
     "build:client": "webpack --mode=development --config tools/webpack/webpack.config.module.js",
