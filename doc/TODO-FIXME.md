@@ -2,9 +2,9 @@ TODO-FIXME
 ==========
 
 # TODO
-- store indexes at configured hours for historization
-  - [x] Manual data store indexing
-  - [X] per-day auto indexing to opensearch
+- costs: take into account the subsribe fees
+  - annual fee to be set in configuration (or monthly?)
+  - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly 
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
     => does not work for now as the component does not update till new data arrives (see withNotification HOC to trigger the refresh every 5 seconds via setInterval - ? requires a retry count in state ?)
@@ -33,6 +33,9 @@ TODO-FIXME
   => needs to be remade without any link to MM2, datastore, advanced stats
 
 # DONE
+- store indexes at configured hours for historization
+  - [x] Manual data store indexing
+  - [X] per-day auto indexing to opensearch
 - provide interfaces for stored items
 - SIGINT signal sent by PM2 does not seem to execute async stop call
   => data store persist is not called
