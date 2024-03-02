@@ -1,7 +1,7 @@
 TODO-FIXME
 ==========
 
-# TODO,
+# TODO
 - [front-end] basic/advanced display modes
   - Basic only shows most important info (status bar, current supply, daily costs...)
   - Advanced shows more pages but with auto scroll carroussel-like
@@ -38,9 +38,10 @@ TODO-FIXME
   => needs to be remade without any link to MM2, datastore, advanced stats
 
 # DONE
+- [x] Data export to Opensearch dashboards
 - store indexes at configured hours for historization
   - [x] Manual data store indexing
-  - [X] per-day auto indexing to opensearch
+  - [x] per-day auto indexing to opensearch
 - provide interfaces for stored items
 - SIGINT signal sent by PM2 does not seem to execute async stop call
   => data store persist is not called
