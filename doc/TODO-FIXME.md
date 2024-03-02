@@ -1,8 +1,12 @@
 TODO-FIXME
 ==========
 
-# TODO
-- costs: take into account the subsribe fees
+# TODO,
+- [front-end] basic/advanced display modes
+  - Basic only shows most important info (status bar, current supply, daily costs...)
+  - Advanced shows more pages but with auto scroll carroussel-like
+  - Configuration: mode (basic default), page persistance time...
+- costs: take into account the subscribe fees
   - annual fee to be set in configuration (or monthly?)
   - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly 
 - quick status display with icons/labels
@@ -29,6 +33,7 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
+- [ ] cannot npm install on dev env anymore (WIN-WSL...) due to native modules
 - [ ] teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
   => needs to be remade without any link to MM2, datastore, advanced stats
 
