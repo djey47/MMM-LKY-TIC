@@ -14,7 +14,7 @@ import { Client } from '@opensearch-project/opensearch/.';
 const IGNORED_STORE_KEYS_PREFIXES = [FIRST_DATA_TS_IS_KEY, 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
 
 /**
- * Export data to openserach index
+ * Export data to opensearch index
  */
 export async function exportDataToOpensearch(entries: StoreDataEntries, config: ModuleConfiguration) {
   const osConfig = config.teleinfo?.dataExport.settings.opensearch;
