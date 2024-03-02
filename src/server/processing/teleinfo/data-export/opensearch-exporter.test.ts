@@ -21,7 +21,7 @@ const osClientMock = {
 } as unknown as Client;
 
 describe('Opensearch exporter', () => {
-  const DOC_DATE = parseISO('2024-03-01T23:00:00.000Z');
+  const DOC_DATE = parseISO('2024-03-02T00:00:00.000Z');
   const STATS_DATE = parseISO('1970-01-01T00:00:00.000Z');
 
   describe('exportDataToOpensearch function', () => {

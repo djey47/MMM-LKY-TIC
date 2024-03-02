@@ -1,4 +1,4 @@
-import parseDate from 'date-fns/parse';
+import parseISO from 'date-fns/parseISO';
 import toDate from 'date-fns/toDate';
 import { createOpenSearchClient } from './helpers/opensearch-client';
 import { Log } from '../../../utils/mm2_facades';
@@ -66,10 +66,11 @@ function groupData(data: StoreDataEntries, config: ModuleConfiguration): Grouped
 
 function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryValue, config: ModuleConfiguration) {
   const date = extractDate(storeKey)
+  const dateISO = dateToISO(date)
   let docItem = target[date];
   if (!docItem) {
     docItem = {
-      date: parseDate(date, 'yyyyMMdd', new Date()),
+      date: parseISO(dateISO),
       options: {
         fareOption: 'HP/HC',
         period1Label: 'HC',
@@ -106,6 +107,13 @@ function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryVa
 function extractDate(storeKey: string) {
   // only support per-day dates for now
   return storeKey.substring(storeKey.length - 8);
+}
+
+function dateToISO(date: string) {
+  const year = date.substring(0, 4);
+  const month = date.substring(4, 6);
+  const day = date.substring(6, 8);
+  return `${year}-${month}-${day}T00:00:00.000Z`;
 }
 
 function convertStats(statsItem: StatsItem): DocStatsItem {
