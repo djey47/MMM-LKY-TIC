@@ -1,15 +1,17 @@
-import { Client } from '@opensearch-project/opensearch';
 import parseDate from 'date-fns/parse';
 import toDate from 'date-fns/toDate';
+import { createOpenSearchClient } from './helpers/opensearch-client';
+import { Log } from '../../../utils/mm2_facades';
+import { FIRST_DATA_TS_IS_KEY } from '../helpers/store-constants';
 
-import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
-import type { EntryValue, Stats, StatsItem, StoreDataEntries,  } from '../helpers/store-models';
+import type { EntryValue, Stats, StatsItem, StoreDataEntries, } from '../helpers/store-models';
 import type { GroupedData } from './model/export';
 import type { DocStatsItem, DocumentByDate } from './model/opensearch';
-import { Log } from '../../../utils/mm2_facades';
-import { ModuleConfiguration } from '../../../../shared/domain/module-config';
+import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
+import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
+import { Client } from '@opensearch-project/opensearch/.';
 
-const IGNORED_STORE_KEYS_PREFIXES = ['FIRST_DATA_TIMESTAMP', 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
+const IGNORED_STORE_KEYS_PREFIXES = [FIRST_DATA_TS_IS_KEY, 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
 
 /**
  * Export data to openserach index
@@ -27,48 +29,14 @@ export async function exportDataToOpensearch(entries: StoreDataEntries, config: 
   const client = createOpenSearchClient(osConfig);
 
   const groupedData = groupData(entries, config);
+
   if (config.debug) {
     Log.info(`'**** opensearch-exporter::exportDataToOpensearch groupedData=${JSON.stringify(groupedData)}`);
   }
 
-  const { indexName } = osConfig;
-  const docPromises = Object.entries(groupedData.perDay)
-    .map(([dateKey, document]) => {
-      if (config.debug) {
-        Log.info(`'**** opensearch-exporter::exportDataToOpensearch Adding document for key: ${dateKey}`);
-      }
+  await sendToOpenSearch(groupedData, client, osConfig, config);
 
-      return client.index({
-        id: `day-${dateKey}`,
-        index: indexName,
-        body: document,
-        refresh: true,
-      });
-    });
-
-    Log.info(`**** opensearch-exporter::exportDataToOpensearch Exporting ${docPromises.length} documents`);
-
-    const responses = await Promise.all(docPromises);
-
-  if (config.debug) {
-    Log.info(`'**** opensearch-exporter::exportDataToOpensearch responses=${JSON.stringify(responses)}`);
-  }
-
-  Log.info(`**** opensearch-exporter::exportDataToOpensearch Export ended!`);
-}
-
-function createOpenSearchClient(config: OpensearchConfiguration) {
-  const { instance, user, password } = config;
-  const instanceURL = new URL(instance);
-
-  // Create a client with SSL/TLS enabled.
-  const client = new Client({
-    node: `${instanceURL.protocol}//${user}:${password}@${instanceURL.hostname}:${instanceURL.port}`,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  });
-  return client;
+  Log.info('**** opensearch-exporter::exportDataToOpensearch Export ended!');
 }
 
 function groupData(data: StoreDataEntries, config: ModuleConfiguration): GroupedData {
@@ -85,9 +53,9 @@ function groupData(data: StoreDataEntries, config: ModuleConfiguration): Grouped
       category = perMonth;
     }
 
-    if (category){
+    if (category) {
       parseData(category, storeKey, storeValue, config);
-    } 
+    }
 
     return grouped;
   }, {
@@ -105,7 +73,7 @@ function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryVa
       options: {
         fareOption: 'HP/HC',
         period1Label: 'HC',
-        period2Label: 'HP',  
+        period2Label: 'HP',
       },
     };
     target[date] = docItem;
@@ -148,4 +116,30 @@ function convertStats(statsItem: StatsItem): DocStatsItem {
     min,
     minDate: toDate(minTimestamp),
   };
+}
+
+async function sendToOpenSearch(data: GroupedData, osClient: Client, osConfig: OpensearchConfiguration, moduleConfig: ModuleConfiguration) {
+  const { indexName } = osConfig;
+
+  const docPromises = Object.entries(data.perDay)
+    .map(([dateKey, document]) => {
+      if (moduleConfig.debug) {
+        Log.info(`'**** opensearch-exporter::exportDataToOpensearch Adding document for key: ${dateKey}`);
+      }
+
+      return osClient.index({
+        id: `day-${dateKey}`,
+        index: indexName,
+        body: document,
+        refresh: true,
+      });
+    });
+
+  Log.info(`**** opensearch-exporter::exportDataToOpensearch Exporting ${docPromises.length} documents`);
+
+  const responses = await Promise.all(docPromises);
+
+  if (moduleConfig.debug) {
+    Log.info(`'**** opensearch-exporter::exportDataToOpensearch responses=${JSON.stringify(responses)}`);
+  }
 }
