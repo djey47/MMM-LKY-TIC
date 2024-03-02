@@ -1,5 +1,0 @@
-{
-  "opensearchInstance": "https://neo-diskstation:9200",
-  "user": "admin",
-  "password": "admin"  
-}

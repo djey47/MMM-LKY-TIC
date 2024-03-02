@@ -23,7 +23,6 @@
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
     "tool:teleinfo-reader": "ts-node ./tools/scripts/teleinfo-reader/teleinfo-reader.ts",
-    "tool:opensearch-data-export": "ts-node ./tools/scripts/opensearch-data-export/opensearch-data-export.ts",
     "dev": "chokidar \"./src/**/*\" \"./support/**/*\" \"./tools/webpack/*\" -i \"./**/*.spec.*\" -c \"npm run build:client\""
   },
   "keywords": [

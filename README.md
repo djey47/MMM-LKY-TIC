@@ -81,7 +81,6 @@ More info about [Opensearch](https://opensearch.org/docs/latest/). This features
 
 ![Opensearch 2](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Opensearch2.png?raw=true)
 
-
 When enabled (see *Configuration -> Teleinfo* section below), collected data is exported to the Opensearch index of your choice. Using this, you'll be able to display data in Opensearch dashboards (see above screenshot).
 
 Examples of index mapping can be found here: `data-export/opensearch/mappings`.
@@ -93,9 +92,7 @@ Examples of index mapping can be found here: `data-export/opensearch/mappings`.
   - Start of current MagicMirror module
   - When MagicMirror and this module are running, and a day change is detected, so at 12 a.m.
 - Make sure the Opensearch instance is accessible from you MagicMirror device, and ready to receive data; as no immediate retry is attempted on failure. The next export occurrence will be either the day after, or if you decide to restart MagicMirror 
-- The index might not exist already, it will be created when necessary
-- Similar feature is also available on-demand, within command line tools, not depending on MagicMirror. See *Utilities* section below for details. Please also note it may not be updated in the future!
-
+- The index might not exist already, it will be created when necessary.
 
 ## Install
 
@@ -198,26 +195,6 @@ See [template documentation](https://github.com/djey47/MMM-React-Canvas-ts#devel
 Small CLI program to diagnose reading of teleinfo data on serial input: `npm run tool:teleinfo-reader`.
 
 Configuration is set via `tools/scripts/teleinfo-reader/config/teleinfo-reader.json` file; see 'Teleinfo section' above.
-
-### opensearch-data-export
-This script will push info from the persisted datastore to an opensearch index: `npm run tool:opensearch-data-export <data store file> <index name>`.
-
-- `data store file`: path to the data store JSON file
-- `index name`: index name to use on opensearch instance
-
-Configuration is set via `tools/scripts/opensearch-data-export/config/opensearch-data-export.json`:
-
-```json
-{
-  "opensearchInstance": "https://my-nas:9200",
-  "user": "os-user",
-  "password": "os-password"  
-}
-```
-
-- `opensearchInstance`: URL of ready-to-use Opensearch instance
-- `user` and `password`: instance credentials. 
-
 
 ### Diagnostics with picocom
 It's also possible to capture raw data on serial input, using `picocom` command line tool: https://linux.die.net/man/8/picocom
