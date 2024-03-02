@@ -3,4 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react', 'react-hooks'],
   root: true,
+  rules: {
+    quotes: ['warn', 'single'],
+  }
 };
