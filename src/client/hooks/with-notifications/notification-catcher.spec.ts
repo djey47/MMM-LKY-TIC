@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { NotificationCatcher } from "./notification-catcher";
+import { NotificationCatcher } from './notification-catcher';
 
 describe('NotificationCatcher class', () => {
   beforeAll(() => {

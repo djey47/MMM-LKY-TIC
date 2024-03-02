@@ -1,4 +1,5 @@
-import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
 // global mocks
 
