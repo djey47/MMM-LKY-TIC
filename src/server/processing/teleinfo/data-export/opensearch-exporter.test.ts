@@ -5,6 +5,7 @@ import type { StoreDataEntries } from '../helpers/store-models';
 import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import type { Client } from '@opensearch-project/opensearch/.';
 import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
+import parseISO from 'date-fns/parseISO';
 
 jest.mock('./helpers/opensearch-client');
 jest.mock('../../../utils/mm2_facades', () => ({
@@ -20,6 +21,9 @@ const osClientMock = {
 } as unknown as Client;
 
 describe('Opensearch exporter', () => {
+  const DOC_DATE = parseISO('2024-03-01T23:00:00.000Z');
+  const STATS_DATE = parseISO('1970-01-01T00:00:00.000Z');
+
   describe('exportDataToOpensearch function', () => {
     const config: ModuleConfiguration = {
       teleinfo: {
@@ -97,7 +101,7 @@ describe('Opensearch exporter', () => {
       });
       expect(osClientMock.index).toHaveBeenCalledWith({
         body: {
-          date: new Date('2024-03-01T23:00:00.000Z'),
+          date: DOC_DATE,
           indexes: {
             period1: 1000,
             period2: 2000
@@ -123,7 +127,7 @@ describe('Opensearch exporter', () => {
       // then
       expect(osClientMock.index).toHaveBeenCalledWith({
         body: {
-          date: new Date('2024-03-01T23:00:00.000Z'),
+          date: DOC_DATE,
           supplied: {
             period1: 500,
             period2: 1000
@@ -149,7 +153,7 @@ describe('Opensearch exporter', () => {
       // then
       expect(osClientMock.index).toHaveBeenCalledWith({
         body: {
-          date: new Date('2024-03-01T23:00:00.000Z'),
+          date: DOC_DATE,
           costs: 3.5,
           options: { fareOption: 'HP/HC', period1Label: 'HC', period2Label: 'HP' }
         },
@@ -194,19 +198,19 @@ describe('Opensearch exporter', () => {
       // then
       expect(osClientMock.index).toHaveBeenCalledWith({
         body: {
-          date: new Date('2024-03-01T23:00:00.000Z'),
+          date: DOC_DATE,
           statistics: {
             apparentPower: {
               max: 1000,
-              maxDate: new Date('1970-01-01T00:00:00.000Z'),
+              maxDate: new Date(STATS_DATE),
               min: 0,
-              minDate: new Date('1970-01-01T00:00:00.000Z'),
+              minDate: new Date(STATS_DATE),
             },
             instantIntensity: {
               max: 1,
-              maxDate: new Date('1970-01-01T00:00:00.000Z'),
+              maxDate: new Date(STATS_DATE),
               min: 0,
-              minDate: new Date('1970-01-01T00:00:00.000Z'),
+              minDate: new Date(STATS_DATE),
             },
           },
           options: { fareOption: 'HP/HC', period1Label: 'HC', period2Label: 'HP' }
