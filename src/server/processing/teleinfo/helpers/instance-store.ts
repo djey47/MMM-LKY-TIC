@@ -4,19 +4,9 @@ import { writeFile } from 'fs/promises';
 import Path from 'path';
 import { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import { Log } from '../../../utils/mm2_facades';
-
-interface Store {
-  meta: {
-    initTs: number;
-    lastReadTs?: number;
-    lastWriteTs?: number;
-    lastPersistTs?: number;
-  };
-  data: {
-    [key: string]: string | number | object | [];
-  };
-}
-
+import { exportDataToOpensearch } from '../data-export/opensearch-exporter';
+import { EntryValue, Store } from './store-models';
+ 
 /**
  * Instance data store singleton
  */
@@ -48,6 +38,8 @@ export class InstanceStore {
 
     this.persist();
     setInterval(this.persist.bind(this), InstanceStore.PERSIST_INTERVAL);
+
+    this.export();
   }
 
   public reset() {
@@ -55,7 +47,7 @@ export class InstanceStore {
     this.persist();
   }
 
-  public put(key: string, value: string | number | object | []) {
+  public put(key: string, value: EntryValue) {
     this.store.data[key] = value;
     this.store.meta.lastWriteTs = new Date().getTime();
   }
@@ -92,6 +84,28 @@ export class InstanceStore {
 
     if (InstanceStore.moduleConfig?.debug) {
       Log.log('**** instance-store::persistSync: done');
+    }
+  }
+
+  /**
+   * Export datastore to external location (for now only opensearch index is supported)
+   */
+  public async export() {
+    const { moduleConfig } = InstanceStore;
+    const dataExportConfig = moduleConfig?.teleinfo?.dataExport;
+    if (!moduleConfig || !dataExportConfig) {
+      return;
+    }
+
+    const { target, settings } = dataExportConfig;
+    if (target !== 'opensearch' || !settings.opensearch) {
+      return;
+    }
+
+    try { 
+      await exportDataToOpensearch(this.store.data, moduleConfig);
+    } catch (e) {
+      Log.error(`!!!! MMM-LKY-TIC::instance-store::export ${JSON.stringify({ e })}`);
     }
   }
 

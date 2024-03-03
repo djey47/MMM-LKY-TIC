@@ -5,6 +5,12 @@ export interface TeleinfoConfiguration {
     mockRefreshRate: number;
     serialPortMockEnabled: boolean;
   };
+  dataExport: {
+    target: 'opensearch' | 'none';
+    settings: {
+      opensearch: OpensearchConfiguration;
+    };
+  };
   fareDetails: FareDetails;
   powerFactor: number;
   serialDevice: string;
@@ -19,3 +25,10 @@ export interface FareDetails {
   ejpNormalPricePerKwh?: number;
   ejpPeakPricePerKwh?: number;
 }
+
+export interface OpensearchConfiguration {
+  indexName: string;
+  instance: string;
+  user: string;
+  password: string;
+};

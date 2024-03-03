@@ -29,6 +29,7 @@ export function computeEstimatedPrices(
 ) {
   const storeInstance = InstanceStore.getInstance();
   let shouldStoreBePersisted = false;
+  let shouldStoreBeExported = false;
 
   // Get current indexes from parsed data
   const indexes = readIndexes(data);
@@ -65,6 +66,7 @@ export function computeEstimatedPrices(
     initialDayIndexes = [...indexes];
     storeInstance.put(currentDayIndexesISKey, initialDayIndexes);
     shouldStoreBePersisted = true;
+    shouldStoreBeExported = true;
   }
   // console.log({ indexes, currentDayISKey: currentDayIndexesISKey, initialDayIndexes });
 
@@ -88,10 +90,6 @@ export function computeEstimatedPrices(
     initialYearIndexes = [...indexes];
     storeInstance.put(currentYearIndexesISKey, initialYearIndexes);
     shouldStoreBePersisted = true;
-  }
-
-  if(shouldStoreBePersisted) {
-    storeInstance.persist();
   }
 
   // Compute prices
@@ -138,6 +136,14 @@ export function computeEstimatedPrices(
   storeInstance.put(currentYearCostsISKey, totalYearPrice);
 
   // console.log({ totalPrice, totalDayPrice });
+
+  // Persistance & export
+  if(shouldStoreBePersisted) {
+    storeInstance.persist();
+  }
+  if (shouldStoreBeExported) {
+    storeInstance.export();
+  }
 
   return {
     total: totalPrice && Math.round(totalPrice),
