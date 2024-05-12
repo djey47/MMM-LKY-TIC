@@ -192,7 +192,7 @@ function computePrice(
 
       const indexDelta = (currentIndex - initialIndex) / 1000;
 
-      const subscriptionFeeProRata = compteSubscriptionFee(period, fareDetails.subscriptionFeePerMonth);
+      const subscriptionFeeProRata = computeSubscriptionFee(period, fareDetails.subscriptionFeePerMonth);
 
       console.log('fare-manager::computePrice', { indexDelta, subscriptionFeeProRata });
 
@@ -202,7 +202,7 @@ function computePrice(
   );
 }
 
-function compteSubscriptionFee(period: ComputationPeriod, feePerMonth?: number) {
+function computeSubscriptionFee(period: ComputationPeriod, feePerMonth?: number) {
   if (feePerMonth === undefined) {
     return 0;
   }
