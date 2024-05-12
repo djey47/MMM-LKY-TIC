@@ -1,7 +1,14 @@
+import differenceInHours from 'date-fns/differenceInHours';
+import getDaysInMonth from 'date-fns/getDaysInMonth';
+import startOfDay from 'date-fns/startOfDay';
+import startOfMonth from 'date-fns/startOfMonth';
+import startOfYear from 'date-fns/startOfYear';
 import { TeleInfo } from '../../../shared/domain/teleinfo';
 import { FareDetails } from '../../../shared/domain/teleinfo-config';
 import { InstanceStore } from './helpers/instance-store';
+import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import {
+  FIRST_DATA_TS_IS_KEY,
   INITIAL_INDEXES_IS_KEY,
   PER_DAY_COSTS_IS_KEY_PREFIX,
   PER_DAY_INDEXES_IS_KEY_PREFIX,
@@ -11,9 +18,9 @@ import {
   PER_YEAR_INDEXES_IS_KEY_PREFIX,
   TOTAL_COSTS_IS_KEY,
 } from './helpers/store-constants';
-import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
-import { readIndexes } from './index-reader';
 import { StoredIndexes } from './helpers/store-models';
+import { readIndexes } from './index-reader';
+import { ComputationPeriod } from './types/computation-period';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -97,25 +104,29 @@ export function computeEstimatedPrices(
     initialIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails
+    fareDetails,
+    ComputationPeriod.OVERALL
   );
   const totalDayPrice = computePrice(
     initialDayIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails
+    fareDetails,
+    ComputationPeriod.DAY
   );
   const totalMonthPrice = computePrice(
     initialMonthIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails
+    fareDetails,
+    ComputationPeriod.MONTH
   );
   const totalYearPrice = computePrice(
     initialYearIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails
+    fareDetails,
+    ComputationPeriod.YEAR
   );
 
   storeInstance.put(TOTAL_COSTS_IS_KEY, totalPrice);
@@ -138,7 +149,7 @@ export function computeEstimatedPrices(
   // console.log({ totalPrice, totalDayPrice });
 
   // Persistance & export
-  if(shouldStoreBePersisted) {
+  if (shouldStoreBePersisted) {
     storeInstance.persist();
   }
   if (shouldStoreBeExported) {
@@ -158,7 +169,8 @@ function computePrice(
   initialIndexes: (number | undefined)[],
   indexes: (number | undefined)[],
   currentPriceKeys: string[],
-  fareDetails: FareDetails
+  fareDetails: FareDetails,
+  period: ComputationPeriod,
 ) {
   return indexes.reduce(
     (amount: number, currentIndex: number | undefined, indexRank: number) => {
@@ -179,9 +191,48 @@ function computePrice(
       }
 
       const indexDelta = (currentIndex - initialIndex) / 1000;
-      // console.log({ indexDelta });
-      return amount + indexDelta * pricePerKwh;
+
+      const subscriptionFeeProRata = compteSubscriptionFee(period, fareDetails.subscriptionFeePerMonth);
+
+      console.log('fare-manager::computePrice', { indexDelta, subscriptionFeeProRata });
+
+      return amount + indexDelta * pricePerKwh + subscriptionFeeProRata;
     },
     0
   );
+}
+
+function compteSubscriptionFee(period: ComputationPeriod, feePerMonth?: number) {
+  if (feePerMonth === undefined) {
+    return 0;
+  }
+
+  const now = Date.now();
+  const hoursInMonth = getDaysInMonth(now) * 24;
+  // FIXME average nb of days per month in a year...
+  const averageHoursInMonth = 30.42 * 24;
+  const firstDataTs = InstanceStore.getInstance().get(FIRST_DATA_TS_IS_KEY)
+
+  let start, diff;
+  switch (period) {
+    case ComputationPeriod.DAY:
+      start = startOfDay(now);
+      diff = differenceInHours(now, start);
+      return feePerMonth * diff / hoursInMonth;
+
+    case ComputationPeriod.MONTH:
+      start = startOfMonth(now);
+      diff = differenceInHours(now, start);
+      return feePerMonth * diff / hoursInMonth;
+
+    case ComputationPeriod.YEAR:
+      start = startOfYear(now);
+      diff = differenceInHours(now, start);
+      return feePerMonth * diff / averageHoursInMonth;
+
+    case ComputationPeriod.OVERALL:
+      start = new Date(firstDataTs as number);
+      diff = differenceInHours(now, start);
+      return feePerMonth * diff / averageHoursInMonth;
+  }
 }

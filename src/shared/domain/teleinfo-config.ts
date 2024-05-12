@@ -24,6 +24,7 @@ export interface FareDetails {
   hcLHPricePerKwh?: number;
   ejpNormalPricePerKwh?: number;
   ejpPeakPricePerKwh?: number;
+  subscriptionFeePerMonth?: number;
 }
 
 export interface OpensearchConfiguration {
