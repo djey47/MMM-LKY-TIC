@@ -6,8 +6,11 @@ TODO-FIXME
   - displays a table with the history (supplied, cost, ...?) for the last 5 days/months. Current day/month values being extrapolation?
 - [front-end] basic/advanced display modes
   - Basic only shows most important info (status bar, current supply, daily costs...)
+  - Advanced pages (2 max):
+    - history
+    - other info
   - Advanced shows more pages but with auto scroll carroussel-like
-  - Configuration: mode (basic default), page persistance time...
+  - Configuration: mode (basic default), page persistance time..., 
 - [ ] costs: take into account the subscribe fees
   - annual fee to be set in configuration (or monthly?)
   - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly 
