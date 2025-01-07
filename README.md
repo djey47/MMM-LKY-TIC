@@ -70,7 +70,7 @@ Costs (d/m/y/t): ~3/8/25/35€
 Per current day/month/year and total:
 
 - Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
-- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they don't include subscription and extra furniture costs.
+- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs.
 
 
 ### Exports local data to Opensearch index
@@ -154,7 +154,8 @@ Since this module relies on `serialport` npm dependency which uses native module
     "ejpNormalPricePerKwh": 0.5,
     "ejpPeakPricePerKwh": 1,
     "hcLHPricePerKwh": 0.6,
-    "hcHHPricePerKwh": 0.8
+    "hcHHPricePerKwh": 0.8,
+    "subscriptionFeePerMonth": 15
   },
   "powerFactor": 0.8,
   "serialDevice": "/dev/ttyAMA0",
@@ -174,10 +175,11 @@ Since this module relies on `serialport` npm dependency which uses native module
 - `developer`: advanced settings
   - `serialPortMockEnabled`: enables (true) or disables (false) serial port emulation
   - `mockRefreshRate`: interval in ms for the emulator to produce mock teleinfo
-- `fareDetails`: price per supplied Kwh, depending on chosen fare option
-  - `basePricePerKwh`: for the subscribed BASE option
-  - `ejpNormalPricePerKwh` and `ejpPeakPricePerKwh`: for the subscribed EJP option
-  - `hcLHPricePerKwh` and `hcHHPricePerKwh`: for the subscribed HC option
+- `fareDetails`:
+  - `basePricePerKwh`: price per supplied Kwh, for the subscribed BASE option
+  - `ejpNormalPricePerKwh` and `ejpPeakPricePerKwh`: price per supplied Kwh, for the subscribed EJP option
+  - `hcLHPricePerKwh` and `hcHHPricePerKwh`: price per supplied Kwh, for the subscribed HC option
+  - `subscriptionFeePerMonth`: (optional) amount of furniture and taxes applied to power supply, per month
 - `powerFactor`: allows estimating instant power in watts (value will depend on your electrical settlement, see excellent [article](https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/backup-power-ups/va-versus-watts--eaton.html))
 - `serialDevice`: device name to capture teleinfo data from.  
 
@@ -216,7 +218,7 @@ For people looking for alternatives, `minicom` should also work with equivalent 
 ## Troubleshooting
 
 ### No serial data seems to be received...
-...whereas the hardware module LED is blinking!
+...and yet, the hardware module LED is blinking!
 
 Sometimes (might happen after a device reboot), the serial device requires reinitialization. To do this:
 1. stop MagicMirror

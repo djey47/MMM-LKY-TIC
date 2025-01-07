@@ -2,11 +2,16 @@ TODO-FIXME
 ==========
 
 # TODO
+- [front-end] history page
+  - displays a table with the history (supplied, cost, ...?) for the last 5 days/months. Current day/month values being extrapolation?
 - [front-end] basic/advanced display modes
   - Basic only shows most important info (status bar, current supply, daily costs...)
+  - Advanced pages (2 max):
+    - history
+    - other info
   - Advanced shows more pages but with auto scroll carroussel-like
-  - Configuration: mode (basic default), page persistance time...
-- costs: take into account the subscribe fees
+  - Configuration: mode (basic default), page persistance time..., 
+- [ ] costs: take into account the subscribe fees
   - annual fee to be set in configuration (or monthly?)
   - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly 
 - quick status display with icons/labels
@@ -33,6 +38,8 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
+- [ ] Computation of estimated prices is not reliable when price per kwh or subscription fee change, as amount are based on delta between initial period indexes and current indexes... => need to freeze costs when any of those items change, amount shold be computed with frozen costs + current costs. Initial indexes must be changed accordingly.
+  => Add concept of contract terms?
 - [ ] cannot npm install on dev env anymore (WIN-WSL...) due to native modules
 - [ ] teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
   => needs to be remade without any link to MM2, datastore, advanced stats
