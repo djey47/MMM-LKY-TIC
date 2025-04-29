@@ -27,13 +27,13 @@ export function computeAdditionalTeleinfoData(
   config: TeleinfoConfiguration
 ): TeleInfo {
   const { apparentPower } = data;
-  const { fareDetails, powerFactor } = config;
+  const { fares, powerFactor } = config;
 
   const enhancedData = {
     ...data,
     meta: enhanceMetadata(data.meta),
     estimatedPower: computeEstimatedPower(powerFactor, apparentPower),
-    estimatedPrices: { ...computeEstimatedPrices(data, fareDetails) },
+    estimatedPrices: { ...computeEstimatedPrices(data, fares) },
     suppliedPower: { ...computeSuppliedPowers(data) },
   };
 

@@ -3,8 +3,8 @@ import getDaysInMonth from 'date-fns/getDaysInMonth';
 import startOfDay from 'date-fns/startOfDay';
 import startOfMonth from 'date-fns/startOfMonth';
 import startOfYear from 'date-fns/startOfYear';
-import { TeleInfo } from '../../../shared/domain/teleinfo';
-import { FareDetails } from '../../../shared/domain/teleinfo-config';
+import parse from 'date-fns/parse';
+import isAfter from 'date-fns/isAfter';
 import { InstanceStore } from './helpers/instance-store';
 import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import {
@@ -21,6 +21,8 @@ import {
 import { StoredIndexes } from './helpers/store-models';
 import { readIndexes } from './index-reader';
 import { ComputationPeriod } from './types/computation-period';
+import type { TeleInfo } from '../../../shared/domain/teleinfo';
+import type { FareDetails, FarePeriod } from '../../../shared/domain/teleinfo-config';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -32,7 +34,7 @@ const PRICE_KEYS_PER_FARE_OPTION: {
 
 export function computeEstimatedPrices(
   data: TeleInfo,
-  fareDetails: FareDetails
+  fares: FarePeriod[]
 ) {
   const storeInstance = InstanceStore.getInstance();
   let shouldStoreBePersisted = false;
@@ -104,28 +106,28 @@ export function computeEstimatedPrices(
     initialIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails,
+    fares,
     ComputationPeriod.OVERALL
   );
   const totalDayPrice = computePrice(
     initialDayIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails,
+    fares,
     ComputationPeriod.DAY
   );
   const totalMonthPrice = computePrice(
     initialMonthIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails,
+    fares,
     ComputationPeriod.MONTH
   );
   const totalYearPrice = computePrice(
     initialYearIndexes,
     indexes,
     currentPriceKeys,
-    fareDetails,
+    fares,
     ComputationPeriod.YEAR
   );
 
@@ -159,7 +161,7 @@ export function computeEstimatedPrices(
   return {
     total: totalPrice && Math.round(totalPrice),
     currentDay:
-      totalDayPrice,
+      totalDayPrice && Math.round(totalDayPrice),
     currentMonth: totalMonthPrice && Math.round(totalMonthPrice),
     currentYear: totalYearPrice && Math.round(totalYearPrice),
   };
@@ -169,7 +171,7 @@ function computePrice(
   initialIndexes: (number | undefined)[],
   indexes: (number | undefined)[],
   currentPriceKeys: string[],
-  fareDetails: FareDetails,
+  fares: FarePeriod[],
   period: ComputationPeriod,
 ) {
   return indexes.reduce(
@@ -183,20 +185,48 @@ function computePrice(
         return amount;
       }
 
-      const priceKey = currentPriceKeys[indexRank];
-      const pricePerKwh = fareDetails[priceKey as string];
-      // console.log({ priceKey, pricePerKwh });
-      if (pricePerKwh === undefined) {
-        return amount;
+      // Compute per fare history
+      const now = Date.now();
+      let minPeriodDate;
+      let maxPeriodDate;
+      switch(period) {
+        case ComputationPeriod.DAY:
+          minPeriodDate = startOfDay(now).getDate();
+          break;
+        case ComputationPeriod.MONTH:
+          minPeriodDate = startOfMonth(now).getDate();
+          break;
+        case ComputationPeriod.YEAR:
+          minPeriodDate = startOfYear(now).getDate();
+          break;
+        default:
+          minPeriodDate = 0;
+          maxPeriodDate = now;
+          break;
       }
+
+      const applicableFares = fares.filter(f => {
+        const startDateParsed = parse(f.startDate, 'YYYY-MM-DD', now);
+        return isAfter(startDateParsed, minPeriodDate);
+      });
+      // var totalPriceOnHistory = applicableFares.reduce((fareAmount, currentFare) => {
+
+      // }, 0);
+
+      const priceKey = currentPriceKeys[indexRank];
+      // const pricePerKwh = fareDetails[priceKey as string];
+      // console.log({ priceKey, pricePerKwh });
+      // if (pricePerKwh === undefined) {
+      //   return amount;
+      // }
 
       const indexDelta = (currentIndex - initialIndex) / 1000;
 
-      const subscriptionFeeProRata = computeSubscriptionFee(period, fareDetails.subscriptionFeePerMonth);
+      // const subscriptionFeeProRata = computeSubscriptionFee(period, fareDetails.subscriptionFeePerMonth);
 
-      console.log('fare-manager::computePrice', { indexDelta, subscriptionFeeProRata });
+      // console.log('fare-manager::computePrice', { indexDelta, subscriptionFeeProRata });
 
-      return amount + indexDelta * pricePerKwh + subscriptionFeeProRata;
+      return amount + indexDelta/* * pricePerKwh + subscriptionFeeProRata*/;
     },
     0
   );

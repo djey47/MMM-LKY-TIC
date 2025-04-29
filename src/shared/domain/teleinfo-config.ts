@@ -11,10 +11,16 @@ export interface TeleinfoConfiguration {
       opensearch: OpensearchConfiguration;
     };
   };
-  fareDetails: FareDetails;
+  fares: FarePeriod[];
   powerFactor: number;
   serialDevice: string;
   stopBits: 1 | 2;
+}
+
+export interface FarePeriod {
+  startDate: string;
+  endDate?: string; 
+  details: FareDetails;
 }
 
 export interface FareDetails {
