@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "install": "npm run build:module-prod",
-    "postinstall": "rm -rf node_modules/@serialport/bindings-cpp/prebuilds && node_modules/.bin/electron-rebuild -f -w @serialport/bindings-cpp",
+    "postinstall": "rm -rf node_modules/@serialport/bindings-cpp/prebuilds && node_modules/.bin/electron-rebuild -v 35.1.2 -f -w @serialport/bindings-cpp",
     "lint": "npm run lint:styles && npm run lint:scripts && npm run lint:source",
     "lint:source": "eslint ./src",
     "lint:scripts": "eslint ./tools/scripts",
@@ -34,11 +34,11 @@
     "teleinfo"
   ],
   "devDependencies": {
-    "@electron/rebuild": "3.3.0",
+    "@electron/rebuild": "^3.7.2",
     "@types/app-root-dir": "0.1.1",
     "@types/edit-json-file": "1.7.0",
     "@types/jest": "29.2.5",
-    "@types/node": "18.11.18",
+    "@types/node": "^22.15.3",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
     "@types/react-test-renderer": "18.0.0",
@@ -83,5 +83,8 @@
     "react-dom": "18.2.0",
     "sass-embedded": "^1.87.0",
     "serialport": "10.5.0"
+  },
+  "overrides": {
+    "node-abi": "4.4.0"
   }
 }
