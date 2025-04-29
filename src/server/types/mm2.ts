@@ -14,7 +14,7 @@ export interface MM2Helper {
    * MMM-LKY-TIC additional property.
    * Keeps track of the setInterval timerid for heartbeat
    */
-  heartbeatTimerId?: NodeJS.Timer | number;
+  heartbeatTimerId?: NodeJS.Timeout | number;
   /**
    * If you want to send a notification to all your modules, use this method.
    * Only the module of your helper type will receive the socket notification.
