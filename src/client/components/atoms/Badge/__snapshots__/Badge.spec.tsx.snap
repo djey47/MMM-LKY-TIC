@@ -2,7 +2,36 @@
 
 exports[`Badge atom component should render correctly 1`] = `
 <span
+  aria-hidden="true"
   className="badge"
+  onKeyDown={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  text
+</span>
+`;
+
+exports[`Badge atom component should render correctly with active prop 1`] = `
+<span
+  aria-hidden="true"
+  className="badge badge--active"
+  onKeyDown={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  text
+</span>
+`;
+
+exports[`Badge atom component should render correctly with onClick prop 1`] = `
+<span
+  aria-hidden="true"
+  className="badge badge--clickable"
+  onClick={[MockFunction]}
+  onKeyDown={[Function]}
+  role="button"
+  tabIndex={0}
 >
   text
 </span>

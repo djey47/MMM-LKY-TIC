@@ -9,5 +9,14 @@
     border-radius: 4px;
     padding: $size-xs;
     color: $highlighted-text;
+
+    &.badge--active {
+      background-color: $highlighted-text;
+      color: black;
+    }
+
+    &.badge--clickable {
+      cursor: pointer;
+    }
   }
 }
