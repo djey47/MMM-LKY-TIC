@@ -1,22 +1,21 @@
+import { Client } from '@opensearch-project/opensearch/.';
 import parseISO from 'date-fns/parseISO';
 import toDate from 'date-fns/toDate';
 import { createOpenSearchClient } from './helpers/opensearch-client';
 import { Log } from '../../../utils/mm2_facades';
 import { FIRST_DATA_TS_IS_KEY } from '../helpers/store-constants';
-
 import type { EntryValue, Stats, StatsItem, StoreDataEntries, } from '../helpers/store-models';
 import type { GroupedData } from './model/export';
 import type { DocStatsItem, DocumentByDate } from './model/opensearch';
 import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
-import { Client } from '@opensearch-project/opensearch/.';
 
 const IGNORED_STORE_KEYS_PREFIXES = [FIRST_DATA_TS_IS_KEY, 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
 
 /**
  * Export data to opensearch index
  */
-export async function exportDataToOpensearch(entries: StoreDataEntries, config: ModuleConfiguration) {
+export const exportDataToOpensearch = async (entries: StoreDataEntries, config: ModuleConfiguration) => {
   const osConfig = config.teleinfo?.dataExport.settings.opensearch;
   if (!osConfig) {
     Log.info('**** opensearch-exporter::exportDataToOpensearch no opensearch configuration provided, export won\'t be processed.');
@@ -37,9 +36,9 @@ export async function exportDataToOpensearch(entries: StoreDataEntries, config: 
   await sendToOpenSearch(groupedData, client, osConfig, config);
 
   Log.info('**** opensearch-exporter::exportDataToOpensearch Export ended!');
-}
+};
 
-function groupData(data: StoreDataEntries, config: ModuleConfiguration): GroupedData {
+const groupData = (data: StoreDataEntries, config: ModuleConfiguration): GroupedData => {
   return Object.entries(data).reduce((grouped: GroupedData, [storeKey, storeValue]) => {
     if (IGNORED_STORE_KEYS_PREFIXES.some((prefix) => storeKey.startsWith(prefix))) {
       return grouped;
@@ -62,9 +61,9 @@ function groupData(data: StoreDataEntries, config: ModuleConfiguration): Grouped
     perDay: {},
     perMonth: {},
   });
-}
+};
 
-function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryValue, config: ModuleConfiguration) {
+const parseData = (target: DocumentByDate, storeKey: string, storeValue: EntryValue, config: ModuleConfiguration) => {
   const date = extractDate(storeKey)
   const dateISO = dateToISO(date)
   let docItem = target[date];
@@ -102,21 +101,22 @@ function parseData(target: DocumentByDate, storeKey: string, storeValue: EntryVa
   if (config.debug) {
     Log.info(`'**** opensearch-exporter::parseData docItem=${JSON.stringify(docItem)}`);
   }
-}
+};
 
-function extractDate(storeKey: string) {
+const extractDate = (storeKey: string) => {
   // only support per-day dates for now
   return storeKey.substring(storeKey.length - 8);
-}
+};
 
-function dateToISO(date: string) {
+// TODO: use date-fns
+const dateToISO = (date: string) => {
   const year = date.substring(0, 4);
   const month = date.substring(4, 6);
   const day = date.substring(6, 8);
   return `${year}-${month}-${day}T00:00:00.000Z`;
-}
+};
 
-function convertStats(statsItem: StatsItem): DocStatsItem {
+const convertStats = (statsItem: StatsItem): DocStatsItem => {
   const { min, max, minTimestamp, maxTimestamp } = statsItem;
   return {
     max,
@@ -124,9 +124,9 @@ function convertStats(statsItem: StatsItem): DocStatsItem {
     min,
     minDate: toDate(minTimestamp),
   };
-}
+};
 
-async function sendToOpenSearch(data: GroupedData, osClient: Client, osConfig: OpensearchConfiguration, moduleConfig: ModuleConfiguration) {
+const sendToOpenSearch = async (data: GroupedData, osClient: Client, osConfig: OpensearchConfiguration, moduleConfig: ModuleConfiguration) => {
   const { indexName } = osConfig;
 
   const docPromises = Object.entries(data.perDay)
@@ -150,4 +150,4 @@ async function sendToOpenSearch(data: GroupedData, osClient: Client, osConfig: O
   if (moduleConfig.debug) {
     Log.info(`'**** opensearch-exporter::exportDataToOpensearch responses=${JSON.stringify(responses)}`);
   }
-}
+};

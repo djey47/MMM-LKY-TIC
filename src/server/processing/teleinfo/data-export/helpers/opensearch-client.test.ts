@@ -1,6 +1,9 @@
+/**
+ * @jest-environment node
+ */
+
 import { Client } from '@opensearch-project/opensearch';
 import { createOpenSearchClient } from './opensearch-client';
-
 import type { OpensearchConfiguration } from '../../../../../shared/domain/teleinfo-config';
 
 jest.mock('@opensearch-project/opensearch');

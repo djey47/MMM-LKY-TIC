@@ -1,3 +1,8 @@
+/**
+ * @jest-environment node
+ */
+
+import parseISO from 'date-fns/parseISO';
 import { exportDataToOpensearch } from './opensearch-exporter';
 import { createOpenSearchClient } from './helpers/opensearch-client';
 
@@ -5,7 +10,6 @@ import type { StoreDataEntries } from '../helpers/store-models';
 import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import type { Client } from '@opensearch-project/opensearch/.';
 import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
-import parseISO from 'date-fns/parseISO';
 
 jest.mock('./helpers/opensearch-client');
 jest.mock('../../../utils/mm2_facades', () => ({
