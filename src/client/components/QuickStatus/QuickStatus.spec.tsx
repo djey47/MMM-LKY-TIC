@@ -39,11 +39,24 @@ describe('QuickStatus component', () => {
     },
   };
 
-  it('should render correctly without data: no teleinfo data after more than 30 seconds', () => {
+  it('should render correctly without data', () => {
     // given
     const propsWithDelayedData: QuickStatusProps = {
       ...defaultProps,
-      hearbeatTs: 1674818157056, // +31s
+    };
+
+    // when
+    const tree = renderer.create(<QuickStatus {...propsWithDelayedData} />).toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });  
+  
+  it('should render correctly with data: no teleinfo data after more than 30 seconds', () => {
+    // given
+    const propsWithDelayedData: QuickStatusProps = {
+      ...propsWithData,
+      hearbeatTs: 1674818158056, // +32s
     };
 
     // when
@@ -67,6 +80,20 @@ describe('QuickStatus component', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('should render correctly with data: no teleinfo data after more than 5 seconds', () => {
+    // given
+    const propsWithDelayedData: QuickStatusProps = {
+      ...propsWithData,
+      hearbeatTs: 1674818132026, // +6s
+    };
+
+    // when
+    const tree = renderer.create(<QuickStatus {...propsWithDelayedData} />).toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+  
   it('should render correctly with data', () => {
     // given-when
     const tree = renderer
@@ -93,6 +120,69 @@ describe('QuickStatus component', () => {
     // when
     const tree = renderer
       .create(<QuickStatus {...propsWithPowerOveruseData} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly with data and intensity more than 5/6 of maximum', () => {
+    // given
+    const propsWithIntensityData: QuickStatusProps = {
+      ...propsWithData,
+      data: {
+        ...propsWithData.data,
+        instantIntensity: 5.5,
+        subscribedIntensity: 6,
+        statistics: {},
+      },
+    };
+
+    // when
+    const tree = renderer
+      .create(<QuickStatus {...propsWithIntensityData} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly with data and intensity more than 2/3 of maximum', () => {
+    // given
+    const propsWithIntensityData: QuickStatusProps = {
+      ...propsWithData,
+      data: {
+        ...propsWithData.data,
+        instantIntensity: 2.5,
+        subscribedIntensity: 3,
+        statistics: {},
+      },
+    };
+
+    // when
+    const tree = renderer
+      .create(<QuickStatus {...propsWithIntensityData} />)
+      .toJSON();
+
+    // then
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly with data and intensity more than 1/3 of maximum', () => {
+    // given
+    const propsWithIntensityData: QuickStatusProps = {
+      ...propsWithData,
+      data: {
+        ...propsWithData.data,
+        instantIntensity: 1.5,
+        subscribedIntensity: 3,
+        statistics: {},
+      },
+    };
+
+    // when
+    const tree = renderer
+      .create(<QuickStatus {...propsWithIntensityData} />)
       .toJSON();
 
     // then
