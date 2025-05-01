@@ -1,7 +1,5 @@
-import classnames from 'classnames';
-import { FunctionComponent } from 'react';
+import clsx from 'clsx';
 import Teleinfo from '../Teleinfo/Teleinfo';
-
 import '../../styles/module.scss';
 import '../../styles/reset.scss';
 import './Main.scss';
@@ -10,9 +8,9 @@ import './Main.scss';
  * MagicMirror
  * Main REACT component
  */
-const Main: FunctionComponent = () => {
+const Main = () => {
   return (
-    <div className={classnames('main', 'dimmed', 'light', 'small')}>
+    <div className={clsx('main', 'dimmed', 'light', 'small')}>
       <Teleinfo />
     </div>
   );
