@@ -10,7 +10,6 @@ export const PERIOD_LABELS_PER_FARE_OPTION: {
 export const LABELS_PER_FARE_PERIOD: {
   [key: string]: string;
 } = {
-  // TODO: Check keys
   BASE: PERIOD_LABELS_PER_FARE_OPTION.BASE[0],
   EJPN: PERIOD_LABELS_PER_FARE_OPTION.EJP[0],
   EJPP: PERIOD_LABELS_PER_FARE_OPTION.EJP[1],
@@ -21,3 +20,5 @@ export const LABELS_PER_FARE_PERIOD: {
 export const DATE_FORMAT = 'yyyy/MM/dd';
 
 export const TIME_FORMAT = 'HH:mm:ss';
+
+export const VALUE_NA = '...';
