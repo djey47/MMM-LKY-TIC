@@ -3,11 +3,9 @@ import { faBoltLightning, faLeaf, faPlugCircleBolt, faPlugCircleExclamation } fr
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import timeDifferenceInSeconds from 'date-fns/differenceInSeconds';
-import { FunctionComponent } from 'react';
-import { TeleInfo } from '../../../shared/domain/teleinfo';
 import { getCurrentPeriodLabel } from '../../shared/displayHelper';
 import Badge from '../atoms/Badge/Badge';
-
+import type { TeleInfo } from '../../../shared/domain/teleinfo';
 import './QuickStatus.scss';
 
 export interface QuickStatusProps {
@@ -18,8 +16,8 @@ export interface QuickStatusProps {
 /**
  * Teleinfo quick status bar
  */
-const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProps) => {
-  function renderItems() {
+const QuickStatus = (props: QuickStatusProps) => {
+  const renderItems = () => {
     return (
       <>
         <li key="qs-link" className="quick-status__link-item">
@@ -33,9 +31,9 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
         </li>
       </>
     );
-  }
+  };
 
-  function renderLinkItem() {
+  const renderLinkItem = () => {
     const options = {
       color: 'red',
       icon: faPlugCircleExclamation,
@@ -71,9 +69,9 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
         <FontAwesomeIcon className={itemClassName} color={options.color} icon={options.icon} />
       </>
     );
-  }
+  };
 
-  function renderSupplyItem() {
+  const renderSupplyItem = () => {
     const options = {
       color: 'white',
       icon: faCircleQuestion,
@@ -107,9 +105,9 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
         <FontAwesomeIcon className={itemClassName} color={options.color} icon={options.icon} />
       </>
     );
-  }
+  };
 
-  function renderFarePeriodItem() {
+  const renderFarePeriodItem = () => {
     if(props.data?.currentFarePeriod) {
       return (
         <>
@@ -120,7 +118,7 @@ const QuickStatus: FunctionComponent<QuickStatusProps> = (props: QuickStatusProp
     return (
       <FontAwesomeIcon className="quick-status__current-fare-period-picto" color="white" icon={faCircleQuestion} />
     ) 
-  }
+  };
 
   return (
     <div className="quick-status">
