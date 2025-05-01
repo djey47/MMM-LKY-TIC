@@ -1,7 +1,7 @@
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faBoltLightning, faLeaf, faPlugCircleBolt, faPlugCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import timeDifferenceInSeconds from 'date-fns/differenceInSeconds';
 import { getCurrentPeriodLabel } from '../../shared/displayHelper';
 import Badge from '../atoms/Badge/Badge';
@@ -45,6 +45,8 @@ const QuickStatus = (props: QuickStatusProps) => {
       const heartbeatTime = props.hearbeatTs || 0;
       const idleDuration = timeDifferenceInSeconds(heartbeatTime, lastReceivedTime);
       
+      console.log({ lastReceivedTime, heartbeatTime, idleDuration });
+
       if (idleDuration > 30) {
         options.color = 'red';
         options.icon = faPlugCircleExclamation;
@@ -61,7 +63,7 @@ const QuickStatus = (props: QuickStatusProps) => {
       }
    }
 
-    const itemClassName = classNames('quick-status__link-picto', {
+    const itemClassName = clsx('quick-status__link-picto', {
       'not-connected': options.isCritical,
     });
     return (
@@ -99,7 +101,7 @@ const QuickStatus = (props: QuickStatusProps) => {
       options.icon = faLeaf;
     }
 
-    const itemClassName = classNames('quick-status__supply-picto', { 'supply-critical': options.isCritical });
+    const itemClassName = clsx('quick-status__supply-picto', { 'supply-critical': options.isCritical });
     return (
       <>
         <FontAwesomeIcon className={itemClassName} color={options.color} icon={options.icon} />
