@@ -44,7 +44,7 @@ describe('MM2 Module client', () => {
     const { name, implementation } = checkAndExtractRegistration(
       mockModuleRegister.mock.lastCall
     );
-    expect(name).toBe('mmm-lky-tic');
+    expect(name).toBe('MMM-LKY-TIC');
     expect(implementation.defaults).toEqual({
       currencySymbol: '€',
       debug: false,
