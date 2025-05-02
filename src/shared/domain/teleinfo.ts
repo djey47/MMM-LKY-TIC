@@ -75,8 +75,27 @@ interface OriginTeleInfo {
 }
 
 /**
+ * Collected data
+ */
+export interface CollectedSupply {
+  [key: string]: number[] | undefined;
+  currentDay?: number[];
+  currentMonth?: number[];
+  currentYear?: number[];
+  total?: number[];
+};
+
+/**
  * Computed data
  */
+export interface Estimated {
+  [key: string]: number | undefined;
+  currentDay?: number;
+  currentMonth?: number;
+  currentYear?: number;
+  total?: number;
+}
+
 export interface Statistics {
   instantPower?: TopicStatistics;
   instantIntensity?: TopicStatistics;
@@ -100,19 +119,8 @@ export interface StatisticsValues {
 
 interface ExtendedTeleInfo {
   estimatedPower?: number;
-  estimatedPrices?: {
-    currentDay?: number;
-    currentMonth?: number;
-    currentYear?: number;
-    total?: number;
-  };
-  suppliedPower?: {
-    [key: string]: number[] | undefined;
-    currentDay?: number[];
-    currentMonth?: number[];
-    currentYear?: number[];
-    total?: number[];
-  };
+  estimatedPrices?: Estimated; 
+  suppliedPower?: CollectedSupply; 
   statistics: Statistics;
   meta?: ExtendedMetadata;
 }

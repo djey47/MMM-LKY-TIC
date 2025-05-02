@@ -1,146 +1,17 @@
-@import "../../styles/common";
+@use "../../styles/common" as commonVars;
 
 /** @define teleinfo */
 
 .mmm-lky-tic-wrapper {
   .teleinfo {
-    color: $normal-text;
+    color: commonVars.$normal-text;
     display: flex;
     flex-direction: column;
     font-size: var(--font-size-normal);
+    height: 275px;
 
     &__no-data {
       font-style: italic;
-    }
-
-    &__power-value {
-      font-size: var(--font-size-large);
-    }
-
-    &__power-unit,
-    &__power-stats-unit,
-    &__intensity-unit,
-    &__supplied-unit,
-    &__supplied-detail-unit,
-    &__costs-unit {
-      color: $highlighted-text;
-    }
-
-    &__power-unit {
-      font-size: var(--font-size-medium);
-    }
-
-    &__power-stats-unit,
-    &__intensity-unit,
-    &__supplied-unit,
-    &__costs-unit {
-      font-size: var(--font-size-xsmall);
-    }
-
-    &__over-intensity-unit,
-    &__supplied-detail-unit {
-      font-size: $font-2xs;
-    }
-
-    &__power {
-      justify-content: center;
-    }
-
-    &__power,
-    &__power-stats-group,
-    &__over-intensity,
-    &__intensity,
-    &__costs,
-    &__supplied,
-    &__supplied-detail {
-      display: flex;
-      flex-direction: row;
-      align-items: baseline;
-    }
-
-    &__supplied-detail {
-      justify-content: right;
-    }
-
-    &__supplied-detail-items,
-    &__power-stats {
-      display: flex;
-      flex-direction: column;
-    }
-
-    &__power-stats,
-    &__supplied,
-    &__costs {
-      font-size: var(--font-size-small);
-    }
-
-    &__supplied-detail,
-    &__over-intensity {
-      font-size: var(--font-size-xsmall);
-    }
-
-    &__intensity,
-    &__over-intensity,
-    &__costs,
-    &__supplied-detail,
-    &__dates-start-last {
-      margin-bottom: $size-m;
-    }
-
-    &__intensity.with-overflow {
-      margin-bottom: 0;
-    }
-
-    &__dates-start-last {
-      font-style: italic;
-      font-size: var(--font-size-xsmall);
-    }
-
-    &__power-value,
-    &__power-stats-value,
-    &__intensity-value,
-    &__costs-value,
-    &__supplied-value,
-    &__dates-start-last-value {
-      color: $highlighted-text;
-    }
-
-    &__intensity,
-    &__over-intensity,
-    &__dates {
-      margin-left: auto;
-    }
-
-    &__over-intensity {
-      animation: blinker 2s linear infinite;
-      color: $critical-text;
-    }
-
-    &__power-stats-label,
-    &__intensity-label,
-    &__over-intensity-label,
-    &__supplied-label,
-    &__costs-label,
-    &__dates-start-last-label {
-      margin-right: $text-separator-m;
-    }
-
-    &__instant-section,
-    &__dates-section,
-    &__costs-section {
-      display: flex;
-      flex-direction: column;
-
-      &::after {
-        content: "";
-        display: block;
-        border-bottom: 1px dashed $dimmed-border;
-      }
-    }
-
-    &__costs-section,
-    &__dates-section {
-      padding-top: $size-m;
     }
   }
 }

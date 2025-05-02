@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Teleinfo from '../Teleinfo/Teleinfo';
+import Teleinfo from '../Teleinfo';
 import '../../styles/module.scss';
 import '../../styles/reset.scss';
 import './Main.scss';
