@@ -102,7 +102,18 @@ Examples of index mapping can be found here: `data-export/opensearch/mappings`.
 
 ### Install note
 
-Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` electron bindings have to be added and built *from module directory*. The `postinstall` npm script should set everything up for you.
+Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` electron bindings have to be added and built *from module directory*. The `postinstall` npm script should set everything up for you. 
+
+Recently, it has been required to specify electron version to be compiled against in the script. Thus, -v switch has been added (with value as *35.1.2* currently); **one has to make sure it'd match against MagicMirror's**.
+
+As illustrated in `package.json`:
+```json
+"scripts": {
+...
+  "postinstall": "rm -rf node_modules/@serialport/bindings-cpp/prebuilds && node_modules/.bin/electron-rebuild -v 35.1.2 -f -w @serialport/bindings-cpp",
+...
+}
+```
 
 ### Installing this module
 1. Clone repository into location of your choice (may be MagicMirror /modules/ subdirectory)
