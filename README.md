@@ -37,40 +37,33 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
   - Red bolt, blinking: power overflow has been detected over subscribed.
 - **F** for Fare period: displays current fare period, according to chosen fare option and time of the day.
 
-### Displays instant data
+Information is dispatched over many pages.
+
+### Info page 1: summary, instant data
 
 ```
                 637VA~511W
-Min (d/m/y/o): 220/210/200/200VA
-Max: 650/2500/3000/3554VA
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
-- daily/monthly/yearly/overall statistics:
-  - minimum value
-  - maximum value
 ---
 ```
-                             Intensity: 1A
-                               Overuse: 3A
+                             Intensity: 1A(+1)
 ```
 - current intensity in Ampere
 - when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere.
-
-
-### Displays daily, monthly, total electrical furniture and costs
-
+---
 ```
-Supplied (d/m/y/t): 475/1000/2500/5000wh
-                        BASE: 475/1000/1500/5000wh
----------------------------------------------
-Costs (d/m/y/t): ~3/8/25/35€
----------------------------------------------
+Costs (today, est.): ~1.6eur
+Supplied (today): 2155Wh
 ```
+- estimated costs at day are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs
+- supplied energy at date, globally.
 
-Per current day/month/year and total:
+### Info page 2: statistics
 
-- Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
-- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs.
+Displays daily, monthly, yearly, total electrical furniture and costs.
+
+TODO
 
 
 ### Exports local data to Opensearch index
@@ -129,12 +122,14 @@ As illustrated in `package.json`:
 {
   "currencySymbol": "€",
   "debug": false,
+  "pageDurationMs": 10000,
   "teleinfo": { ... }
 }
 ```
 
 - `currencySymbol`: defines the symbol to be used for money (e.g cost)
 - `debug`: enables (true) or disables (false) additional log messages for development or troubleshooting
+- `pageDurationMs`: duration in milliseconds for every info panel page (0 meaning the summary page will always be displayed); default is 10000 (=10s)
 - `teleinfo`: see below.
 
 ### Teleinfo section
