@@ -98,6 +98,7 @@ export interface Estimated {
 
 export interface Statistics {
   instantPower?: TopicStatistics;
+  instantEstimatedPower?: TopicStatistics;
   instantIntensity?: TopicStatistics;
 }
 
