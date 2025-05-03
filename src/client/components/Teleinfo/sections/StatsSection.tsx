@@ -29,7 +29,7 @@ const displaySingleValue = (value?: number) => {
   return value ?? VALUE_NA;
 };
 
-const displayItem = (topic: Topic, item: Item, config?: ModuleConfiguration ) => {
+const displayItem = (topic: Topic, item: Item, config?: ModuleConfiguration) => {
   if (!item) {
     return VALUE_NA;
   }
@@ -40,7 +40,7 @@ const displayItem = (topic: Topic, item: Item, config?: ModuleConfiguration ) =>
     supplied: 'Wh',
     costs: config?.currencySymbol ?? '',
   };
-  
+
   const unit = unitPerTopic[topic];
   if (topic === 'power' || topic === 'intensity') {
     const { min, max, average } = item as StatisticsValues;
@@ -57,20 +57,24 @@ const displayItem = (topic: Topic, item: Item, config?: ModuleConfiguration ) =>
   }
 }
 
-export const Table = ({ tableData }: TableProps) => {
-  const data = useMemo(() => tableData, []);  
+const Table = ({ tableData }: TableProps) => {
+  const data = useMemo(() => tableData, []);
   const configuration = useContext(ConfigurationContext);
 
   const now = new Date();
 
-  const columns = useMemo<ColumnDef<Data, any>[]>(
+  const columns = useMemo<ColumnDef<Data, string>[]>(
     () => [
       {
         header: '',
         accessorFn: ({ topic, day, fareOption }) => {
           if (topic === 'supplied') {
-            const optionLabels = (day as number[]).map((_o, r) => getPeriodLabel(fareOption, r)).join('+'); 
+            const optionLabels = (day as number[]).map((_o, r) => getPeriodLabel(fareOption, r)).join('+');
             return `${topic} (${optionLabels})`;
+          } else if (topic === 'power') {
+            return 'pwr (est.)';
+          } else if (topic === 'costs') {
+            return 'costs (est.)';
           }
           return topic;
         },
@@ -141,7 +145,7 @@ export const Table = ({ tableData }: TableProps) => {
 
 const StatsSection = ({ data }: InfoSectionCommonProps) => {
   if (!data) {
-    return undefined;
+    return null;
   }
 
   const toTopicTableData = (rawData: TeleInfo, topic: string) => {
@@ -149,7 +153,7 @@ const StatsSection = ({ data }: InfoSectionCommonProps) => {
     let fareOption: string | undefined;
     switch (topic) {
       case 'power':
-        stats = rawData.statistics.instantPower;
+        stats = rawData.statistics.instantEstimatedPower;
         break;
       case 'intensity':
         stats = rawData.statistics.instantIntensity;
@@ -191,7 +195,6 @@ const StatsSection = ({ data }: InfoSectionCommonProps) => {
       ...toTopicTableData(rawData, topic),
     }));
   };
-
 
   const { meta } = data;
   const firstReceivedDataDate = displayDate(
