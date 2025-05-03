@@ -9,7 +9,8 @@ MagicMirror2 module to display info about home power supply (previous generation
 
 Module is currently under development, working for use case above.
 
-![Sample 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Sample1.png?raw=true)
+![Sample 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/InfoPanel-1.png?raw=true)
+![Sample 2](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/InfoPanel-2.png?raw=true)
 
 ## Features
 
