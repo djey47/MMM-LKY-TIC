@@ -9,7 +9,7 @@ const SummarySection = ({ data }: InfoSectionCommonProps) => {
   const configuration = useContext(ConfigurationContext);
 
   if (!data) {
-    return undefined;
+    return null;
   }
 
   const { currencySymbol } = configuration || {};
@@ -70,7 +70,7 @@ const SummarySection = ({ data }: InfoSectionCommonProps) => {
       <section className="summary-section__costs-section">
         <p className="summary-section__costs">
           <span className="summary-section__costs-label">
-            Costs (today):
+            Costs (today, est.):
           </span>
           <span className="summary-section__costs-value">
             ~{displayPriceWithTwoDecimals(data.estimatedPrices?.currentDay)}
