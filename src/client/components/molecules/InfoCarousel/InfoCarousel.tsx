@@ -6,7 +6,7 @@ import type { TeleInfo } from '../../../../shared/domain/teleinfo';
 import type { InfoSectionCommonProps } from '../../../types/client';
 import './InfoCarousel.scss';
 
-interface InfoCarouselProps {
+export interface InfoCarouselProps {
   data?: TeleInfo;
   stickyIndex?: number;
 }

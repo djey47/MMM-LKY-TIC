@@ -48,6 +48,7 @@ describe('MM2 Module client', () => {
     expect(implementation.defaults).toEqual({
       currencySymbol: '€',
       debug: false,
+      pageDurationMs: 10000,
     });
     expect(typeof implementation.getDom).toBe('function');
     expect(typeof implementation.getHeader).toBe('function');

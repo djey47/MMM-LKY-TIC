@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import ConfigurationContext from '../../contexts/ConfigurationContext';
 import useWithNotifications from '../../hooks/with-notifications/with-notifications';
-import QuickStatus from '../QuickStatus/QuickStatus';
-import { InfoCarousel } from '../molecules/InfoCarousel';
+import QuickStatus from '../QuickStatus';
+import InfoCarousel from '../molecules/InfoCarousel';
 import type { TeleInfo, TeleInfoHeartbeat } from '../../../shared/domain/teleinfo';
 import './Teleinfo.scss';
 

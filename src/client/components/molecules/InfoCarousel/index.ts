@@ -1,1 +1,2 @@
-export { default as InfoCarousel } from './InfoCarousel';
+export { default } from './InfoCarousel';
+export type { InfoCarouselProps } from './InfoCarousel';
