@@ -6,5 +6,6 @@ import { TeleinfoConfiguration } from './teleinfo-config';
 export interface ModuleConfiguration {
   debug?: boolean;
   currencySymbol?: string;
+  pageDurationMs?: number;
   teleinfo?: TeleinfoConfiguration;
 }

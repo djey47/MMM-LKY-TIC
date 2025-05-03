@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StatsSection, SummarySection } from '../../Teleinfo/sections';
 import Badge from '../../atoms/Badge/Badge';
+import ConfigurationContext from '../../../contexts/ConfigurationContext';
 import type { TeleInfo } from '../../../../shared/domain/teleinfo';
 import type { InfoSectionCommonProps } from '../../../types/client';
 import './InfoCarousel.scss';
@@ -11,9 +12,9 @@ interface InfoCarouselProps {
 }
 
 const PAGES = [SummarySection, StatsSection/*, HistorySection*/];
-const PAGE_DELAY_MS = 4000;
 
 const InfoCarousel = ({ data, stickyIndex }: InfoCarouselProps) => {
+  const configuration = useContext(ConfigurationContext);
   const [currentPage, setCurrentPage] = useState(stickyIndex ?? 0);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const InfoCarousel = ({ data, stickyIndex }: InfoCarouselProps) => {
 
     const interval = setInterval(() => {
       setCurrentPage((prevPage) => (prevPage + 1) % PAGES.length); // Assuming 3 pages
-    }, PAGE_DELAY_MS);
+    }, configuration?.pageDurationMs);
     return () => clearInterval(interval);
   }, []);
 

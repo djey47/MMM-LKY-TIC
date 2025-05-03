@@ -28,6 +28,7 @@ Module.register(MODULE_NAME, {
   defaults: {
     debug: false,
     currencySymbol: '€',
+    pageDurationMs: 10000,
   },
 
   getStyles: function (): string[] {
