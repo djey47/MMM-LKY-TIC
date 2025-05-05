@@ -25,15 +25,3 @@ export type EntryNumericValue = number;
 export type EntryNumericTupleValue = (number | undefined)[];
 
 export type EntryValue = EntryNumericValue | EntryNumericTupleValue | StoredStatistics;
-
-export type Stats = {
-  apparentPower: StatsItem,
-  instantIntensity: StatsItem,
-};
-
-export type StatsItem = {
-  min: number,
-  minTimestamp: number,
-  max: number,
-  maxTimestamp: number,
-}

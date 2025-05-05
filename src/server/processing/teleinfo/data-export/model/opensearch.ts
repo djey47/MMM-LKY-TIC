@@ -1,8 +1,8 @@
 export type DocStatsItem = {
-  min: number,
-  minDate: Date,
-  max: number,
-  maxDate: Date,
+  min?: number,
+  minDate?: Date,
+  max?: number,
+  maxDate?: Date,
 };
 
 export type DocPeriodicInfo = {
@@ -21,6 +21,7 @@ export type Document = {
   },
   statistics?: {
     apparentPower: DocStatsItem,
+    estimatedPower: DocStatsItem,
     instantIntensity: DocStatsItem,
   },
   supplied?: DocPeriodicInfo,

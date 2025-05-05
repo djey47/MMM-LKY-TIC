@@ -2,13 +2,15 @@ import { Client } from '@opensearch-project/opensearch/.';
 import parseISO from 'date-fns/parseISO';
 import toDate from 'date-fns/toDate';
 import { createOpenSearchClient } from './helpers/opensearch-client';
-import { Log } from '../../../utils/mm2_facades';
 import { FIRST_DATA_TS_IS_KEY } from '../helpers/store-constants';
-import type { EntryValue, Stats, StatsItem, StoreDataEntries, } from '../helpers/store-models';
+import { dateToISO } from '../helpers/format';
+import { Log } from '../../../utils/mm2_facades';
+import type { EntryValue, StoreDataEntries, StoredStatistics, } from '../helpers/store-models';
 import type { GroupedData } from './model/export';
 import type { DocStatsItem, DocumentByDate } from './model/opensearch';
 import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
+import type { StatisticsValues } from '../../../../shared/domain/teleinfo';
 
 const IGNORED_STORE_KEYS_PREFIXES = [FIRST_DATA_TS_IS_KEY, 'INITIAL_', 'TOTAL_', 'OVERALL_', 'YEAR_'];
 
@@ -44,12 +46,10 @@ const groupData = (data: StoreDataEntries, config: ModuleConfiguration): Grouped
       return grouped;
     }
 
-    const { perDay, perMonth } = grouped;
+    const { perDay } = grouped;
     let category: DocumentByDate | undefined = undefined;
     if (storeKey.startsWith('DAY')) {
       category = perDay;
-    } else if (storeKey.startsWith('MONTH')) {
-      category = perMonth;
     }
 
     if (category) {
@@ -91,9 +91,10 @@ const parseData = (target: DocumentByDate, storeKey: string, storeValue: EntryVa
   } else if (isCostsData) {
     docItem.costs = storeValue as number;
   } else if (isStatsData) {
-    const { apparentPower, instantIntensity } = storeValue as Stats;
+    const { apparentPower, estimatedPower, instantIntensity } = storeValue as StoredStatistics;
     docItem.statistics = {
       apparentPower: convertStats(apparentPower),
+      estimatedPower: convertStats(estimatedPower),
       instantIntensity: convertStats(instantIntensity),
     };
   }
@@ -108,21 +109,13 @@ const extractDate = (storeKey: string) => {
   return storeKey.substring(storeKey.length - 8);
 };
 
-// TODO: use date-fns
-const dateToISO = (date: string) => {
-  const year = date.substring(0, 4);
-  const month = date.substring(4, 6);
-  const day = date.substring(6, 8);
-  return `${year}-${month}-${day}T00:00:00.000Z`;
-};
-
-const convertStats = (statsItem: StatsItem): DocStatsItem => {
-  const { min, max, minTimestamp, maxTimestamp } = statsItem;
+const convertStats = (statsItem?: StatisticsValues): DocStatsItem => {
+  const { min, max, minTimestamp, maxTimestamp } = statsItem ?? {};
   return {
     max,
-    maxDate: toDate(maxTimestamp),
+    maxDate: maxTimestamp !== undefined ? toDate(maxTimestamp) : undefined,
     min,
-    minDate: toDate(minTimestamp),
+    minDate: minTimestamp !== undefined ? toDate(minTimestamp) : undefined,
   };
 };
 
