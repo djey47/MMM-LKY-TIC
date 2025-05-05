@@ -43,8 +43,8 @@ const displayItem = (topic: Topic, item: Item, config?: ModuleConfiguration) => 
 
   const unit = unitPerTopic[topic];
   if (topic === 'power' || topic === 'intensity') {
-    const { min, max, average } = item as StatisticsValues;
-    return `${displaySingleValue(min)}/${displaySingleValue(max)}/${displaySingleValue(average)}${unit}`;
+    const { min, max } = item as StatisticsValues;
+    return `${displaySingleValue(min)}/${displaySingleValue(max)}${unit}`;
   } else if (topic === 'supplied') {
     const suppliedValues = item as number[];
     const totalSupplied = suppliedValues.reduce((acc, val) => acc + (val || 0), 0);
