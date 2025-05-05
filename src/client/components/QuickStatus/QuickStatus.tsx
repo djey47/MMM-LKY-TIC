@@ -45,8 +45,6 @@ const QuickStatus = (props: QuickStatusProps) => {
       const heartbeatTime = props.hearbeatTs || 0;
       const idleDuration = timeDifferenceInSeconds(heartbeatTime, lastReceivedTime);
       
-      console.log({ lastReceivedTime, heartbeatTime, idleDuration });
-
       if (idleDuration > 30) {
         options.color = 'red';
         options.icon = faPlugCircleExclamation;
