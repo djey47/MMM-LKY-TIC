@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StatsSection, SummarySection } from '../../Teleinfo/sections';
+import { HistorySection, StatsSection, SummarySection } from '../../Teleinfo/sections';
 import Badge from '../../atoms/Badge/Badge';
 import ConfigurationContext from '../../../contexts/ConfigurationContext';
 import type { TeleInfo } from '../../../../shared/domain/teleinfo';
@@ -11,7 +11,7 @@ export interface InfoCarouselProps {
   stickyIndex?: number;
 }
 
-const PAGES = [SummarySection, StatsSection/*, HistorySection*/];
+const PAGES = [SummarySection, StatsSection, HistorySection];
 
 const InfoCarousel = ({ data, stickyIndex }: InfoCarouselProps) => {
   const configuration = useContext(ConfigurationContext);

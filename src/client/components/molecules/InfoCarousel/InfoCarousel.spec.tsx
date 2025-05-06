@@ -6,6 +6,7 @@ import ConfigurationContext from '../../../contexts/ConfigurationContext';
 jest.mock('../../Teleinfo/sections', () => ({
   SummarySection: () => <div data-testid="summary-section">SummarySection Content</div>,
   StatsSection: () => <div data-testid="stats-section">StatsSection Content</div>,
+  HistorySection: () => <div data-testid="history-section">HistorySection Content</div>,
 }));
 
 describe('InfoCarousel component', () => {
@@ -34,8 +35,10 @@ describe('InfoCarousel component', () => {
     // then
     expect(screen.getByTestId('summary-section')).toBeInTheDocument();
     expect(screen.queryByTestId('stats-section')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('history-section')).not.toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('3')).toBeInTheDocument();
   });
 
   it('switches page on badge click', () => {
@@ -48,6 +51,7 @@ describe('InfoCarousel component', () => {
     // then
     expect(screen.getByTestId('stats-section')).toBeInTheDocument();
     expect(screen.queryByTestId('summary-section')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('history-section')).not.toBeInTheDocument();
   });
 
   it('rotates pages automatically when stickyIndex is not provided', () => {
@@ -58,6 +62,10 @@ describe('InfoCarousel component', () => {
     // when: timer advances to trigger the first rotation
     act(() => jest.advanceTimersByTime(configuration.pageDurationMs));
     expect(screen.getByTestId('stats-section')).toBeInTheDocument();
+
+    // when: timer advances to trigger the second rotation
+    act(() => jest.advanceTimersByTime(configuration.pageDurationMs));
+    expect(screen.getByTestId('history-section')).toBeInTheDocument();
 
     // advances again to back to first page (full cycle)
     act(() => jest.advanceTimersByTime(configuration.pageDurationMs));

@@ -9,11 +9,11 @@ import {
 import { VALUE_NA } from '../../../shared/displayConstants';
 import { displayDate, displayPriceWithTwoDecimals, getPeriodLabel } from '../../../shared/displayHelper';
 import ConfigurationContext from '../../../contexts/ConfigurationContext';
-import type { CollectedSupply, Estimated, StatisticsValues, TeleInfo, TopicStatistics } from '../../../../shared/domain/teleinfo';
+import type { CollectedSupply, Estimated, EstimatedHistory, StatisticsValues, TeleInfo, TopicStatistics } from '../../../../shared/domain/teleinfo';
 import type { InfoSectionCommonProps } from '../../../types/client';
 import './StatsSection.scss';
 
-type Item = StatisticsValues | number[] | number | undefined;
+type Item = EstimatedHistory | StatisticsValues | (number|undefined)[] | number | undefined;
 
 type Topic = 'power' | 'intensity' | 'supplied' | 'costs';
 
