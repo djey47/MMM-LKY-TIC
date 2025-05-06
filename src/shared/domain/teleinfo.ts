@@ -89,12 +89,19 @@ export interface CollectedSupply {
  * Computed data
  */
 export interface Estimated {
-  [key: string]: number | undefined;
+  [key: string]: number | EstimatedHistory | undefined;
   currentDay?: number;
   currentMonth?: number;
   currentYear?: number;
+  history?: EstimatedHistory;
   total?: number;
 }
+
+export interface EstimatedHistory {
+  lastDays?: (number | undefined)[];
+  lastMonths?: (number | undefined)[];
+}
+
 
 export interface Statistics {
   instantPower?: TopicStatistics;
