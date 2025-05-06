@@ -3,9 +3,9 @@ TODO-FIXME
 
 # TODO
 - [front-end] paginated display mode:
-  - summary
-  - stats
-  - history
+  - [x] summary
+  - [ ] stats
+  - [ ] history
     - displays a table with the history (supplied, cost, ...?) for the last 5 days/months. Current day/month values being extrapolation?
   - Configuration: page persistance time...,  
 - quick status display with icons/labels
