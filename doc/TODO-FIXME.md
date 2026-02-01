@@ -4,10 +4,12 @@ TODO-FIXME
 # TODO
 - [front-end] paginated display mode:
   - [x] summary
-  - [ ] stats
+  - [x] stats
   - [ ] history
-    - displays a table with the history (supplied, cost, ...?) for the last 5 days/months. Current day/month values being extrapolation?
-  - Configuration: page persistance time...,  
+    - [x] displays a table with the history (supplied, cost, ...?) for the last 5 days/months. 
+    - [ ] current day/month values being extrapolation?
+  - [x] Configuration: page persistance time...,
+  - [x] Button to lock (suspend) auto page switching  
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
     => does not work for now as the component does not update till new data arrives (see withNotification HOC to trigger the refresh every 5 seconds via setInterval - ? requires a retry count in state ?)
