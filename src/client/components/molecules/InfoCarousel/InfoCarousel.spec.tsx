@@ -85,4 +85,25 @@ describe('InfoCarousel component', () => {
     // then
     expect(screen.getByTestId('stats-section')).toBeInTheDocument();
   });
+
+  it('toggles lock state on lock click', () => {
+    // given
+    renderWithContext({ data: {} });
+    expect(screen.getByTestId('summary-section')).toBeInTheDocument();
+
+    // when: timer advances to trigger the first rotation
+    act(() => jest.advanceTimersByTime(configuration.pageDurationMs));
+    expect(screen.getByTestId('stats-section')).toBeInTheDocument();
+    expect(screen.getByText('"className":"info-carousel__lock-icon"', { exact: false })).toBeInTheDocument();
+
+    // when: click on lock
+    fireEvent.click(screen.getByTestId('lock-cta'));
+
+    // when: timer advances again
+    act(() => jest.advanceTimersByTime(configuration.pageDurationMs));
+    
+    // then
+    expect(screen.getByTestId('stats-section')).toBeInTheDocument();
+    expect(screen.getByText('"className":"info-carousel__lock-icon is-locked"', { exact: false })).toBeInTheDocument();
+  });
 });

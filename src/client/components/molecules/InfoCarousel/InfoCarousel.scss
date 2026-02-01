@@ -19,5 +19,9 @@
       justify-content: center;
       gap: commonVars.$size-m;
     }
+
+    &__lock-icon.is-locked {
+      color: orange;
+    }
   }
 }
