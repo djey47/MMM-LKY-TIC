@@ -38,9 +38,11 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
   - Red bolt, blinking: power overflow has been detected over subscribed.
 - **F** for Fare period: displays current fare period, according to chosen fare option and time of the day.
 
-Information is dispatched over many pages.
+Information is dispatched over many pages, rotating like a carousel.
 
-### Info page 1: summary, instant data
+Using 🔒 button (requires touch or pointer), it's possible to lock on current page. 
+
+#### Info page 1: summary, instant data
 
 ```
                 637VA~511W
@@ -60,12 +62,13 @@ Supplied (today): 2155Wh
 - estimated costs at day are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs
 - supplied energy at date, globally.
 
-### Info page 2: statistics
+#### Info page 2: statistics
 
 Displays daily, monthly, yearly, total electrical furniture and costs.
 
-TODO
+#### Info page 3: costs history
 
+Displays costs for last 7 days (line 1) and last 6 months (line 2)
 
 ### Exports local data to Opensearch index
 
