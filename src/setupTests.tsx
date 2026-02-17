@@ -1,3 +1,6 @@
+// Timezone set for all tests
+process.env.TZ = 'Etc/GMT-2'; // 'Etc/GMT-2' matches UTC+2
+
 import React from 'react';
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 

@@ -1,19 +1,21 @@
-import { StatisticsValues, TeleInfo, TopicStatistics } from '../../../shared/domain/teleinfo';
 import { InstanceStore } from './helpers/instance-store';
 import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import { PER_DAY_STATS_IS_KEY_PREFIX, PER_MONTH_STATS_IS_KEY_PREFIX, OVERALL_STATS_IS_KEY, PER_YEAR_STATS_IS_KEY_PREFIX } from './helpers/store-constants';
-import { StoredStatistics } from './helpers/store-models';
+import type { StoredStatistics } from './helpers/store-models';
+import type { StatisticsValues, TeleInfo, TopicStatistics } from '../../../shared/domain/teleinfo';
 
-export function computeStatistics(data: TeleInfo) {
+export const computeStatistics = (data: TeleInfo) => {
   const instantPowerStats = computeTopicStats('apparentPower', data.apparentPower);
+  const instantEstimatedPowerStats = computeTopicStats('estimatedPower', data.estimatedPower);
   const instantIntensityStats = computeTopicStats('instantIntensity', data.instantIntensity);
   return {
     instantPower: instantPowerStats,
+    instantEstimatedPower: instantEstimatedPowerStats,
     instantIntensity: instantIntensityStats,
   };
-}
+};
 
-function computeTopicStats(name: string, value?: number): TopicStatistics | undefined {
+const computeTopicStats = (name: string, value?: number): TopicStatistics | undefined => {
   if (value === undefined) {
     return undefined;
   }
@@ -27,9 +29,9 @@ function computeTopicStats(name: string, value?: number): TopicStatistics | unde
     currentYear,
     overall,
   };
-}
+};
 
-function computePeriodicStats(value: number, isKey: string, topicName: string): StatisticsValues {
+const computePeriodicStats = (value: number, isKey: string, topicName: string): StatisticsValues => {
   const storeInstance = InstanceStore.getInstance();
 
   const currentTime = new Date().getTime();
@@ -63,4 +65,4 @@ function computePeriodicStats(value: number, isKey: string, topicName: string): 
   storeInstance.put(isKey, newStoredStats);
 
   return newStatsValues;
-}
+};

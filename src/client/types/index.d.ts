@@ -31,6 +31,7 @@ interface MM2ModuleHelper {
 interface ModuleConfiguration {
   debug?: boolean;
   currencySymbol?: string;
+  pageDurationMs?: number;
   teleinfo?: object;
 }
 

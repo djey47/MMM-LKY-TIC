@@ -1,11 +1,14 @@
+/**
+ * @jest-environment node
+ */
+
+import parseISO from 'date-fns/parseISO';
 import { exportDataToOpensearch } from './opensearch-exporter';
 import { createOpenSearchClient } from './helpers/opensearch-client';
-
 import type { StoreDataEntries } from '../helpers/store-models';
 import type { ModuleConfiguration } from '../../../../shared/domain/module-config';
 import type { Client } from '@opensearch-project/opensearch/.';
 import type { OpensearchConfiguration } from '../../../../shared/domain/teleinfo-config';
-import parseISO from 'date-fns/parseISO';
 
 jest.mock('./helpers/opensearch-client');
 jest.mock('../../../utils/mm2_facades', () => ({
@@ -173,6 +176,12 @@ describe('Opensearch exporter', () => {
             minTimestamp: 0,
             maxTimestamp: 0,
           },
+          estimatedPower: {
+            min: 0,
+            max: 900,
+            minTimestamp: 0,
+            maxTimestamp: 0,
+          },
           instantIntensity: {
             min: 0,
             max: 1,
@@ -202,6 +211,12 @@ describe('Opensearch exporter', () => {
           statistics: {
             apparentPower: {
               max: 1000,
+              maxDate: new Date(STATS_DATE),
+              min: 0,
+              minDate: new Date(STATS_DATE),
+            },
+            estimatedPower: {
+              max: 900,
               maxDate: new Date(STATS_DATE),
               min: 0,
               minDate: new Date(STATS_DATE),

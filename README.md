@@ -9,7 +9,8 @@ MagicMirror2 module to display info about home power supply (previous generation
 
 Module is currently under development, working for use case above.
 
-![Sample 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/Sample1.png?raw=true)
+![Sample 1](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/InfoPanel-1.png?raw=true)
+![Sample 2](https://github.com/djey47/MMM-LKY-TIC/blob/main/doc/shots/InfoPanel-2.png?raw=true)
 
 ## Features
 
@@ -37,41 +38,37 @@ See [here](https://github.com/djey47/MMM-React-Canvas-ts) for technical details
   - Red bolt, blinking: power overflow has been detected over subscribed.
 - **F** for Fare period: displays current fare period, according to chosen fare option and time of the day.
 
-### Displays instant data
+Information is dispatched over many pages, rotating like a carousel.
+
+Using 🔒 button (requires touch or pointer), it's possible to lock on current page. 
+
+#### Info page 1: summary, instant data
 
 ```
                 637VA~511W
-Min (d/m/y/o): 220/210/200/200VA
-Max: 650/2500/3000/3554VA
 ```
 - apparent power in VA, and estimate in Watt (depending on your own power factor). Power factor value can be set via the teleinfo configuration, see corresponding section below
-- daily/monthly/yearly/overall statistics:
-  - minimum value
-  - maximum value
 ---
 ```
-                             Intensity: 1A
-                               Overuse: 3A
+                             Intensity: 1A(+1)
 ```
 - current intensity in Ampere
 - when apparent power exceeds subscribed value, a warning appears with the current intensity overflow in Ampere.
-
-
-### Displays daily, monthly, total electrical furniture and costs
-
+---
 ```
-Supplied (d/m/y/t): 475/1000/2500/5000wh
-                        BASE: 475/1000/1500/5000wh
----------------------------------------------
-Costs (d/m/y/t): ~3/8/25/35€
----------------------------------------------
+Costs (today, est.): ~1.6eur
+Supplied (today): 2155Wh
 ```
+- estimated costs at day are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs
+- supplied energy at date, globally.
 
-Per current day/month/year and total:
+#### Info page 2: statistics
 
-- Supplied energy is detailed according to the chosen fare option (provided by Teleinfo data: ``BASE``, ``HC``, ``EJP``)
-- Estimated costs are computed in respect to current fare option and configured fare details (see configuration section below). Please note they now include subscription and extra furniture costs.
+Displays daily, monthly, yearly, total electrical furniture and costs.
 
+#### Info page 3: costs history
+
+Displays costs for last 7 days (line 1) and last 6 months (line 2)
 
 ### Exports local data to Opensearch index
 
@@ -102,7 +99,18 @@ Examples of index mapping can be found here: `data-export/opensearch/mappings`.
 
 ### Install note
 
-Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` electron bindings have to be added and built *from module directory*. The `postinstall` npm script should set everything up for you.
+Since this module relies on `serialport` npm dependency which uses native modules, the `@serialport/bindings-cpp` electron bindings have to be added and built *from module directory*. The `postinstall` npm script should set everything up for you. 
+
+Recently, it has been required to specify electron version to be compiled against in the script. Thus, -v switch has been added (with value as *35.1.2* currently); **one has to make sure it'd match against MagicMirror's**.
+
+As illustrated in `package.json`:
+```json
+"scripts": {
+...
+  "postinstall": "rm -rf node_modules/@serialport/bindings-cpp/prebuilds && node_modules/.bin/electron-rebuild -v 35.1.2 -f -w @serialport/bindings-cpp",
+...
+}
+```
 
 ### Installing this module
 1. Clone repository into location of your choice (may be MagicMirror /modules/ subdirectory)
@@ -118,12 +126,14 @@ Since this module relies on `serialport` npm dependency which uses native module
 {
   "currencySymbol": "€",
   "debug": false,
+  "pageDurationMs": 10000,
   "teleinfo": { ... }
 }
 ```
 
 - `currencySymbol`: defines the symbol to be used for money (e.g cost)
 - `debug`: enables (true) or disables (false) additional log messages for development or troubleshooting
+- `pageDurationMs`: duration in milliseconds for every info panel page (0 meaning the summary page will always be displayed); default is 10000 (=10s)
 - `teleinfo`: see below.
 
 ### Teleinfo section

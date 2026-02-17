@@ -3,8 +3,6 @@ import getDaysInMonth from 'date-fns/getDaysInMonth';
 import startOfDay from 'date-fns/startOfDay';
 import startOfMonth from 'date-fns/startOfMonth';
 import startOfYear from 'date-fns/startOfYear';
-import { TeleInfo } from '../../../shared/domain/teleinfo';
-import { FareDetails } from '../../../shared/domain/teleinfo-config';
 import { InstanceStore } from './helpers/instance-store';
 import { generateCurrentDayISKey, generateCurrentMonthISKey, generateCurrentYearISKey } from './helpers/instance-store-keys';
 import {
@@ -21,6 +19,8 @@ import {
 import { StoredIndexes } from './helpers/store-models';
 import { readIndexes } from './index-reader';
 import { ComputationPeriod } from './types/computation-period';
+import type { Estimated, TeleInfo } from '../../../shared/domain/teleinfo';
+import type { FareDetails } from '../../../shared/domain/teleinfo-config';
 
 const PRICE_KEYS_PER_FARE_OPTION: {
   [key: string]: string[];
@@ -30,10 +30,13 @@ const PRICE_KEYS_PER_FARE_OPTION: {
   HC: ['hcLHPricePerKwh', 'hcHHPricePerKwh'],
 };
 
-export function computeEstimatedPrices(
+const HISTORY_DAYS_SIZE = 31;
+const HISTORY_MONTHS_SIZE = 12;
+
+export const computeEstimatedPrices = (
   data: TeleInfo,
   fareDetails: FareDetails
-) {
+): Estimated | undefined => {
   const storeInstance = InstanceStore.getInstance();
   let shouldStoreBePersisted = false;
   let shouldStoreBeExported = false;
@@ -148,6 +151,32 @@ export function computeEstimatedPrices(
 
   // console.log({ totalPrice, totalDayPrice });
 
+  // Costs of the last 7 days for history
+  const costsDaysHistory = [
+    totalDayPrice,
+    ...Array.from({ length: HISTORY_DAYS_SIZE - 1 }).map((_, index) => {
+      const dayIndex = index + 1;
+      const dayISKey = generateCurrentDayISKey(
+        PER_DAY_COSTS_IS_KEY_PREFIX,
+        dayIndex
+      );
+      const previousDayPrice = storeInstance.get(dayISKey) as number;
+      return previousDayPrice;
+    })];
+
+  // Costs of the last 6 months for history
+  const costsMonthsHistory = [
+    totalMonthPrice,
+    ...Array.from({ length: HISTORY_MONTHS_SIZE - 1 }).map((_, index) => {
+      const monthIndex = index + 1;
+      const monthISKey = generateCurrentMonthISKey(
+        PER_MONTH_COSTS_IS_KEY_PREFIX,
+        monthIndex
+      );
+      const previousMonthPrice = storeInstance.get(monthISKey) as number;
+      return previousMonthPrice;
+    })];
+
   // Persistance & export
   if (shouldStoreBePersisted) {
     storeInstance.persist();
@@ -156,10 +185,15 @@ export function computeEstimatedPrices(
     storeInstance.export();
   }
 
+  console.log('fare-manager::computeEstimatedPrices', { costsHistory: costsDaysHistory });
+
   return {
     total: totalPrice && Math.round(totalPrice),
-    currentDay:
-      totalDayPrice,
+    currentDay: totalDayPrice,
+    history: {
+      lastDays: costsDaysHistory,
+      lastMonths: costsMonthsHistory,  
+    },
     currentMonth: totalMonthPrice && Math.round(totalMonthPrice),
     currentYear: totalYearPrice && Math.round(totalYearPrice),
   };

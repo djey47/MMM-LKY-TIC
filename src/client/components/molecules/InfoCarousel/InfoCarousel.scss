@@ -1,0 +1,27 @@
+@use '../../../styles/common' as commonVars;
+
+.mmm-lky-tic-wrapper {
+  .info-carousel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    &__page {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    &__controls {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: commonVars.$size-m;
+    }
+
+    &__lock-icon.is-locked {
+      color: orange;
+    }
+  }
+}

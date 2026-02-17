@@ -1,7 +1,7 @@
 import { Client } from '@opensearch-project/opensearch';
-import { OpensearchConfiguration } from '../../../../../shared/domain/teleinfo-config';
+import type { OpensearchConfiguration } from '../../../../../shared/domain/teleinfo-config';
 
-export function createOpenSearchClient(config: OpensearchConfiguration) {
+export const createOpenSearchClient = (config: OpensearchConfiguration) => {
   const { instance, user, password } = config;
   const instanceURL = new URL(instance);
 
@@ -13,4 +13,4 @@ export function createOpenSearchClient(config: OpensearchConfiguration) {
     },
   });
   return client;
-}
+};

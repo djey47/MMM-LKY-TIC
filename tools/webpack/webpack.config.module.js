@@ -10,7 +10,7 @@ const packageFile = EditJsonFile(`${appRootPath}/package.json`);
 module.exports = {
   entry: './src/client/module.ts',
   output: {
-    filename: `${packageFile.get('name')}.js`,
+    filename: `${packageFile.get('name').toUpperCase()}.js`,
     path: outputPath,
   },
   module: {

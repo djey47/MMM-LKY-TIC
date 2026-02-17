@@ -2,18 +2,14 @@ TODO-FIXME
 ==========
 
 # TODO
-- [front-end] history page
-  - displays a table with the history (supplied, cost, ...?) for the last 5 days/months. Current day/month values being extrapolation?
-- [front-end] basic/advanced display modes
-  - Basic only shows most important info (status bar, current supply, daily costs...)
-  - Advanced pages (2 max):
-    - history
-    - other info
-  - Advanced shows more pages but with auto scroll carroussel-like
-  - Configuration: mode (basic default), page persistance time..., 
-- [ ] costs: take into account the subscribe fees
-  - annual fee to be set in configuration (or monthly?)
-  - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly 
+- [front-end] paginated display mode:
+  - [x] summary
+  - [x] stats
+  - [ ] history
+    - [x] displays a table with the history (supplied, cost, ...?) for the last 5 days/months. 
+    - [ ] current day/month values being extrapolation?
+  - [x] Configuration: page persistance time...,
+  - [x] Button to lock (suspend) auto page switching  
 - quick status display with icons/labels
   - [x] connection status to TIC: disconnected (no data or too old data received) or connected
     => does not work for now as the component does not update till new data arrives (see withNotification HOC to trigger the refresh every 5 seconds via setInterval - ? requires a retry count in state ?)
@@ -22,12 +18,10 @@ TODO-FIXME
   - [x] supply status: eco / medium / high / critical
     => Based on overflow power warning (critical) and on current intensity VS subscribed intensity (eco to high)
     => could be enhanced with custom settings based on instant power (thresholds)
-  - [] cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
+  - [ ] cost trend: extrapolate daily cost and compare with the day before: eco+, steady, higher
     => Backend computation
     => Need indexes from configured hours for more reliability
     => By default, extrapolate current value to the end of the day
-- migrate to dart-sass (also update canvas)
-  => replace sass @imports with @use
 - archive data store per month (see GH issue #1)
 - store and display statistics per day:
   - [x] supplied power
@@ -38,13 +32,18 @@ TODO-FIXME
 - unit tests for teleinfo processing
 
 # FIXME
-- [ ] Computation of estimated prices is not reliable when price per kwh or subscription fee change, as amount are based on delta between initial period indexes and current indexes... => need to freeze costs when any of those items change, amount shold be computed with frozen costs + current costs. Initial indexes must be changed accordingly.
+- [ ] Computation of estimated prices is not reliable when price per kwh or subscription fee change, as amount are based on delta between initial period indexes and current indexes... => need to freeze costs when any of those items change, amount should be computed with frozen costs + current costs. Initial indexes must be changed accordingly.
   => Add concept of contract terms?
-- [ ] cannot npm install on dev env anymore (WIN-WSL...) due to native modules
 - [ ] teleinfo-reader utility does not work anymore because of MM2 interfaces (node_helper and log)
   => needs to be remade without any link to MM2, datastore, advanced stats
 
 # DONE
+- [x] cannot npm install on dev env anymore (WIN-WSL...) due to native modules
+- migrate to dart-sass (also update canvas)
+  => replace sass @imports with @use
+- [x] costs: take into account the subscribe fees
+  - annual fee to be set in configuration (or monthly?)
+  - compute global cost : add all fare period costs + fee / day, fee / month, fee / year, total fee accordingly
 - [x] Data export to Opensearch dashboards
 - store indexes at configured hours for historization
   - [x] Manual data store indexing

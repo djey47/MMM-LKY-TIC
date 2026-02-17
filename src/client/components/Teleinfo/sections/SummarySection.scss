@@ -1,0 +1,74 @@
+@use "../../../styles/common" as commonVars;
+
+.mmm-lky-tic-wrapper {
+  .summary-section {
+    color: commonVars.$normal-text;
+    display: flex;
+    flex-direction: column;
+
+    &__power,
+    &__over-intensity,
+    &__intensity {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+    }
+
+    &__power {
+      justify-content: center;
+    }
+
+    &__power-value {
+      font-size: var(--font-size-large);
+    }
+
+    &__power-unit,
+    &__intensity-unit,
+    &__costs-unit {
+      color: commonVars.$highlighted-text;
+    }
+
+    &__power-unit {
+      font-size: var(--font-size-medium);
+    }
+
+    &__costs-unit {
+      font-size: var(--font-size-small);
+    }
+
+    &__intensity-unit {
+      font-size: var(--font-size-xsmall);
+      margin-right: commonVars.$text-separator-m;
+    }
+
+    &__intensity{
+      margin-left: auto;
+      margin-bottom: commonVars.$size-m;
+    }
+
+    &__power-value,
+    &__intensity-value,
+    &__costs-value,
+    &__supplied-value {
+      color: commonVars.$highlighted-text;
+    }
+
+    &__intensity-label,
+    &__costs-label,
+    &__supplied-label {
+      margin-right: commonVars.$text-separator-m;
+    }
+
+    &__over-intensity-label,
+    &__over-intensity-value,
+    &__over-intensity-unit {
+      font-size: var(--font-size-xsmall);
+      animation: blinker 2s linear infinite;
+      color: commonVars.$critical-text;
+    }
+
+    &__over-intensity-unit {
+      font-size: commonVars.$font-2xs;
+    }
+  }
+}

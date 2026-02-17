@@ -1,0 +1,27 @@
+@use "../../../styles/common" as commonVars;
+
+.mmm-lky-tic-wrapper {
+  .stats-section {
+    text-align: center;
+
+    &__dates {
+      display: flex;
+      flex-direction: column;
+      padding-top: commonVars.$size-m;
+    }
+
+    &__dates-start-last {
+      margin-bottom: commonVars.$size-m;
+      font-style: italic;
+      font-size: var(--font-size-xsmall);
+    }
+
+    &__dates-start-last-value {
+      color: commonVars.$highlighted-text;
+    }
+
+    &__dates-start-last-label {
+      margin-right: commonVars.$text-separator-m;
+    }
+  }
+}
